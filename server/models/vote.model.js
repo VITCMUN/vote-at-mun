@@ -9,22 +9,8 @@ var sequelize = require('../common/postgres')
 
 var Vote =  sequelize.define('Vote',{
         vote_val: { 
-            type : Sequelize.DataTypes.NUMBER 
-        },
-        timestamp: { 
-            type : Sequelize.DataTypes.TIME 
+            type : Sequelize.NUMBER 
         }
     })
-
-Vote.belongsTo(Poll, {foreignKey : {
-        name : 'vote_poll_type',
-        field : 'vote_poll_type',
-      }})
-
-Vote.belongsTo(User, {foreignKey : {
-        name : 'username',
-        field : 'cast_by',
-      }})
-             
 
 module.exports = Vote

@@ -1,31 +1,40 @@
-/**  GUIDELINES 
-   * stance - 0 present, 1 present and voting,
-   * user_type - 0 delegate, 1 executive board, 2 admin
-*/
+/*
+ * GUIDELINES 
+ * stance - 0 present, 1 present and voting,
+ * user_type - 0 delegate, 1 executive board, 2 admin
+ */
 
 var Sequelize = require('sequelize')
 var sequelize = require('../common/postgres')
+var Poll = require('./poll.model')
+var Vote = require('./vote.model')
 
 var User =  sequelize.define('User', {
         username:{
-            type : Sequelize.DataTypes.STRING,
+            type : Sequelize.CITEXT,
             primaryKey : true 
         },
         
         password: {
-            type : Sequelize.DataTypes.STRING
+            type : Sequelize.STRING,
+            allowNull: false
         },
         user_type: {
-            type : Sequelize.DataTypes.NUMBER
+            type : Sequelize.NUMBER,
+            allowNull: false,
         },
 
         profile_pic_url:{ 
-            type : Sequelize.DataTypes.STRING
+            type : Sequelize.STRING
         },
         stance: {
-            type : Sequelize.DataTypes.NUMBER 
+            type : Sequelize.NUMBER,
+            allowNull: false 
         }
 })
+
+User.hasMany(Poll)
+User.hasMany(Vote)
 
 module.exports = User
 

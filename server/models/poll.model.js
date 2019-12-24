@@ -1,38 +1,32 @@
-/**
+/*
  * voting_type - 1 all voting , 0 all not voting 
  */
 
-var User = require("./user.model")
 var Sequelize = require('sequelize')
 var sequelize = require('../common/postgres')
+var Vote = require('./vote.model')
 
 var Poll =  sequelize.define('Poll' , {
     voting_type: { 
-      type : Sequelize.DataTypes.STRING 
+      type : Sequelize.NUMBER,
+      allowNull: false,
+      defaulValue: 0 
     },
-
-    id:{
-       type : Sequelize.DataTypes.STRING,
-       primaryKey : true
-      },
 
     time_to_talk: { 
-      type : Sequelize.DataTypes.NUMBER 
+      type : Sequelize.NUMBER 
     },
 
-    title: { 
-      type : Sequelize.DataTypes.STRING 
+    individual_speaker_time: {
+      type : Sequelize.NUMBER
     },
 
-    timestamp: { 
-      type : Sequelize.DataTypes.TIME 
-    }
+    title: {
+      type : Sequelize.STRING 
+    },
 
   })
 
-Poll.belongsTo(User, {foreignKey : {
-  name: 'proposed_by',
-  field: 'proposed_by'
-}})
+Poll.hasMany(Vote)
 
 module.exports = Poll
