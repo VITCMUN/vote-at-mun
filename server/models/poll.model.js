@@ -2,9 +2,12 @@
  * voting_type - 1 all voting , 0 all not voting 
  */
 
+const logger = require('../winston')
+
+
 var User = require("./user.model")
 var Sequelize = require('sequelize')
-var sequelize = require('../common/postgres')
+var { sequelize } = require('../common/postgres')
 
 var Poll =  sequelize.define('Poll' , {
     voting_type: { 
@@ -17,7 +20,7 @@ var Poll =  sequelize.define('Poll' , {
       },
 
     time_to_talk: { 
-      type : Sequelize.DataTypes.NUMBER 
+      type : Sequelize.DataTypes.INTEGER
     },
 
     title: { 
@@ -34,5 +37,11 @@ Poll.belongsTo(User, {foreignKey : {
   name: 'proposed_by',
   field: 'proposed_by'
 }})
+
+Poll.sync({ force: true }).then(() => {
+    logger.info("synced the poll model")
+}).catch((err)=>{
+    logger.error(err.message)
+});
 
 module.exports = Poll

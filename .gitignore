@@ -1,0 +1,20 @@
+# Node Specific
+node_modules
+package-lock.json
+server/debug.txt
+server/errors.txt
+.env.local
+
+# OS Specific
+.DS_Store
+.Trashes
+.Spotlight-V*
+Thumbs.db
+Icon?
+
+# IDE Specific
+.vscode
+.idea
+.project
+*.sublime-workspace
+*.sublime-project
