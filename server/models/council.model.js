@@ -16,7 +16,7 @@ var Council =  sequelize.define('Council',{
     })
 
 Council.sync({ force: true }).then(() => {
-    logger.info("synced the poll model")
+    logger.info("synced the council model")
 }).catch((err)=>{
     logger.error(err.message)
 });

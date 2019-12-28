@@ -1,9 +1,8 @@
-/**
+/*
  * voting_type - 1 all voting , 0 all not voting 
  */
 
 const logger = require('../winston')
-
 
 var Sequelize = require('sequelize')
 var sequelize = require('../common/postgres')
