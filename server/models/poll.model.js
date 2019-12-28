@@ -5,38 +5,32 @@
 const logger = require('../winston')
 
 
-var User = require("./user.model")
 var Sequelize = require('sequelize')
-var { sequelize } = require('../common/postgres')
+var sequelize = require('../common/postgres')
+var Vote = require('./vote.model')
 
 var Poll =  sequelize.define('Poll' , {
     voting_type: { 
-      type : Sequelize.DataTypes.STRING 
+      type : Sequelize.INTEGER,
+      allowNull: false,
+      defaulValue: 0 
     },
-
-    id:{
-       type : Sequelize.DataTypes.STRING,
-       primaryKey : true
-      },
 
     time_to_talk: { 
-      type : Sequelize.DataTypes.INTEGER
+      type : Sequelize.INTEGER 
     },
 
-    title: { 
-      type : Sequelize.DataTypes.STRING 
+    individual_speaker_time: {
+      type : Sequelize.INTEGER
     },
 
-    timestamp: { 
-      type : Sequelize.DataTypes.TIME 
-    }
+    title: {
+      type : Sequelize.STRING 
+    },
 
   })
 
-Poll.belongsTo(User, {foreignKey : {
-  name: 'proposed_by',
-  field: 'proposed_by'
-}})
+Poll.hasMany(Vote)
 
 Poll.sync({ force: true }).then(() => {
     logger.info("synced the poll model")
