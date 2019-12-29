@@ -19,6 +19,6 @@ Council.sync({ force: true }).then(() => {
     logger.info("synced the council model")
 }).catch((err)=>{
     logger.error(err.message)
-});
+})
 
 module.exports = Council

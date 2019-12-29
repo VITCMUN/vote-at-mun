@@ -19,6 +19,6 @@ Vote.sync({ force: true }).then(() => {
     logger.info("synced the vote model")
 }).catch((err)=>{
     logger.error(err.message)
-});        
+})
 
 module.exports = Vote

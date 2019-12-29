@@ -35,6 +35,6 @@ Poll.sync({ force: true }).then(() => {
     logger.info("synced the poll model")
 }).catch((err)=>{
     logger.error(err.message)
-});
+})
 
 module.exports = Poll

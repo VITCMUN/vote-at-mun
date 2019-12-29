@@ -42,7 +42,7 @@ User.sync({ force: true }).then(() => {
     logger.info("synced the user model")
 }).catch((err)=>{
     logger.error(err.message)
-});
+})
 
 module.exports = User
 
