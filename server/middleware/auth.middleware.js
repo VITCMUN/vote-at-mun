@@ -7,7 +7,7 @@ exports.jwt_auth = (req,res,next) => {
 			logger.error(err.message)
 			return next(err)
 		} else if (!user) {
-			return res.json(info)
+			return res.status(403).json(info)
 		} else {
 			return next()
 		}

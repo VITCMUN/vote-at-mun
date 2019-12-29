@@ -11,7 +11,7 @@ router.post('/login', function(req,res,next){
 			logger.error(err.message)
 			return next(err)
 		} else if (!user) {
-			return res.json(info)
+			return res.status(403).json(info)
 		} else {
 			req.logIn(user,{ session : false }, (err) => {
 				if(err){
@@ -19,7 +19,7 @@ router.post('/login', function(req,res,next){
 					return next(err)
 				} else {
 					const token = jwt.sign({username: user.username},config.jwt_secret_key)
-					return res.json({ user,token })
+					return res.status(200).json({ user,token })
 				}
 			})
 		}
