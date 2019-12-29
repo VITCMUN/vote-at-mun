@@ -5,14 +5,16 @@ const schema = require('./graphql/schema/schema')
 const logger = require('winston')
 const passport = require('passport')
 const bodyParser = require('body-parser')
-const Cors = require('cors')
+const cors = require('cors')
 const auth_router = require('./routes/auth.routes')
 const api_router = require('./routes/api.routes')
 const auth_middleware = require('./middleware/auth.middleware')
 
+const PORT = process.env.WEBAPP_PORT || 3000
+
 require('./passport/passport')
 
-app.use(Cors())
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(passport.initialize())
@@ -27,4 +29,4 @@ app.use(
     }),
 )
 
-app.listen(4000, () => logger.info("Welcome to VITCMUN 2020"))
+app.listen(PORT, () => logger.info("Welcome to VITCMUN 2020"))
