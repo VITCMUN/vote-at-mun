@@ -1,4 +1,4 @@
-var config = require('../config')
+var { config } = require('../config')
 var Sequelize = require('sequelize')
 
 exports.sequelize = new Sequelize(

@@ -4,6 +4,8 @@
  * user_type - 0 delegate, 1 executive board, 2 admin
  */
 
+const logger = require('../winston')
+
 var Sequelize = require('sequelize')
 var sequelize = require('../common/postgres')
 var Poll = require('./poll.model')
@@ -20,7 +22,7 @@ var User =  sequelize.define('User', {
             allowNull: false
         },
         user_type: {
-            type : Sequelize.NUMBER,
+            type : Sequelize.INTEGER,
             allowNull: false,
         },
 
@@ -28,7 +30,7 @@ var User =  sequelize.define('User', {
             type : Sequelize.STRING
         },
         stance: {
-            type : Sequelize.NUMBER,
+            type : Sequelize.INTEGER,
             allowNull: false 
         }
 })
@@ -36,6 +38,11 @@ var User =  sequelize.define('User', {
 User.hasMany(Poll)
 User.hasMany(Vote)
 
-module.exports = User
+User.sync({ force: true }).then(() => {
+    logger.info("synced the user model")
+}).catch((err)=>{
+    logger.error(err.message)
+})
 
+module.exports = User
 
