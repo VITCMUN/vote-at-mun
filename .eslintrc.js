@@ -3,19 +3,21 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: ["plugin:react/recommended", "airbnb"],
+  extends: ['plugin:react/recommended', 'airbnb'],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
     },
     ecmaVersion: 2018,
-    sourceType: "module"
+    sourceType: 'module'
   },
-  plugins: ["react"],
-  rules: {}
+  plugins: ['react'],
+  rules: {
+    'import/prefer-default-export': 'off'
+  }
 };
