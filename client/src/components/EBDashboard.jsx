@@ -1,7 +1,7 @@
 import React from 'react';
-import './EBDashboard.css';
+import '../styling/EBDashboard.css';
 
-const EBDashboard = props => {
+const EBDashboard = () => {
   return (
     <div className="FlexContainer">
       <div className="LeftContainer">
@@ -10,7 +10,7 @@ const EBDashboard = props => {
       </div>
 
       <div className="RightContainer">
-        <br></br>
+        <br />
         <img className="MunImage2" src="mun.png" alt="VITCC MUN" />
         <h4 className="DashboardHeading">
           <b>WELCOME EXECUTIVE BOARD!</b>
@@ -19,7 +19,9 @@ const EBDashboard = props => {
         <div className="VotingButton">
           <div className="Cardboard">
             <img src="pollimg.jpg" alt="Poll" className="PollImage" />
-            <button className="Vote">Conduct Voting</button>
+            <button type="button" className="Vote">
+              Conduct Voting
+            </button>
           </div>
         </div>
       </div>
