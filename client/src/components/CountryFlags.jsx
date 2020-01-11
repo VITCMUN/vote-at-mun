@@ -76,7 +76,7 @@ const CountryFlags = props => {
           className="CountryProfile"
           role="button"
           tabIndex={0}
-          onKeyPress={(event, country1) => handleKeyPress(event, country1)}
+          onKeyPress={event => handleKeyPress(event, country)}
         >
           {getImage(country)}
           <b className="countryName">{country.name}</b>
