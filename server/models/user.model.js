@@ -5,7 +5,7 @@
  */
 
 const Sequelize = require('sequelize');
-const { sequelize } = require('../common/postgres').sequelize;
+const { sequelize } = require('../common/postgres');
 const Poll = require('./poll.model');
 const Vote = require('./vote.model');
 

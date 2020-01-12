@@ -1,10 +1,13 @@
-/*
- *  this is an example schema make appropriate changes
- */
-const { buildSchema } = require('graphql');
+const { gql } = require('apollo-server');
 
-exports.schema = buildSchema(`
- 	type Query {
- 		hello : String
- 	}
-`);
+exports.typeDefs = gql`
+  type Query {
+    nvotes: Int!
+  }
+  type Mutation {
+    vote(val: Boolean!): Int!
+  }
+  type Subscription {
+    vote_update: Int!
+  }
+`;

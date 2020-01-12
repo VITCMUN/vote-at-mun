@@ -3,7 +3,7 @@
  */
 
 const Sequelize = require('sequelize');
-const { sequelize } = require('../common/postgres').sequelize;
+const { sequelize } = require('../common/postgres');
 const Vote = require('./vote.model');
 
 const Poll = sequelize.define('Poll', {
