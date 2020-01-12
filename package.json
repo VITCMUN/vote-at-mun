@@ -7,7 +7,8 @@
     "test": "will add",
     "lint": "eslint",
     "lint-test": "eslint client/ --ext .js,.jsx",
-    "prettier": "prettier --write"
+    "prettier": "prettier --write",
+    "devstart": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
@@ -59,6 +60,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^4.0.6",
     "lint-staged": "^9.5.0",
+    "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   }
 }

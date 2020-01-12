@@ -1,13 +1,10 @@
 /*
-*  this is an example schema make appropriate changes 
-*/
-var { graphql, buildSchema } = require('graphql')
+ *  this is an example schema make appropriate changes
+ */
+const { buildSchema } = require('graphql');
 
 exports.schema = buildSchema(`
  	type Query {
  		hello : String
  	}
-`)
-
-
-
+`);

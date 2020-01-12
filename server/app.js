@@ -1,32 +1,45 @@
-const express = require('express')
-const graphqlHTTP = require('express-graphql')
-const app = express()
-const schema = require('./graphql/schema/schema')
-const logger = require('winston')
-const passport = require('passport')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const auth_router = require('./routes/auth.routes')
-const api_router = require('./routes/api.routes')
-const auth_middleware = require('./middleware/auth.middleware')
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
+const logger = require('winston');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const authRouter = require('./routes/auth.routes');
+const apiRouter = require('./routes/api.routes');
+const authMiddleware = require('./middleware/auth.middleware');
+const { sequelize } = require('./common/postgres').sequelize;
+const schema = require('./graphql/schema/schema');
 
-const PORT = process.env.WEBAPP_PORT || 3000
+const app = express();
 
-require('./passport/passport')
+const PORT = process.env.WEBAPP_PORT || 3000;
 
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(passport.initialize())
-app.use('/auth',auth_router)
-app.use('/api',auth_middleware.jwt_auth,api_router)
+sequelize
+  .authenticate()
+  .then(() => {
+    logger.info('Connection has been established successfully.');
+  })
+  .catch(err => {
+    logger.error('Unable to connect to the database:', err);
+  });
+
+sequelize.sync();
+
+require('./passport/passport');
+
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use('/auth', authRouter);
+app.use('/api', authMiddleware.jwt_auth, apiRouter);
 
 app.use(
-   '/graphql',
-    graphqlHTTP({
-        schema : schema,
-        graphiql :true,
-    }),
-)
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
-app.listen(PORT, () => logger.info("Welcome to VITCMUN 2020"))
+app.listen(PORT, () => logger.info('Welcome to VITCMUN 2020'));

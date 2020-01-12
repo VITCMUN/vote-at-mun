@@ -1,40 +1,31 @@
 /*
- * voting_type - 1 all voting , 0 all not voting 
+ * voting_type - 1 all voting , 0 all not voting
  */
 
-const logger = require('../winston')
+const Sequelize = require('sequelize');
+const { sequelize } = require('../common/postgres').sequelize;
+const Vote = require('./vote.model');
 
-var Sequelize = require('sequelize')
-var sequelize = require('../common/postgres')
-var Vote = require('./vote.model')
+const Poll = sequelize.define('Poll', {
+  voting_type: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaulValue: 0,
+  },
 
-var Poll =  sequelize.define('Poll' , {
-    voting_type: { 
-      type : Sequelize.INTEGER,
-      allowNull: false,
-      defaulValue: 0 
-    },
+  time_to_talk: {
+    type: Sequelize.INTEGER,
+  },
 
-    time_to_talk: { 
-      type : Sequelize.INTEGER 
-    },
+  individual_speaker_time: {
+    type: Sequelize.INTEGER,
+  },
 
-    individual_speaker_time: {
-      type : Sequelize.INTEGER
-    },
+  title: {
+    type: Sequelize.STRING,
+  },
+});
 
-    title: {
-      type : Sequelize.STRING 
-    },
+Poll.hasMany(Vote);
 
-  })
-
-Poll.hasMany(Vote)
-
-Poll.sync({ force: true }).then(() => {
-    logger.info("synced the poll model")
-}).catch((err)=>{
-    logger.error(err.message)
-})
-
-module.exports = Poll
+module.exports = Poll;
