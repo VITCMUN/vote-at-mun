@@ -1,0 +1,82 @@
+.CountryProfile{
+    display: flex;
+    align-items: center;
+    width:100%;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+.Flag:hover{
+    display: none;
+}
+.Flag:hover + .countryName{
+    display: inherit;
+}
+.Flag{
+    border-radius: 50px;
+    width:80px;
+    height:auto;
+    margin-left: 37px;
+    margin-right: 37px;
+}
+.countryName{
+    padding: 0px;
+    font-size: 20px;
+    margin-left: 50px;
+    margin-right: 28px;
+    width:80px;
+    margin-top: 27px;
+    text-align: center;
+    display: none;
+}
+.CountriesMenu {
+    height: 100%;
+    width:100%;
+    border-radius: 52px;
+    border: solid 3px #f6dba6;
+}
+.CountriesMenuText{
+    position: relative;
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.CountryProfilesArea{
+    margin-top: 15px;
+    height:65%;
+    overflow-y: scroll;
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.CountryProfilesArea::-webkit-scrollbar {
+    display: none;
+}
+.search input{
+    width:80%;
+    border-radius: 25px;
+    font-size: 14px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background:  rgb(75, 17, 30);
+    border : 2px solid #f6dba6;
+    color:#f6dba6;
+}
+.countryContainer{
+    height:100px;
+}
+.selectorCountry{
+    background : #310B14;
+    border-color: #F6DBA6;
+    height: 35px;
+    color: #F6DBA6;
+    margin-top: 25px;
+    margin-bottom: 11px;
+    width: 80px;
+    margin-right: 14px;
+    margin-left: 14px;
+  }
