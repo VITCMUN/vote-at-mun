@@ -7,7 +7,8 @@
     "test": "will add",
     "lint": "eslint",
     "lint-test": "eslint client/ --ext .js,.jsx",
-    "prettier": "prettier --write"
+    "prettier": "prettier --write",
+    "devstart": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,8 @@
     }
   },
   "dependencies": {
+    "apollo-server": "^2.9.16",
+    "apollo-server-express": "^2.9.16",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -43,10 +46,10 @@
     "passport-json": "^1.2.0",
     "passport-jwt": "^4.0.0",
     "pg": "^7.15.1",
+    "pg-hstore": "^2.3.3",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "sequelize": "^5.21.3",
-    "sequelize-cli": "^5.5.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -61,6 +64,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^4.0.6",
     "lint-staged": "^9.5.0",
+    "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   }
 }
