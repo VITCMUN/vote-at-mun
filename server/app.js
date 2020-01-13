@@ -11,9 +11,18 @@ const authMiddleware = require('./middleware/auth.middleware');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
+const user = require('./models/user.model');
 
 const app = express();
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => {
+    return {
+      User: user,
+    };
+  },
+});
 
 const PORT = process.env.WEBAPP_PORT || 3000;
 
@@ -29,7 +38,7 @@ sequelize
     logger.info('Connection has been established successfully.');
   })
   .catch(err => {
-    logger.error('Unable to connect to the database:', err);
+    logger.error(`Unable to connect to the database: ${err}`);
   });
 
 sequelize.sync();

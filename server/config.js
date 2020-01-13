@@ -15,4 +15,5 @@ exports.config = {
   error_log_file: 'server/log/errors.txt',
   debug_log_file: 'server/log/debug.txt',
   jwt_secret_key: 'vote@mun2020',
+  saltRounds: 10,
 };

@@ -6,8 +6,24 @@ exports.typeDefs = gql`
   }
   type Mutation {
     vote(val: Boolean!): Int!
+    addUser(
+      username: String!
+      password: String!
+      userType: Int!
+      displayPicUrl: String
+      stance: Int!
+    ): String!
+    login(username: String!, password: String!): loginResponse!
+  }
+  type User {
+    username: String!
+    userType: Int!
+  }
+  type loginResponse {
+    user: User!
+    token: String!
   }
   type Subscription {
-    vote_update: Int!
+    voteUpdate: Int!
   }
 `;
