@@ -2,12 +2,7 @@ const http = require('http');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const logger = require('winston');
-const passport = require('passport');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const authRouter = require('./routes/auth.routes');
-const apiRouter = require('./routes/api.routes');
-const authMiddleware = require('./middleware/auth.middleware');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
@@ -43,14 +38,7 @@ sequelize
 
 sequelize.sync();
 
-require('./passport/passport');
-
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use('/auth', authRouter);
-app.use('/api', authMiddleware.jwt_auth, apiRouter);
 
 httpServer.listen(PORT, () => {
   logger.info(`Server ready at http//localhost${PORT}${server.graphqlPath}`);

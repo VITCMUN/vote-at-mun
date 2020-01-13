@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const jwtSecretKey = require('../../config').config.jwt_secret_key;
+const { jwtSecretKey } = require('../../config').config;
 
 exports.login = async (_, { username, password }, { dataSources }) => {
   const user = await dataSources.User.findByPk(username);
