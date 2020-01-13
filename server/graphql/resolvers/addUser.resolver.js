@@ -5,8 +5,12 @@ const { saltRounds } = require('../../config').config;
 exports.addUser = async (
   _,
   { username, password, userType, displayPicUrl, stance },
-  { dataSources }
+  { dataSources, userInstance }
 ) => {
+  if (!userInstance || userInstance.userType !== 2) {
+    throw new Error('Not authenticated');
+  }
+
   const user = await dataSources.User.findByPk(username);
   if (user) {
     logger.info(`User with username ${username} already exists`);
@@ -14,11 +18,11 @@ exports.addUser = async (
   }
   const passHash = await bcrypt.hashSync(password, saltRounds);
   await dataSources.User.create({
-    username,
-    passHash,
-    userType,
-    displayPicUrl,
-    stance,
+    username: username,
+    password: passHash,
+    user_type: userType,
+    profile_pic_url: displayPicUrl,
+    stance: stance,
   });
   logger.info(`User with username ${username} created`);
   return `User created: ${username}`;

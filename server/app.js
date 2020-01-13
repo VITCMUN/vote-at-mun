@@ -3,10 +3,12 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const logger = require('winston');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
 const user = require('./models/user.model');
+const { jwtSecretKey } = require('./config').config;
 
 const app = express();
 const server = new ApolloServer({
@@ -15,6 +17,23 @@ const server = new ApolloServer({
   dataSources: () => {
     return {
       User: user,
+    };
+  },
+  context: ({ req }) => {
+    const tokenWithBearer = req.headers.authorization || '';
+    const token = tokenWithBearer.split(' ')[1];
+    const userInstance = () => {
+      try {
+        if (token) {
+          return jwt.verify(token, jwtSecretKey);
+        }
+        return null;
+      } catch (err) {
+        return null;
+      }
+    };
+    return {
+      userInstance: userInstance(),
     };
   },
 });
