@@ -12,7 +12,8 @@ exports.config = {
     database: 'postgres',
     port: 5432,
   },
-  error_log_file: 'server/log/errors.txt',
-  debug_log_file: 'server/log/debug.txt',
-  jwt_secret_key: 'vote@mun2020',
+  errorLogFile: 'server/log/errors.txt',
+  debugLogFile: 'server/log/debug.txt',
+  jwtSecretKey: 'vote@mun2020',
+  saltRounds: 10,
 };

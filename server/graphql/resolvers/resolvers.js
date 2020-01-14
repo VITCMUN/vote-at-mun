@@ -1,4 +1,6 @@
 const { PubSub } = require('apollo-server');
+const { addUser } = require('./addUser.resolver');
+const { login } = require('./login.resolver');
 
 const pubsub = new PubSub();
 
@@ -12,14 +14,16 @@ module.exports = {
     vote: (_, { val }) => {
       if (val) {
         num += 1;
-        pubsub.publish('vote_update', { vote_update: num });
+        pubsub.publish('voteUpdate', { voteUpdate: num });
       }
       return num;
     },
+    addUser,
+    login,
   },
   Subscription: {
-    vote_update: {
-      subscribe: () => pubsub.asyncIterator('vote_update'),
+    voteUpdate: {
+      subscribe: () => pubsub.asyncIterator('voteUpdate'),
     },
   },
 };

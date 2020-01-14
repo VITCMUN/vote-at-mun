@@ -1,7 +1,0 @@
-# test token generation
-
-$ curl -H 'Content-Type: application/json' --data '{"username":"<username>","password":"<password>"}' localhost:4000/api/login/
-
-# api endpoint
-
-$ curl -H 'Content-Type: application/json' -H 'Authorization: JWT <token>' localhost:4000/api/<endpoint>/
