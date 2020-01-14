@@ -5,5 +5,9 @@ node_js:
 cache:
   directories:
     - "node_modules"
+notifications:
+  email:
+    on_failure: never
+    on_success: always
 script:
   npm run lint-test -s

@@ -1,8 +1,7 @@
 # Node Specific
 node_modules
 package-lock.json
-server/debug.txt
-server/errors.txt
+server/log
 .env.local
 
 # OS Specific

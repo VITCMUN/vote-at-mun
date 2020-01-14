@@ -1,0 +1,104 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	height: 100%;
+	background-color: #511926;
+}
+
+.title {
+	font-size: 6vw;
+	text-align: center;
+	padding: 2%;
+	color: #f6dba6;
+}
+
+.councilContainer {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	margin-left: 20%;
+	margin-right: 20%;
+	transform: translateX(4%);
+}
+
+.councilLogo {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	padding-left: 15%;
+	padding-right: 15%;
+	border-right: 3px solid black;
+}
+
+.councilLogo img {
+	transform: translateX(10%);
+}
+
+.countryFlag {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	padding-left: 15%;
+	padding-right: 15%;
+	border-left: 3px solid black;
+}
+
+.countryFlag img {
+	transform: translateY(10%);
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.logo img {
+	transform: translateX(-9%);
+}
+
+/* support for small screens */
+
+@media(max-width: 1020px) {
+	.councilContainer {
+		flex-direction: column;
+	}
+
+	.councilLogo {
+		border-bottom: 3px solid black;
+		border-right: 0;
+		padding-bottom: 10%;
+	}
+
+	.councilLogo img {
+		transform: translateX(0);
+		width: 200px;
+		height: 200px;
+	}
+
+	.countryFlag {
+		border-left: 0;
+		border-top: 3px solid black;
+		padding-top: 10%;
+	}
+
+	.countryFlag img {
+		transform: translateY(0);
+		width: 350px;
+		height: 180px;
+	}
+
+	.logo img {
+		transform: translateX(5%);
+	}
+
+}
