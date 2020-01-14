@@ -1,32 +1,60 @@
-const express = require('express')
-const graphqlHTTP = require('express-graphql')
-const app = express()
-const schema = require('./graphql/schema/schema')
-const logger = require('winston')
-const passport = require('passport')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const auth_router = require('./routes/auth.routes')
-const api_router = require('./routes/api.routes')
-const auth_middleware = require('./middleware/auth.middleware')
+const { ApolloServer } = require('apollo-server');
+const logger = require('winston');
+const { sequelize } = require('./common/postgres');
+const { typeDefs } = require('./graphql/schema/schema');
+const resolvers = require('./graphql/resolvers/resolvers');
+const user = require('./models/user.model');
+const { getUser } = require('./common/userAuth');
 
-const PORT = process.env.WEBAPP_PORT || 3000
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  subscriptions: {
+    onConnect: connectionParams => {
+      if (connectionParams.authToken) {
+        const token = connectionParams.authToken || '';
+        const currentUser = getUser(token);
+        if (!currentUser) {
+          throw new Error('Not Authenticated');
+        }
 
-require('./passport/passport')
+        return {
+          currentUser: currentUser,
+        };
+      }
+      throw new Error('Missing Auth Token');
+    },
+  },
+  context: ({ req, connection }) => {
+    if (connection) {
+      return connection.context;
+    }
+    const token = req.headers.authorization || '';
+    const currentUser = getUser(token);
+    return {
+      currentUser: currentUser,
+      User: user,
+    };
+  },
+  cors: true,
+  debug: true,
+  playground: true
+});
 
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(passport.initialize())
-app.use('/auth',auth_router)
-app.use('/api',auth_middleware.jwt_auth,api_router)
+const PORT = process.env.WEBAPP_PORT || 3000;
 
-app.use(
-   '/graphql',
-    graphqlHTTP({
-        schema : schema,
-        graphiql :true,
-    }),
-)
+sequelize
+  .authenticate()
+  .then(() => {
+    logger.info('Connection has been established successfully.');
+  })
+  .catch(err => {
+    logger.error(`Unable to connect to the database: ${err}`);
+  });
 
-app.listen(PORT, () => logger.info("Welcome to VITCMUN 2020"))
+sequelize.sync();
+
+server.listen(PORT).then(({ url, subscriptionsUrl }) => {
+  logger.info(`Server ready at ${url}`);
+  logger.info(`Subscriptions ready at ${subscriptionsUrl}`);
+});
