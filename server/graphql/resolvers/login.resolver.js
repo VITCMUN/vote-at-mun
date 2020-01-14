@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { jwtSecretKey } = require('../../config').config;
 
-exports.login = async (_, { username, password }, { dataSources }) => {
-  const user = await dataSources.User.findByPk(username);
+exports.login = async (_, { username, password }, { User }) => {
+  const user = await User.findByPk(username);
   if (!user) {
     throw new Error('Invalid Username');
   }

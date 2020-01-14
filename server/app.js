@@ -1,50 +1,47 @@
-const http = require('http');
-const { ApolloServer } = require('apollo-server-express');
-const express = require('express');
+const { ApolloServer } = require('apollo-server');
 const logger = require('winston');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
 const user = require('./models/user.model');
-const { jwtSecretKey } = require('./config').config;
+const { getUser } = require('./common/userAuth');
 
-const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => {
+  subscriptions: {
+    onConnect: connectionParams => {
+      if (connectionParams.authToken) {
+        const token = connectionParams.authToken || '';
+        const currentUser = getUser(token);
+        if (!currentUser) {
+          throw new Error('Not Authenticated');
+        }
+
+        return {
+          currentUser: currentUser,
+        };
+      }
+      throw new Error('Missing Auth Token');
+    },
+  },
+  context: ({ req, connection }) => {
+    if (connection) {
+      return connection.context;
+    }
+    const token = req.headers.authorization || '';
+    const currentUser = getUser(token);
     return {
+      currentUser: currentUser,
       User: user,
     };
   },
-  context: ({ req }) => {
-    const tokenWithBearer = req.headers.authorization || '';
-    const token = tokenWithBearer.split(' ')[1];
-    const userInstance = () => {
-      try {
-        if (token) {
-          return jwt.verify(token, jwtSecretKey);
-        }
-        return null;
-      } catch (err) {
-        return null;
-      }
-    };
-    return {
-      userInstance: userInstance(),
-    };
-  },
+  cors: true,
+  debug: true,
+  playground: true
 });
 
 const PORT = process.env.WEBAPP_PORT || 3000;
-
-server.applyMiddleware({ app });
-
-const httpServer = http.createServer(app);
-
-server.installSubscriptionHandlers(httpServer);
 
 sequelize
   .authenticate()
@@ -57,11 +54,7 @@ sequelize
 
 sequelize.sync();
 
-app.use(cors());
-
-httpServer.listen(PORT, () => {
-  logger.info(`Server ready at http//localhost${PORT}${server.graphqlPath}`);
-  logger.info(
-    `Subscriptions ready at ws//localhost${PORT}${server.subscriptionsPath}`
-  );
+server.listen(PORT).then(({ url, subscriptionsUrl }) => {
+  logger.info(`Server ready at ${url}`);
+  logger.info(`Subscriptions ready at ${subscriptionsUrl}`);
 });
