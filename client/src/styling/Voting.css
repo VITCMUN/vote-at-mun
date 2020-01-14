@@ -56,29 +56,27 @@ html,body{
     justify-content: space-evenly;
 }
 .pollBtn{
-    width:120px;
-    height: 120px;
-    border-radius: 80px;
-    font-size: 40px;
+    width:220px;
+    height: 60px;
+    border-radius: 20px;
+    font-size: 30px;
     font-weight: 300;
-    border: 2px solid #F6DBA6;
+    background: #F6DBA6;
+    border: 2px solid #000000;
     margin-top: 50px;
     opacity: 0.4;
+    transition: all 0.75s;
 }
 .pollBtn:focus{
     outline: none;
 }
 .pollBtn:hover{
    opacity: 1;
-}
-.voteYes .pollBtn{
-    background: rgb(24, 144, 24);
-}
-.voteNo .pollBtn{
-    background: rgb(158, 29, 29);
+   transform: scale(1.2);
 }
 .selected{
     opacity: 1;
+    transform: scale(1.2);
 }
 .notSelected{
     opacity: 0.2;
