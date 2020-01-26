@@ -1,68 +1,34 @@
 {
-  "name": "vote-at-mun-master",
-  "version": "1.0.0",
-  "description": "MUN voting application ",
-  "main": "app.js",
-  "scripts": {
-    "test": "will add",
-    "lint": "eslint",
-    "lint-test": "eslint client/ --ext .js,.jsx",
-    "prettier": "prettier --write",
-    "devstart": "nodemon server/app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VITCMUN/vote-at-mun.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/VITCMUN/vote-at-mun/issues"
-  },
-  "homepage": "https://github.com/VITCMUN/vote-at-mun#readme",
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "npm run prettier -s",
-      "npm run lint -s",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "apollo-server": "^2.9.16",
-    "bcryptjs": "^2.4.3",
-    "fuzzy-search": "^3.0.2",
-    "graphql": "^14.5.8",
-    "jsonwebtoken": "^8.5.1",
-    "moment-timezone": "^0.5.27",
-    "node-postgres": "^0.1.2",
-    "passport": "^0.4.1",
-    "passport-json": "^1.2.0",
-    "passport-jwt": "^4.0.0",
-    "pg": "^7.15.1",
-    "pg-hstore": "^2.3.3",
-    "prop-types": "^15.7.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
     "react": "^16.12.0",
-    "sequelize": "^5.21.3",
-    "winston": "^3.2.1"
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
   },
-  "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "husky": "^4.0.6",
-    "lint-staged": "^9.5.0",
-    "nodemon": "^2.0.2",
-    "prettier": "^1.19.1"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
