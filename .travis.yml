@@ -9,5 +9,7 @@ notifications:
   email:
     on_failure: never
     on_success: always
+before_script:
+  cd client/
 script:
   npm run lint-test -s
