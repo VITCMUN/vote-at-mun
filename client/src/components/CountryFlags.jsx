@@ -6,7 +6,7 @@ import { CountryNames } from '../constants/CountryNames';
 
 // Recommended Width and Height
 // width: 355px;
-// height: 583px;
+// height: 623px;
 
 // Pass a function as props to get the selected items
 
