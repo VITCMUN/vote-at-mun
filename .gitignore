@@ -1,7 +1,10 @@
 # Node Specific
-node_modules
-package-lock.json
+*/node_modules
+*/package-lock.json
 server/log
+*/.eslintrc.js
+*/.eslintrc.json
+*/.prettierrc
 .env.local
 
 # OS Specific
