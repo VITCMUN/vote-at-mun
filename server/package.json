@@ -7,6 +7,16 @@
     "test": "will add",
     "devstart": "nodemon src/app.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VITCMUN/vote-at-mun.git"
@@ -32,6 +42,8 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
+    "husky": "^4.2.1",
+    "lint-staged": "^10.0.3",
     "nodemon": "^2.0.2"
   }
 }
