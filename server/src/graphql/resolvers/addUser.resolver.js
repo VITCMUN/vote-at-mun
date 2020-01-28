@@ -18,7 +18,7 @@ exports.addUser = async (
   }
   const passHash = await bcrypt.hashSync(password, saltRounds);
   await User.create({
-    username,
+    username: username,
     password: passHash,
     user_type: userType,
     profile_pic_url: displayPicUrl,

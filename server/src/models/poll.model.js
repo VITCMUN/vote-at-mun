@@ -13,17 +13,21 @@ const Poll = sequelize.define('Poll', {
     defaulValue: 0,
   },
 
-  time_to_talk: {
-    type: Sequelize.INTEGER,
-  },
-
-  individual_speaker_time: {
+  total_speaker_time: {
     type: Sequelize.INTEGER,
   },
 
   title: {
     type: Sequelize.STRING,
   },
+
+  description: {
+    type: Sequelize.STRING,
+  },
+
+  raised_by: {
+    type: Sequelize.STRING,
+  }
 });
 
 Poll.hasMany(Vote);
