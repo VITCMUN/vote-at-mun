@@ -80,3 +80,6 @@
     margin-right: 14px;
     margin-left: 14px;
   }
+.Selected{
+    opacity: 0.3;
+}

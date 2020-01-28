@@ -10,4 +10,6 @@ notifications:
     on_failure: never
     on_success: always
 script:
-  npm run lint-test -s
+  cd client
+  npm install
+  npm run lint-test
