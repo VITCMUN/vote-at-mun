@@ -11,5 +11,6 @@ notifications:
     on_success: always
 before_script:
   cd client/
+  npm install
 script:
   npm run lint-test -s
