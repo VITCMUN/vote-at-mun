@@ -14,6 +14,13 @@ exports.typeDefs = gql`
       stance: Int!
     ): String!
     login(username: String!, password: String!): loginResponse!
+    addPoll(
+      title: String!
+      voting_type: Int!
+      tst: Int
+      description: String
+      raised_by: String
+    ): String!
   }
   type User {
     username: String!

@@ -4,6 +4,7 @@ const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
 const user = require('./models/user.model');
+const poll = require('./models/poll.model');
 const { getUser } = require('./common/userAuth');
 
 const server = new ApolloServer({
@@ -33,6 +34,7 @@ const server = new ApolloServer({
     return {
       currentUser,
       User: user,
+      Poll: poll,
     };
   },
   cors: true,
