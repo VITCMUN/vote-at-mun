@@ -1,0 +1,40 @@
+.country{
+  width: 490px;
+  height: 640px;
+  text-align: center;
+}
+
+#heading{
+  font-family: Nunito;
+  font-size: 80px;
+  padding: 0;
+  margin: 0;
+  color: white;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.Main{
+  background-color: #511926;
+  height: 100vh;
+}
+
+.parts{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.part1{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.part2{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
