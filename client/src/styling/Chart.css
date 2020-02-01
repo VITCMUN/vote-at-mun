@@ -1,0 +1,10 @@
+.chart {
+    height: 70vh;
+    width: 70vh;
+    transform: translateY(10px);
+}
+
+/*.box{
+	border: 2px solid #F6DBA6;
+	border-radius: 5px;
+}*/
