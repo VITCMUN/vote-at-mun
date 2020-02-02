@@ -39,7 +39,7 @@ const EBPoll = () => {
           <div>
             <Sidebar />
           </div>
-          <img className="img2" src="mun.png" />
+          <img className="img2" src="mun.png" alt="MUN" />
           <h4 className="EB">
             <b>{heading}</b>
           </h4>
