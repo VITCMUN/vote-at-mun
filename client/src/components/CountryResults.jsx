@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "../styling/CountryResults.css";
-import FuzzySearch from "fuzzy-search";
-import { CountryNames } from "../constants/CountryNames";
+import React, { useState } from 'react';
+import '../styling/CountryResults.css';
+import FuzzySearch from 'fuzzy-search';
+import { CountryNames } from '../constants/CountryNames';
 
 // Recommended Width and Height
 // width: 355px;
@@ -11,19 +11,19 @@ import { CountryNames } from "../constants/CountryNames";
 
 // Country Names are used to filter countries and will be passed as selected from this component
 
-const CountryResults = props => {
-  const [countries, setCountries] = useState(
-    CountryNames.map((val, index, arr) => {
-      val["voted"] = "false";
+const CountryResults = () => {
+  const [countries] = useState(
+    CountryNames.map(val => {
+      // eslint-disable-next-line no-param-reassign
+      val.voted = 'false';
       return val;
     })
   );
-  console.log("Hi");
-  const [keyword, setKeyword] = useState("");
-  const searcher = new FuzzySearch(countries, ["name"], {
+  const [keyword, setKeyword] = useState('');
+  const searcher = new FuzzySearch(countries, ['name'], {
     caseSensitive: false,
     // A better matching result will be displayed first
-    sort: true
+    sort: true,
   });
 
   const result = searcher.search(keyword);
@@ -37,9 +37,7 @@ const CountryResults = props => {
         <div className="CountryProfile" role="button" tabIndex={0}>
           <img src={country.source} className="Flag" alt={country.name} />
           <b className="countryName">{country.name}</b>
-          <span
-            className={country.voted !== "false" ? "Voted" : "NotVoted"}
-          ></span>
+          <span className={country.voted !== 'false' ? 'Voted' : 'NotVoted'} />
         </div>
       </div>
     ));

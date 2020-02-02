@@ -1,10 +1,9 @@
-import React from "react";
-import "./App.css";
-import { ResultChart } from "./Components/Chart.jsx";
-import Sidebar from "./Sidebar.jsx";
-import { CountryResults } from "./Components/CountryResults.jsx";
+import React from 'react';
+import { ResultChart } from './Chart.jsx';
+import Sidebar from './Sidebar.jsx';
+import { CountryResults } from './CountryResults.jsx';
 
-function App(props) {
+function App() {
   return (
     <div className="Main">
       <Sidebar />
