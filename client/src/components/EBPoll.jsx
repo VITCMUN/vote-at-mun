@@ -25,7 +25,6 @@ const EBPoll = () => {
   };
 
   const handleSubmit = event => {
-    console.log(pollForm, selected);
     event.preventDefault();
     // TODO : Add path to mutation call
   };
@@ -40,7 +39,7 @@ const EBPoll = () => {
           <div>
             <Sidebar />
           </div>
-          <img className="img2" src="mun.png" alt="MUN" />
+          <img className="img2" src="mun.png" />
           <h4 className="EB">
             <b>{heading}</b>
           </h4>
