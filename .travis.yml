@@ -4,12 +4,10 @@ node_js:
   - "stable"
 cache:
   directories:
-    - "node_modules"
+    - "./node_modules"
 notifications:
   email:
     on_failure: never
     on_success: always
 script:
-  cd client
-  npm install
-  npm run lint-test
+  cd client && npm install && npm run lint-test

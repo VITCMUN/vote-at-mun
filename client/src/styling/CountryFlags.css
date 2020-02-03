@@ -74,11 +74,12 @@
     border-color: #F6DBA6;
     height: 35px;
     color: #F6DBA6;
-    margin-top: 25px;
-    margin-bottom: 11px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     width: 80px;
     margin-right: 14px;
     margin-left: 14px;
+    font-size: 14px;
   }
 .Selected{
     opacity: 0.3;
