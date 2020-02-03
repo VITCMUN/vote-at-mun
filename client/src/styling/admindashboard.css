@@ -1,0 +1,120 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.admincontainer{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.pageheader{
+	flex: 1;
+	flex-direction: row;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #511926;
+	width: 100vw;
+}
+.headlogo{
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+.headtitle{
+	flex: 8;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 60px;
+	font-family: Nunito;
+	color: #f6dba6;
+}
+.pagecontent{
+	flex: 7;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #511926;
+	width: 100vw;
+}
+
+.optionbutton{
+	width: 15vw;
+	height: 8vh;
+	background-color: #34434A;
+	margin: 40px;
+	border-radius: 10px;
+	text-align: center;
+	padding-top: 3vh;
+	opacity: 0.9;
+}
+
+.optiontext{
+	font-size: 40px;
+	color: #f6dba6;
+}
+
+/* form */
+
+input{
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 3px solid black;
+	margin-right: 20px;
+	font-size: 40px;
+	color: #f6dba6;
+	padding-left: 10px;
+}
+
+label{
+	font-size: 40px;
+	color: #f6dba6;
+	margin-right: 10px;
+}
+
+.submit{
+	width: 12vw;
+	height: 6vh;
+	background-color: #34434A;
+	border-radius: 10px;
+	text-align: center;
+	padding-top: 2vh;
+	opacity: 0.9;
+	font-size: 40px;
+	color: #f6dba6;
+	margin: auto auto;
+	margin-top: 50px;
+}
+
+.goback{
+	width: 12vw;
+	height: 6vh;
+	background-color: #34434A;
+	border-radius: 10px;
+	text-align: center;
+	padding-top: 2vh;
+	opacity: 0.9;
+	font-size: 40px;
+	color: #f6dba6;
+	margin: auto auto;
+	margin-top: 180px;
+}
+
+select{
+	border: 0;
+	outline: 0;
+	background: transparent;
+	background-color: #34434A;
+	width: 12vw;
+	height: 6vh;
+	font-size: 40px;
+	color: #f6dba6;
+}
+
+/* add user */
