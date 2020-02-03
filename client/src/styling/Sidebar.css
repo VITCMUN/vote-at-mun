@@ -25,6 +25,7 @@ label {
 .container {
 	display: flex;
   min-height: 200%;
+  position: fixed;
 }
 
 input[data-function*='swipe'] {
@@ -94,6 +95,10 @@ input[data-function*='swipe']:checked~.sidebar .menu li {
 	left: 0;
 	height: 130%;
 	transition: all .3s;
+}
+
+.menu{
+	margin-top: 250px;
 }
 
 .menu li {

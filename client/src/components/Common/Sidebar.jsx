@@ -1,10 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/*
-Since two labels are being used for a single input so disable the
-corresponding eslint error
-*/
 import React from 'react';
-import '../styling/Sidebar.css';
+import '../../styling/Sidebar.css';
+import { Link } from '@reach/router';
 
 /*
 Recommended Styling
@@ -29,22 +25,16 @@ function Sidebar() {
           <img className="img1" src="black1.png" alt="MUN" />
           <br />
           <li>
-            <a href="https://vitcmun.in/">Home</a>
+            <Link to="/executiveBoard">Dashboard</Link>
           </li>
           <li>
-            <a href="https://vitcmun.in/">XYZ</a>
+            <Link to="/ebPoll">Create Poll</Link>
           </li>
           <li>
-            <a href="https://vitcmun.in/">XYZ</a>
+            <Link to="/result">View Results</Link>
           </li>
           <li>
-            <a href="https://vitcmun.in/">XYZ</a>
-          </li>
-          <li>
-            <a href="https://vitcmun.in/">XYZ</a>
-          </li>
-          <li>
-            <a href="https://vitcmun.in/">XYZ</a>
+            <a href="https://vitcmun.in/">Logout</a>
           </li>
         </nav>
       </div>
