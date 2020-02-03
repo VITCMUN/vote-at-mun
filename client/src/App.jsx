@@ -36,18 +36,38 @@ const App = () => {
     loading: LoadingScreen,
   });
 
-  return (
-    <div>
+  // 0 means Delegate
+  // 1 means EB
+  // 2 means Admin
+  const userType = 2;
+
+  const getRoutes = () => {
+    if (userType === 0) {
+      return (
+        <Router>
+          <Voting path="vote" />
+          <Result path="result" />
+          <DelegateDashboard path="/*" />
+        </Router>
+      );
+    }
+    if (userType === 1) {
+      return (
+        <Router>
+          <EBPoll path="ebPoll" />
+          <Result path="result" />
+          <EBDashboard path="/*" />
+        </Router>
+      );
+    }
+    return (
       <Router>
-        <DelegateDashboard path="delegate" />
-        <AdminDashboard path="admin" />
-        <EBDashboard path="executiveBoard" />
-        <EBPoll path="ebPoll" />
-        <Voting path="vote" />
-        <Result path="result" />
+        <AdminDashboard path="/*" />
       </Router>
-    </div>
-  );
+    );
+  };
+
+  return <div>{getRoutes()}</div>;
 };
 
 export default App;
