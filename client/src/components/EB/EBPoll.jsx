@@ -39,7 +39,7 @@ const EBPoll = () => {
       <div className="App">
         <div>
           <div>
-            <Sidebar type={0} />
+            <Sidebar />
           </div>
           <img className="img2" src="mun.png" alt="MUN" />
           <h4 className="EB">
