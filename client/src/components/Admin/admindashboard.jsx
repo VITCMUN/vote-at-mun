@@ -5,7 +5,7 @@ function AdminDashboard() {
   const [renderView, setRenderView] = useState(0);
   const [addUserState, setaddUserState] = useState({ name: '', email: '' });
   const [deleteUserState, setdeleteUserState] = useState({ name: '', uid: '' });
-  const [, , setchooseBannerState] = useState({ banner: '1' });
+  const [, setchooseBannerState] = useState({ banner: '1' });
 
   function addUserFormHandler(event) {
     event.preventDefault();
