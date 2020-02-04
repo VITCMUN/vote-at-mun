@@ -50,12 +50,12 @@
 	margin: 40px;
 	border-radius: 10px;
 	text-align: center;
-	padding-top: 3vh;
+	padding-top: 2.5vh;
 	opacity: 0.9;
 }
 
 .optiontext{
-	font-size: 40px;
+	font-size: 1.5em;
 	color: #f6dba6;
 }
 
@@ -84,9 +84,9 @@ label{
 	background-color: #34434A;
 	border-radius: 10px;
 	text-align: center;
-	padding-top: 2vh;
+	padding-top: 1.5vh;
 	opacity: 0.9;
-	font-size: 40px;
+	font-size: 1.5em;
 	color: #f6dba6;
 	margin: auto auto;
 	margin-top: 50px;
@@ -98,9 +98,9 @@ label{
 	background-color: #34434A;
 	border-radius: 10px;
 	text-align: center;
-	padding-top: 2vh;
+	padding-top: 1.5vh;
 	opacity: 0.9;
-	font-size: 40px;
+	font-size: 1.5em;
 	color: #f6dba6;
 	margin: auto auto;
 	margin-top: 180px;
@@ -113,8 +113,6 @@ select{
 	background-color: #34434A;
 	width: 12vw;
 	height: 6vh;
-	font-size: 40px;
+	font-size: 2em;
 	color: #f6dba6;
 }
-
-/* add user */
