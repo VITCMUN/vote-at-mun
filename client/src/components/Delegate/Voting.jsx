@@ -1,6 +1,7 @@
 // import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
-import '../styling/Voting.css';
+import '../../styling/Voting.css';
+import { navigate } from '@reach/router';
 
 const Voting = () => {
   const initial = {
@@ -33,6 +34,7 @@ const Voting = () => {
     // const submitVote = async payload => {
     // const response = await graphQLCall(payload);
     // redirect to vote complete page
+    navigate('/result');
   };
 
   const getButtons = () => {
@@ -138,4 +140,4 @@ const Voting = () => {
   );
 };
 
-export { Voting };
+export default Voting;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../styling/CountryFlags.css';
+import '../../styling/CountryFlags.css';
 import FuzzySearch from 'fuzzy-search';
 import PropTypes from 'prop-types';
-import { CountryNames } from '../constants/CountryNames';
+import { CountryNames } from '../../constants/CountryNames';
 
 // Recommended Width and Height
 // width: 355px;

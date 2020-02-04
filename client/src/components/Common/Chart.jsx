@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import '../styling/Chart.css';
+import '../../styling/Chart.css';
 
 function ResultChart() {
   const [chartData] = useState({

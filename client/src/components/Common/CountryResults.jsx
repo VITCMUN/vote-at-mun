@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../styling/CountryResults.css';
+import '../../styling/CountryResults.css';
 import FuzzySearch from 'fuzzy-search';
-import { CountryNames } from '../constants/CountryNames';
+import { CountryNames } from '../../constants/CountryNames';
 
 // Recommended Width and Height
 // width: 355px;

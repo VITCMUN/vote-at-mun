@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import '../styling/EBPoll.css';
-import Sidebar from './Sidebar';
-import { CountryFlags } from './CountryFlags';
+import '../../styling/EBPoll.css';
+import { navigate } from '@reach/router';
+import Sidebar from '../Common/Sidebar';
+import { CountryFlags } from '../Common/CountryFlags';
 
 const EBPoll = () => {
   // Initial State of the poll form
@@ -27,6 +28,7 @@ const EBPoll = () => {
   const handleSubmit = event => {
     event.preventDefault();
     // TODO : Add path to mutation call
+    navigate('result');
   };
 
   // To escape the ' character

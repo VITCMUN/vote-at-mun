@@ -1,8 +1,15 @@
 import React from 'react';
-import '../styling/DelegateLanding.css';
+import '../../styling/DelegateLanding.css';
+// import { navigate } from '@reach/router';
 
 function DelegateLanding() {
   // insert : councilLogo, countyFlag, vitcmun logo images from /Public/
+  /*
+  Since for the delegate we do not have any in app sidebar we need to have a
+  subscription which will trigget the navigation
+  */
+
+  // navigate('/vote');
   return (
     <>
       <p className="title">WELCOME DELEGATE !</p>

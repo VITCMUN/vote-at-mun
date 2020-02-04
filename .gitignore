@@ -1,6 +1,7 @@
 # Node Specific
 */node_modules
 */package-lock.json
+package-lock.json
 server/log
 .env.local
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styling/admindashboard.css';
+import '../../styling/admindashboard.css';
 
 function AdminDashboard() {
   const [renderView, setRenderView] = useState(0);

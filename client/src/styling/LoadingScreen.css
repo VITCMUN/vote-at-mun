@@ -1,0 +1,54 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+body,head{
+    height:100%;
+    width:100%;
+    background: #511926;
+    overflow-x: hidden;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    height:100%;
+}
+.heading{
+    text-align: center;
+    width:100%;
+}
+.heading h1{
+    color : #F6DBA6;
+    font-weight: 100;
+    font-size: 50px;
+    margin-top:50px;
+    margin-bottom: 120px;
+}
+.munLogo{
+    height:170px;
+    width:auto;
+    position: fixed;
+    top:0px;
+    /* left:80px; */
+    margin-left: 90px;
+}
+
+@media only screen and (max-width: 1030px) {
+    .responsive{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .munLogo{
+        position: relative;
+        height:120px;
+        width:120px;
+        margin-left: 0px;
+    }
+}
