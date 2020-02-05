@@ -9,6 +9,7 @@ exports.typeDefs = gql`
     addUser(userDetails: userDetails!): String!
     login(username: String!, password: String!): loginResponse!
     addPoll(pollDetails: pollDetails!): String!
+    setCouncil(name: String!,bannerUrl: String): String!
   }
   type User {
     username: String!

@@ -37,7 +37,6 @@ const User = sequelize.define('User', {
   }
 });
 
-User.hasMany(Poll);
 User.hasMany(Vote);
 
 module.exports = User;

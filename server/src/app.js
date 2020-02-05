@@ -3,8 +3,7 @@ const logger = require('winston');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
-const user = require('./models/user.model');
-const poll = require('./models/poll.model');
+const { User, Poll, Council } = require('./models/index');
 const { getUser } = require('./common/userAuth');
 
 const pubsub = new PubSub();
@@ -36,8 +35,9 @@ const server = new ApolloServer({
     const currentUser = getUser(token);
     return {
       currentUser,
-      User: user,
-      Poll: poll,
+      User,
+      Poll,
+      Council,
       pubsub,
     };
   },
