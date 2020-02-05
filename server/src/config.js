@@ -9,11 +9,12 @@ exports.config = {
     host: 'localhost',
     username: 'postgres',
     password: '0000',
-    database: 'postgres',
+    database: 'vitcmun',
     port: 5432,
   },
   errorLogFile: 'log/errors.txt',
   debugLogFile: 'log/debug.txt',
+  infoLogFile: 'log/info.txt',
   jwtSecretKey: 'vote@mun2020',
   saltRounds: 10,
 };

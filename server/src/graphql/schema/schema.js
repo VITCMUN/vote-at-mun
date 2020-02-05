@@ -1,26 +1,19 @@
 const { gql } = require('apollo-server');
 
 exports.typeDefs = gql`
-  type Query {
+  type Query{
     nvotes: Int!
   }
   type Mutation {
-    vote(val: Boolean!): Int!
-    addUser(
-      username: String!
-      password: String!
-      userType: Int!
-      displayPicUrl: String
-      stance: Int!
-    ): String!
+    addUser(userDetails: userDetails!): String!
     login(username: String!, password: String!): loginResponse!
-    addPoll(
-      title: String!
-      voting_type: Int!
-      tst: Int
-      description: String
-      raised_by: String
-    ): String!
+    addPoll(pollDetails: pollDetails!): String!
+    setCouncil(name: String!,bannerUrl: String): String!
+    vote(voteDetails: voteDetails): Boolean!
+  }
+  type Subscription {
+    voteUpdate: Int!
+    pollDetails: pollUpdate!
   }
   type User {
     username: String!
@@ -30,7 +23,31 @@ exports.typeDefs = gql`
     user: User!
     token: String!
   }
-  type Subscription {
-    voteUpdate: Int!
+  input voteDetails {
+    pollId: Int!
+    vote: Boolean!
+  }
+  input pollDetails {
+    title: String
+    description: String
+    totalSpeakerTime: Int
+    votingType: Int!
+    raisedBy: String
+  }
+  type pollUpdate {
+    pollId: Int!
+    title: String
+    description: String
+    totalSpeakerTime: Int
+    votingType: Int!
+    raisedBy: String
+  }
+  input userDetails{
+    username: String!
+    password: String!
+    userType: Int!
+    displayPicUrl: String
+    stance: Int!
+    observer: Boolean!
   }
 `;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import '../styling/CountryFlags.css';
+import '../../styling/CountryFlags.css';
 import FuzzySearch from 'fuzzy-search';
-import { CountryNames } from '../constants/CountryNames';
+import PropTypes from 'prop-types';
+import { CountryNames } from '../../constants/CountryNames';
 
 // Recommended Width and Height
 // width: 355px;
@@ -13,8 +13,7 @@ import { CountryNames } from '../constants/CountryNames';
 // Country Names are used to filter countries and will be passed as selected from this component
 
 const CountryFlags = props => {
-  const { getSelected, selectedArray } = props;
-  const [selected, setSelected] = useState(selectedArray);
+  const { selected, setSelected } = props;
   const [keyword, setKeyword] = useState('');
   const searcher = new FuzzySearch(CountryNames, ['name'], {
     caseSensitive: false,
@@ -105,9 +104,6 @@ const CountryFlags = props => {
       <button className="selectorCountry" onClick={clearAll} type="button">
         Clear All
       </button>
-      <button className="selectorCountry" onClick={getSelected} type="button">
-        Submit
-      </button>
       <button className="selectorCountry" onClick={selectAll} type="button">
         Select All
       </button>
@@ -115,15 +111,9 @@ const CountryFlags = props => {
   );
 };
 
-// Validating the props passed
-
 CountryFlags.propTypes = {
-  selectedArray: PropTypes.shape([]),
-  getSelected: PropTypes.func.isRequired,
-};
-
-CountryFlags.defaultProps = {
-  selectedArray: [],
+  selected: PropTypes.instanceOf(Array).isRequired,
+  setSelected: PropTypes.func.isRequired,
 };
 
 export { CountryFlags };

@@ -10,6 +10,7 @@
 }
 .Flag:hover + .countryName{
     display: inherit;
+    font-size: 1.3em;
 }
 .Flag{
     border-radius: 50px;
@@ -74,13 +75,27 @@
     border-color: #F6DBA6;
     height: 35px;
     color: #F6DBA6;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 25px;
+    margin-bottom: 11px;
     width: 80px;
     margin-right: 14px;
     margin-left: 14px;
-    font-size: 14px;
   }
-.Selected{
-    opacity: 0.3;
+
+.Voted{
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: green;
+    border-radius: 50%;
+    transform: translateX(-250%) translateY(100%);
+}
+
+.NotVoted{
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translateX(-250%) translateY(100%);
 }

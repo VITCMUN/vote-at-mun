@@ -1,40 +1,45 @@
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer, PubSub } = require('apollo-server');
 const logger = require('winston');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
-const user = require('./models/user.model');
-const poll = require('./models/poll.model');
+const { User, Poll, Council, Vote } = require('./models/index');
 const { getUser } = require('./common/userAuth');
+
+const pubsub = new PubSub();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   subscriptions: {
     onConnect: connectionParams => {
-      if (connectionParams.authToken) {
-        const token = connectionParams.authToken || '';
+      if (connectionParams.authorization) {
+        const token = connectionParams.authorization || '';
         const currentUser = getUser(token);
         if (!currentUser) {
           throw new Error('Not Authenticated');
         }
         return {
           currentUser,
+          pubsub
         };
       }
       throw new Error('Missing Auth Token');
     },
   },
-  context: ({ req, connection }) => {
+  context: async ({ req, connection }) => {
     if (connection) {
       return connection.context;
     }
     const token = req.headers.authorization || '';
-    const currentUser = getUser(token);
+    const currentUser = await getUser(token);
     return {
       currentUser,
-      User: user,
-      Poll: poll,
+      User,
+      Poll,
+      Council,
+      Vote,
+      pubsub,
     };
   },
   cors: true,

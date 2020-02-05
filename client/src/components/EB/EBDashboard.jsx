@@ -1,7 +1,12 @@
 import React from 'react';
-import '../styling/EBDashboard.css';
+import '../../styling/EBDashboard.css';
+import { navigate } from '@reach/router';
 
 const EBDashboard = () => {
+  const goToPollForm = () => {
+    navigate('/ebPoll');
+  };
+
   return (
     <div className="FlexContainer">
       <div className="LeftContainer">
@@ -19,7 +24,7 @@ const EBDashboard = () => {
         <div className="VotingButton">
           <div className="Cardboard">
             <img src="pollimg.jpg" alt="Poll" className="PollImage" />
-            <button type="button" className="Vote">
+            <button type="button" className="Vote" onClick={goToPollForm}>
               Conduct Voting
             </button>
           </div>
