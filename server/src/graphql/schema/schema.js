@@ -6,21 +6,9 @@ exports.typeDefs = gql`
   }
   type Mutation {
     vote(val: Boolean!): Int!
-    addUser(
-      username: String!
-      password: String!
-      userType: Int!
-      displayPicUrl: String
-      stance: Int!
-    ): String!
+    addUser(userDetails: userDetails!): String!
     login(username: String!, password: String!): loginResponse!
-    addPoll(
-      title: String!
-      voting_type: Int!
-      tst: Int
-      description: String
-      raised_by: String
-    ): String!
+    addPoll(pollDetails: pollDetails!): String!
   }
   type User {
     username: String!
@@ -32,5 +20,28 @@ exports.typeDefs = gql`
   }
   type Subscription {
     voteUpdate: Int!
+    pollDetails: pollUpdate!
+  }
+  input pollDetails {
+    title: String
+    description: String
+    totalSpeakerTime: Int
+    votingType: Int!
+    raisedBy: String
+  }
+  type pollUpdate {
+    title: String
+    description: String
+    totalSpeakerTime: Int
+    votingType: Int!
+    raisedBy: String
+  }
+  input userDetails{
+    username: String!
+    password: String!
+    userType: Int!
+    displayPicUrl: String
+    stance: Int!
+    observer: Boolean!
   }
 `;

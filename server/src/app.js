@@ -1,4 +1,4 @@
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer, PubSub } = require('apollo-server');
 const logger = require('winston');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
@@ -6,6 +6,8 @@ const resolvers = require('./graphql/resolvers/resolvers');
 const user = require('./models/user.model');
 const poll = require('./models/poll.model');
 const { getUser } = require('./common/userAuth');
+
+const pubsub = new PubSub();
 
 const server = new ApolloServer({
   typeDefs,
@@ -20,6 +22,7 @@ const server = new ApolloServer({
         }
         return {
           currentUser,
+          pubsub
         };
       }
       throw new Error('Missing Auth Token');
@@ -35,6 +38,7 @@ const server = new ApolloServer({
       currentUser,
       User: user,
       Poll: poll,
+      pubsub,
     };
   },
   cors: true,

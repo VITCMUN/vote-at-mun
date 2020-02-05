@@ -1,3 +1,0 @@
-(Jan 14th 2020 8:53:35 PM IST) [[32minfo[39m] "User with username abc created"
-(Jan 26th 2020 10:28:55 PM IST) [[32minfo[39m] "User with username kunal created"
-(Jan 26th 2020 10:29:22 PM IST) [[32minfo[39m] "User with username kunal already exists"

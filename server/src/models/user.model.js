@@ -31,6 +31,10 @@ const User = sequelize.define('User', {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  observer: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  }
 });
 
 User.hasMany(Poll);

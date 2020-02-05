@@ -1,9 +1,7 @@
-const { PubSub } = require('apollo-server');
 const { addUser } = require('./addUser.resolver');
 const { login } = require('./login.resolver');
 const { addPoll } = require('./addPoll.resolver');
-
-const pubsub = new PubSub();
+const logger = require('../../winston');
 
 let num = 0;
 
@@ -12,7 +10,7 @@ module.exports = {
     nvotes: () => num,
   },
   Mutation: {
-    vote: (_, { val }) => {
+    vote: (_, { val }, { pubsub }) => {
       if (val) {
         num += 1;
         pubsub.publish('voteUpdate', { voteUpdate: num });
@@ -25,7 +23,13 @@ module.exports = {
   },
   Subscription: {
     voteUpdate: {
-      subscribe: () => pubsub.asyncIterator('voteUpdate'),
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('voteUpdate'),
+    },
+    pollDetails: {
+      subscribe: (_, __, { currentUser, pubsub }) => {
+        logger.info(`${currentUser.username} subscribed to pollDetails`);
+        return pubsub.asyncIterator('pollDetails');
+      },
     },
   },
 };
