@@ -3,7 +3,7 @@ const logger = require('winston');
 const { sequelize } = require('./common/postgres');
 const { typeDefs } = require('./graphql/schema/schema');
 const resolvers = require('./graphql/resolvers/resolvers');
-const { User, Poll, Council } = require('./models/index');
+const { User, Poll, Council, Vote } = require('./models/index');
 const { getUser } = require('./common/userAuth');
 
 const pubsub = new PubSub();
@@ -13,8 +13,8 @@ const server = new ApolloServer({
   resolvers,
   subscriptions: {
     onConnect: connectionParams => {
-      if (connectionParams.authToken) {
-        const token = connectionParams.authToken || '';
+      if (connectionParams.authorization) {
+        const token = connectionParams.authorization || '';
         const currentUser = getUser(token);
         if (!currentUser) {
           throw new Error('Not Authenticated');
@@ -27,17 +27,18 @@ const server = new ApolloServer({
       throw new Error('Missing Auth Token');
     },
   },
-  context: ({ req, connection }) => {
+  context: async ({ req, connection }) => {
     if (connection) {
       return connection.context;
     }
     const token = req.headers.authorization || '';
-    const currentUser = getUser(token);
+    const currentUser = await getUser(token);
     return {
       currentUser,
       User,
       Poll,
       Council,
+      Vote,
       pubsub,
     };
   },
