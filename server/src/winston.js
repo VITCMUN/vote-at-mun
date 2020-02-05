@@ -25,6 +25,10 @@ const transportsList = [
     level: 'debug',
     filename: config.debugLogFile,
   }),
+  new transports.File({
+    level: 'info',
+    filename: config.infoLogFile,
+  }),
 ];
 
 const logger = createLogger({

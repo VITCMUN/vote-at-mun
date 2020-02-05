@@ -7,8 +7,22 @@ const { sequelize } = require('../common/postgres');
 
 const Vote = sequelize.define('Vote', {
   vote_val: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.BOOLEAN,
   },
+  voterId: {
+    type: Sequelize.STRING,
+    references: {
+      model: 'Users',
+      key: 'username'
+    }
+  },
+  pollId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Polls',
+      key: 'id'
+    }
+  }
 });
 
 module.exports = Vote;

@@ -31,9 +31,12 @@ const User = sequelize.define('User', {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  observer: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  }
 });
 
-User.hasMany(Poll);
 User.hasMany(Vote);
 
 module.exports = User;
