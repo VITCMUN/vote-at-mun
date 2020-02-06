@@ -21,9 +21,9 @@ exports.addPoll = async (
         pollId: poll.id,
         title: poll.title,
         description: poll.description,
-        totalSpeakerTime: poll.totalSpeakerTime,
-        votingType: poll.votingType,
-        raisedBy: poll.raisedBy,
+        totalSpeakerTime: poll.total_speaker_time,
+        votingType: poll.voting_type,
+        raisedBy: poll.raised_by,
       }
     });
     logger.info(`New Poll created::${pollDetails.title}`);
