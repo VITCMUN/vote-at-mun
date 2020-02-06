@@ -8,29 +8,27 @@ const EBDashboard = () => {
   };
 
   return (
-    <div className="FlexContainer">
-      <div className="LeftContainer">
-        <img className="MunImage1" src="mun.png" alt="VITCC MUN" />
-        <img className="CouncilImage" src="unsc.png" alt="VITCC MUN" />
+    <>
+      <div className="left-container">
+        <img className="logo-big" src="img/mun.png" alt="VITCMUN" />
+        <div className="welcome-text">
+          Welcomes the Members of the Executive Board
+        </div>
       </div>
-
-      <div className="RightContainer">
-        <br />
-        <img className="MunImage2" src="mun.png" alt="VITCC MUN" />
-        <h4 className="DashboardHeading">
-          <b>WELCOME EXECUTIVE BOARD!</b>
-        </h4>
-        <br />
-        <div className="VotingButton">
-          <div className="Cardboard">
-            <img src="pollimg.jpg" alt="Poll" className="PollImage" />
-            <button type="button" className="Vote" onClick={goToPollForm}>
+      <div className="right-container">
+        <div className="card">
+          <div className="card-header">
+            <img className="card-img" src="img/disec.png" alt="Council" />
+            <div className="card-text">DISEC</div>
+          </div>
+          <div className="card-body">
+            <button type="button" className="button" onClick={goToPollForm}>
               Conduct Voting
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Router } from '@reach/router';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import Loadable from 'react-loadable';
 import LoadingScreen from './components/Common/LoadingScreen';
 
@@ -36,10 +38,14 @@ const App = () => {
     loading: LoadingScreen,
   });
 
-  // 0 means Delegate
-  // 1 means EB
-  // 2 means Admin
-  const userType = 2;
+  const GET_USER_TYPE = gql`
+    query GetUserType {
+      userType @client
+    }
+  `;
+
+  const { data } = useQuery(GET_USER_TYPE);
+  const { userType } = data;
 
   const getRoutes = () => {
     if (userType === 0) {
@@ -60,11 +66,14 @@ const App = () => {
         </Router>
       );
     }
-    return (
-      <Router>
-        <AdminDashboard path="/*" />
-      </Router>
-    );
+    if (userType === 2) {
+      return (
+        <Router>
+          <AdminDashboard path="/*" />
+        </Router>
+      );
+    }
+    return <h2>Contact Tech Support</h2>;
   };
 
   return <div>{getRoutes()}</div>;
