@@ -7,6 +7,8 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+import { typeDefs } from './typedefs';
+import { resolvers } from './resolvers';
 import App from './App';
 
 const cache = new InMemoryCache();
@@ -20,6 +22,8 @@ const link = new HttpLink({
 const client = new ApolloClient({
   cache,
   link,
+  typeDefs,
+  resolvers,
 });
 
 cache.writeData({

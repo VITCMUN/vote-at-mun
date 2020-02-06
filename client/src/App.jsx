@@ -39,7 +39,7 @@ const App = () => {
   });
 
   const GET_USER_TYPE = gql`
-    query IsUserLoggedIn {
+    query GetUserType {
       userType @client
     }
   `;
