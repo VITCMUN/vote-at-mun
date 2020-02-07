@@ -5,9 +5,8 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
-import { typeDefs } from './typedefs';
+import { typeDefs, IS_LOGGED_IN } from './typedefs';
 import { resolvers } from './resolvers';
 import App from './App';
 
@@ -32,12 +31,6 @@ cache.writeData({
     userType: localStorage.getItem('userType'),
   },
 });
-
-const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
-  }
-`;
 
 function IsLoggedIn() {
   const { data } = useQuery(IS_LOGGED_IN);
