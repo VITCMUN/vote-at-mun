@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import "../../styling/login.css";
+import React, { useState } from 'react';
+import '../../styling/login.css';
 
 const LoginForm = () => {
-  const [title, setTitle] = useState("");
-  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState('');
+  const [password, setPassword] = useState('');
   const handleSubmit = e => {
     e.preventDefault();
-    setTitle("");
-    setPassword("");
+    setTitle('');
+    setPassword('');
   };
   return (
     <div className="login-page">

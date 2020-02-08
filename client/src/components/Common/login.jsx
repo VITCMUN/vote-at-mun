@@ -1,6 +1,6 @@
-import React from "react";
-import "./EBDashboard.css";
-import LoginForm from "./form";
+import React from 'react';
+import './EBDashboard.css';
+import LoginForm from './form';
 
 function Login() {
   return (
@@ -11,7 +11,7 @@ function Login() {
       </div>
 
       <div className="RightContainer">
-        <br></br>
+        <br />
         <img className="MunImage2" src="mun.png" alt="VITCC MUN" />
         <h4 className="DashboardHeading">
           <b>WELCOME</b>
