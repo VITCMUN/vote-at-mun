@@ -6,7 +6,6 @@
 
 const Sequelize = require('sequelize');
 const { sequelize } = require('../common/postgres');
-const Poll = require('./poll.model');
 const Vote = require('./vote.model');
 
 const User = sequelize.define('User', {
@@ -29,7 +28,7 @@ const User = sequelize.define('User', {
   },
   stance: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    defaultValue: 0,
   },
   observer: {
     type: Sequelize.BOOLEAN,

@@ -8,6 +8,7 @@ const { sequelize } = require('../common/postgres');
 const Vote = sequelize.define('Vote', {
   vote_val: {
     type: Sequelize.BOOLEAN,
+    allowNull: false,
   },
   voterId: {
     type: Sequelize.STRING,

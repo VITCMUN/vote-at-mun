@@ -3,17 +3,18 @@ const { login } = require('./login.resolver');
 const { addPoll } = require('./addPoll.resolver');
 const { setCouncil } = require('./setCouncil.resolver');
 const { vote } = require('./vote.resolver');
+const { removeUser } = require('./removeUser.resolver');
+const { getDelegates } = require('./getDelegates.resolver');
 const logger = require('../../winston');
-
-const num = 0;
 
 module.exports = {
   Query: {
-    nvotes: () => num,
+    getDelegates
   },
   Mutation: {
-    vote,
+    vote, // delegate
     addUser, // admin
+    removeUser, // admin
     setCouncil, // admin
     login,
     addPoll, // EB
