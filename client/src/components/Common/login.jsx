@@ -1,5 +1,5 @@
 import React from 'react';
-import '../..styling/EBDashboard.css';
+import '../../styling/EBDashboard.css';
 import LoginForm from './form';
 
 function Login() {
