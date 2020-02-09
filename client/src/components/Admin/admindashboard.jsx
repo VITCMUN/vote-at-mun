@@ -3,7 +3,14 @@ import '../../styling/admindashboard.css';
 
 function AdminDashboard() {
   const [renderView, setRenderView] = useState(0);
-  const [addUserState, setaddUserState] = useState({ name: '', email: '' });
+  const [addUserState, setaddUserState] = useState({
+    username: '',
+    password: '',
+    user_type: '',
+    profile_pic_url: '',
+    stance: '',
+    observer: '',
+  });
   const [deleteUserState, setdeleteUserState] = useState({ name: '', uid: '' });
   const [, setchooseBannerState] = useState({ banner: '1' });
 
@@ -63,32 +70,115 @@ function AdminDashboard() {
   const addUser = (
     <>
       <form className="adduserform">
-        <label htmlFor="name">Name: </label>
+        <label htmlFor="username">Username: </label>
         <input
           type="text"
-          name="name"
-          id="name"
+          name="username"
+          id="username"
           required
-          value={addUserState.name}
+          // value={addUserState.username}
           onChange={event =>
-            setaddUserState({
-              name: event.target.value,
-              email: addUserState.email,
-            })
+            setaddUserState(
+              Object.assign(addUserState, {
+                username: event.target.value,
+              })
+            )
           }
         />
-        <label htmlFor="email">Email: </label>
+        <br />
+        <label htmlFor="password">Password: </label>
         <input
-          type="email"
-          name="email"
-          id="email"
+          type="text"
+          name="password"
+          id="password"
           required
-          value={addUserState.email}
+          // value={addUserState.password}
           onChange={event =>
-            setaddUserState({
-              name: addUserState.name,
-              email: event.target.value,
-            })
+            setaddUserState(
+              Object.assign(addUserState, {
+                password: event.target.value,
+              })
+            )
+          }
+        />
+        <br />
+        <label htmlFor="user_type">User Type: </label>
+        <input
+          type="text"
+          name="user_type"
+          id="user_type"
+          required
+          // value={addUserState.user_type}
+          onChange={event =>
+            setaddUserState(
+              Object.assign(addUserState, {
+                user_type: event.target.value,
+              })
+            )
+          }
+        />
+        <br />
+        <label htmlFor="profile_pic_url">Profile Pic URL: </label>
+        <input
+          type="text"
+          name="profile_pic_url"
+          id="profile_pic_url"
+          required
+          // value={addUserState.profile_pic_url}
+          onChange={event =>
+            setaddUserState(
+              Object.assign(addUserState, {
+                profile_pic_url: event.target.value,
+              })
+            )
+          }
+        />
+        <br />
+        <label htmlFor="stance">Stance: </label>
+        <input
+          type="text"
+          name="stance"
+          id="stance"
+          required
+          // value={addUserState.stance}
+          onChange={event =>
+            setaddUserState(
+              Object.assign(addUserState, {
+                stance: event.target.value,
+              })
+            )
+          }
+        />
+        <br />
+        <label htmlFor="observer">Not Observer: </label>
+        <input
+          type="radio"
+          name="observer"
+          id="observer"
+          required
+          // value={addUserState.stance}
+          onChange={() =>
+            setaddUserState(
+              Object.assign(addUserState, {
+                observer: false,
+              })
+            )
+          }
+        />
+        <span />
+        <label htmlFor="observer">Observer: </label>
+        <input
+          type="radio"
+          name="observer"
+          id="observertwo"
+          required
+          // value={addUserState.stance}
+          onChange={() =>
+            setaddUserState(
+              Object.assign(addUserState, {
+                observer: true,
+              })
+            )
           }
         />
         <div

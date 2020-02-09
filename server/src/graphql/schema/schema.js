@@ -2,10 +2,11 @@ const { gql } = require('apollo-server');
 
 exports.typeDefs = gql`
   type Query{
-    nvotes: Int!
+    getDelegates: [String!]
   }
   type Mutation {
     addUser(userDetails: userDetails!): String!
+    removeUser(username: String!): Int!
     login(username: String!, password: String!): loginResponse!
     addPoll(pollDetails: pollDetails!): String!
     setCouncil(name: String!,bannerUrl: String): String!
@@ -47,7 +48,7 @@ exports.typeDefs = gql`
     password: String!
     userType: Int!
     displayPicUrl: String
-    stance: Int!
-    observer: Boolean!
+    stance: Int
+    observer: Boolean
   }
 `;

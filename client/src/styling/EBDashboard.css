@@ -1,107 +1,93 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-html,body {
-	height: 100%;
-}
-.FlexContainer{
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
+.left-container{
+  float: left;
+  width: 50%;
   height: 100vh;
+  background-color: #130000;
+}
+.right-container{
+  float: right;
+  width: 50%;
+  height: 100vh;
+  background-color: #310b14;
 }
 
-.RightContainer {
-  flex: 1;
-  display:flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+.left-container .logo-big{
+  display: block;
+  width: 60%;
+  margin: auto;
+  padding: 20px 0;
+}
+.left-container .welcome-text{
+  width: fit-content;
+  max-width: 85%;
+  font-size: xx-large;
   text-align: center;
-  color: #F6DBA6;
-  font-size: 22px;
-  font-family: Nunito;
-  font-weight: bolder;
-  background-color: #511926;
-} 
-.LeftContainer{
-  flex: 1;
-  display:flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  color: #fff;
-  background-color: #310B14;
-}
-.VotingButton{
-  margin-top:60px;
-}
-.MunImage1{
-  flex: 1;
-  width: 30vw;
-}
-.MunImage2{
-  width: 150px;
-}
-.CouncilImage{
-  flex: 1;
-  width:30vw;
+  color: #ffffd8;
+  margin: auto;
 }
 
-.DashboardHeading{
-  color:#F6DBA6;
-  font-size:32px;
-  /* margin-left:40px; */
-  font-family: "Nunito";
-  /* margin-top:-98px; */
+.right-container .card{
+  width: 50%;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  background-color: #5d323a;
+  box-shadow: 0 2px 2px 2px;
+}
+.card .card-header{
+  width: 100%;
+  padding: 20px;
+}
+.card-header .card-img{
+  width: 100%;
+}
+.card-header .card-text{
+  color: #ffffff;
+  width: fit-content;
+  max-width: 85%;
+  text-align: center;
+  margin: auto;
+  font-size: x-large;
+}
+.card-body{
+  background-color: #130000;
+  padding: 20px;
+}
+.card-body .button{
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffd8;
+  text-align: center;
+  border-radius: 8px;
+  border: 0;
 }
 
-
-.Cardboard{
-  background: #310B14;
-  width: 14rem;
-  border-width: 4px;
-  border-color: #310B14;
-  padding: 0px;
-  border-radius: 10px;
-  height:18rem;
-  position: relative;
-}
-
-.PollImage{
-  position: absolute;
-  top : 0px;
-  left : 0px;
-  width:14rem;
-  height:auto;
-  margin : 0px;
-  padding: 0px;
-}
-
-.Vote{
-  background : #310B14;
-  padding: 3px;
-  border-color: #F6DBA6;
-  height: 40px;
-  color: #F6DBA6;
-  position: absolute;
-  bottom : 0px;
-  left : 4rem;
-  margin-bottom: 11px;
-}
-
-/* @media(max-width:1440px) and (min-width:320px)
-{
-  .App{
-    margin:0 auto;
-    height: 100vh;
-    width: 100vw;
+@media screen and (max-width: 760px){
+  body{
+    background-color: #310b14;
   }
-  .VotingButton{
-    display: table;
-    margin: auto;
-    margin-top: 130px;
+  .left-container{
+    float: none;
+    width: 100%;
+    height: fit-content;
   }
-  
-} */
+  .left-container .logo-big{
+    padding: 10px;
+  }
+  .left-container .welcome-text{
+    font-size: x-large;
+    padding-bottom: 20px;
+  }
+  .right-container{
+    float: none;
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 20px;
+    background-color: #310b14;
+  }
+  .right-container .card{
+    padding-top: 10%;
+    width: 90%;
+  }
+}

@@ -47,7 +47,7 @@ const server = new ApolloServer({
   playground: true,
 });
 
-const PORT = process.env.WEBAPP_PORT || 3000;
+const PORT = process.env.WEBAPP_PORT || 4000;
 
 sequelize
   .authenticate()

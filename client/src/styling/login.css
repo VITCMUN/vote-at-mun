@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,body {
+	height: 100%;
+}
+.FlexContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.RightContainer {
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  color: #F6DBA6;
+  font-size: 22px;
+  font-family: Nunito;
+  font-weight: bolder;
+  background-color: #511926;
+} 
+.LeftContainer{
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+  background-color: #310B14;
+}
+.VotingButton{
+  margin-top:60px;
+}
+.MunImage1{
+  flex: 1;
+  width: 30vw;
+}
+.MunImage2{
+  width: 150px;
+}
+.CouncilImage{
+  flex: 1;
+  width:30vw;
+}
+
+.DashboardHeading{
+  color:#F6DBA6;
+  font-size:32px;
+  /* margin-left:40px; */
+  font-family: "Nunito";
+  /* margin-top:-98px; */
+}
+
+
+.Cardboard{
+  background: #310B14;
+  width: 14rem;
+  border-width: 4px;
+  border-color: #310B14;
+  padding: 0px;
+  border-radius: 10px;
+  height:18rem;
+  position: relative;
+}
+
+.PollImage{
+  position: absolute;
+  top : 0px;
+  left : 0px;
+  width:14rem;
+  height:auto;
+  margin : 0px;
+  padding: 0px;
+}
+
+.Vote{
+  background : #310B14;
+  padding: 3px;
+  border-color: #F6DBA6;
+  height: 40px;
+  color: #F6DBA6;
+  position: absolute;
+  bottom : 0px;
+  left : 4rem;
+  margin-bottom: 11px;
+}
+
+/* form */
+  .login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+  }
+  .form {
+    position: relative;
+    z-index: 1;
+    background: #f6dba6;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+  .form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #fff;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  .form button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #511926;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #f6dba6;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+  .form button:hover,.form button:active,.form button:focus {
+    background: #000;
+  }
+
+/* @media(max-width:1440px) and (min-width:320px)
+{
+  .App{
+    margin:0 auto;
+    height: 100vh;
+    width: 100vw;
+  }
+  .VotingButton{
+    display: table;
+    margin: auto;
+    margin-top: 130px;
+  }
+  
+} */
+
