@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import '../../styling/EBPoll.css';
 import { navigate } from '@reach/router';
+import { useMutation } from 'react-apollo';
+import Swal from 'sweetalert2';
+import { ADD_POLL } from '../../typedefs';
 import Sidebar from '../Common/Sidebar';
 import { CountryFlags } from '../Common/CountryFlags';
 
@@ -19,16 +22,41 @@ const EBPoll = () => {
   const [selected, setSelected] = useState([]);
 
   // The below functions are used to manage the state of the form
-
+  const [addpoll] = useMutation(ADD_POLL);
   const handleInputChange = event => {
     const { name, value } = event.target;
     updatePollForm({ ...pollForm, [name]: value });
   };
 
   const handleSubmit = event => {
-    event.preventDefault();
-    // TODO : Add path to mutation call
-    navigate('result');
+    try {
+      event.preventDefault();
+      addpoll({
+        variables: {
+          title: pollForm.agenda,
+          description: pollForm.description,
+          votingType: parseInt(pollForm.type, 16),
+          totalSpeakerTime: parseInt(pollForm.totalSpeakerTime, 16),
+          raisedBy: pollForm.raisedBy,
+        },
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Poll Created',
+        confirmButtonText: 'Poll Created',
+        confirmButtonColor: 'green',
+      });
+      navigate('/result');
+    } catch (err) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: err,
+        confirmButtonText: 'Try Again',
+        confirmButtonColor: 'red',
+      });
+    }
   };
 
   // To escape the ' character
