@@ -70,6 +70,11 @@ input{
 	font-size: 40px;
 	color: #f6dba6;
 	padding-left: 10px;
+	margin: 10px;
+}
+
+input[type="radio"] {
+    transform: scale(2.5);
 }
 
 label{
@@ -103,7 +108,7 @@ label{
 	font-size: 1.5em;
 	color: #f6dba6;
 	margin: auto auto;
-	margin-top: 180px;
+	margin-top: 10vh;
 }
 
 select{
@@ -115,4 +120,9 @@ select{
 	height: 6vh;
 	font-size: 2em;
 	color: #f6dba6;
+}
+
+span{
+	margin-left: 20px;
+	margin-right: 20px;
 }
