@@ -1,9 +1,7 @@
 import React from 'react';
 import { Router } from '@reach/router';
-import { useQuery } from '@apollo/react-hooks';
 import Loadable from 'react-loadable';
 import LoadingScreen from './components/Common/LoadingScreen';
-import { GET_USER_TYPE } from './typedefs';
 
 const App = () => {
   // Loadable is used so that when an user accesses the voting app
@@ -38,10 +36,8 @@ const App = () => {
     loading: LoadingScreen,
   });
 
-  const { data } = useQuery(GET_USER_TYPE);
-  const { userType } = data;
-
   const getRoutes = () => {
+    const userType = 1;
     if (userType === 0) {
       return (
         <Router>

@@ -1,19 +1,17 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import '../../styling/EBPoll.css';
 import { navigate } from '@reach/router';
-import { useMutation } from 'react-apollo';
 import Swal from 'sweetalert2';
-import { ADD_POLL } from '../../typedefs';
-import Sidebar from '../Common/Sidebar';
 import { CountryFlags } from '../Common/CountryFlags';
+import Navbar from '../Common/Navbar';
+import { CountryNames } from '../../constants/CountryNames';
 
 const EBPoll = () => {
   // Initial State of the poll form
   const [pollForm, updatePollForm] = useState({
     agenda: '',
-    type: '',
-    totalSpeakerTime: '',
+    type: '0',
+    totalSpeakerTime: '0',
     description: '',
     raisedBy: '',
     countries: '',
@@ -22,24 +20,15 @@ const EBPoll = () => {
   const [selected, setSelected] = useState([]);
 
   // The below functions are used to manage the state of the form
-  const [addpoll] = useMutation(ADD_POLL);
   const handleInputChange = event => {
+    event.preventDefault();
     const { name, value } = event.target;
     updatePollForm({ ...pollForm, [name]: value });
   };
 
   const handleSubmit = event => {
+    event.preventDefault();
     try {
-      event.preventDefault();
-      addpoll({
-        variables: {
-          title: pollForm.agenda,
-          description: pollForm.description,
-          votingType: parseInt(pollForm.type, 16),
-          totalSpeakerTime: parseInt(pollForm.totalSpeakerTime, 16),
-          raisedBy: pollForm.raisedBy,
-        },
-      });
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -59,120 +48,93 @@ const EBPoll = () => {
     }
   };
 
-  // To escape the ' character
-  const heading = "EXECUTIVE BOARD'S DASHBOARD";
+  const getCountrties = () => {
+    return CountryNames.map(obj => (
+      <option key={obj.name} value={obj.name}>
+        {obj.name}
+      </option>
+    ));
+  };
 
   return (
-    <div className="resolution">
-      <div className="App">
-        <div>
-          <div>
-            <Sidebar />
+    <div className="container">
+      <Navbar />
+      <div className="form-container">
+        <div className="form-component">
+          <div className="form-box">
+            <form onSubmit={handleSubmit}>
+              <h1 className="heading">Create a new Poll</h1>
+              <div className="form-fields">
+                <div className="field">
+                  <label htmlFor="textinp">Agenda</label>
+                  <input
+                    type="text"
+                    name="agenda"
+                    value={pollForm.agenda}
+                    id="textinp"
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="voteType">Voting Type</label>
+                  <select
+                    name="type"
+                    value={pollForm.type}
+                    onChange={handleInputChange}
+                    id="voteType"
+                    className="selectField"
+                  >
+                    <option value="0">All not voting</option>
+                    <option value="1">All voting</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label htmlFor="totalSpeakerTimeInp">
+                    Total Speaker Time (in mins)
+                  </label>
+                  <input
+                    type="number"
+                    name="totalSpeakerTime"
+                    value={pollForm.totalSpeakerTime}
+                    min="0"
+                    id="totalSpeakerTimeInp"
+                    onInput={handleInputChange}
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="description">Description</label>
+                  <input
+                    type="text"
+                    name="description"
+                    value={pollForm.description}
+                    id="description"
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="raisedBy">Raised By</label>
+                  <select
+                    name="raisedBy"
+                    value={pollForm.raisedBy}
+                    onChange={handleInputChange}
+                    id="raisedType"
+                    className="selectField"
+                  >
+                    {getCountrties()}
+                  </select>
+                </div>
+                <input
+                  type="submit"
+                  className="submitBtn"
+                  onClick={handleSubmit}
+                  value="Create"
+                />
+              </div>
+            </form>
           </div>
-          <img className="img2" src="mun.png" alt="MUN" />
-          <h4 className="EB">
-            <b>{heading}</b>
-          </h4>
-          <br />
-          <div className="div1">
+          <div className="form-flags">
             <CountryFlags selected={selected} setSelected={setSelected} />
           </div>
-          <br />
-          <button type="button" className="button" id="join">
-            <b>SELECT COUNTRIES TO BROADCAST</b>
-          </button>
-          <form className="Appp" onSubmit={handleSubmit}>
-            <h1>
-              <span className="font-weight-bold head">POLL FORM</span>
-            </h1>
-            <br />
-            <label className="agendaLabel">
-              <b>Agenda</b>
-            </label>
-            <div className="input">
-              <input
-                type="text"
-                onChange={handleInputChange}
-                value={pollForm.agenda}
-                name="agenda"
-                className="no-outline"
-              />
-            </div>
-            <br />
-            <label className="typeLabel">
-              <b>Type</b>
-            </label>
-            <br />
-            <div className="input">
-              <input
-                type="text"
-                value={pollForm.type}
-                onChange={handleInputChange}
-                name="type"
-                className="no-outline"
-              />
-            </div>
-            <br />
-            <br />
-            <div className="tst">
-              <label className="totalSpeakerTimeLabel">
-                <b>Total Speaker Time</b>
-              </label>
-              <br />
-            </div>
-            <div className="input">
-              <input
-                type="number"
-                value={pollForm.totalSpeakerTime}
-                onChange={handleInputChange}
-                name="totalSpeakerTime"
-                className="no-outline"
-              />
-            </div>
-            <br />
-            <br />
-            <label className="descriptionLabel">
-              <b>Description</b>
-            </label>
-            <br />
-            <div className="input">
-              <input
-                type="text"
-                value={pollForm.description}
-                onChange={handleInputChange}
-                name="description"
-                className="no-outline"
-              />
-            </div>
-            <br />
-            <br />
-            <label className="raisedByLabel">
-              <b>Raised by</b>
-            </label>
-            <br />
-            <div className="input">
-              <input
-                type="text"
-                value={pollForm.raisedBy}
-                onChange={handleInputChange}
-                name="raisedBy"
-                className="no-outline"
-              />
-            </div>
-
-            <br />
-            <div id="menuBall1" className="menuBall">
-              <a
-                href="https://vitcmun.in/"
-                onClick={handleSubmit}
-                className="ball blueball"
-              >
-                <div className="menuText">
-                  <b> CREATE</b>
-                </div>
-              </a>
-            </div>
-          </form>
         </div>
       </div>
     </div>
