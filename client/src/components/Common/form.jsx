@@ -1,37 +1,55 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import '../../styling/login.css';
 
-const LoginForm = () => {
-  const [title, setTitle] = useState('');
-  const [password, setPassword] = useState('');
-  const handleSubmit = e => {
-    e.preventDefault();
-    setTitle('');
-    setPassword('');
-  };
-  return (
-    <div className="login-page">
-      <div className="form">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={title}
-            placeholder="username"
-            required
-            onChange={e => setTitle(e.target.value)}
-          />
-          <input
-            type="password"
-            value={password}
-            placeholder="password"
-            required
-            onChange={e => setPassword(e.target.value)}
-          />
-          <button type="submit">login</button>
-        </form>
-      </div>
-    </div>
-  );
-};
+export default class LoginForm extends Component {
+  constructor() {
+    super();
+    this.state = { username: '', password: '' };
+  }
 
-export default LoginForm;
+  onChangeUsername = event => {
+    const username = event.target.value;
+    this.setState({ username });
+  };
+
+  onChangePassword = event => {
+    const password = event.target.value;
+    this.setState({ password });
+  };
+
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.login({
+      variables: {
+        username: this.state.username,
+        password: this.state.password,
+      },
+    });
+  };
+
+  render() {
+    return (
+      <div className="login-page">
+        <div className="form">
+          <form className="login-form" onSubmit={this.onSubmit}>
+            <input
+              type="text"
+              value={this.state.username}
+              placeholder="username"
+              required
+              onChange={this.onChangeUsername}
+            />
+            <input
+              type="password"
+              value={this.state.password}
+              placeholder="password"
+              required
+              onChange={this.onChangePassword}
+            />
+            <button type="submit">login</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
