@@ -1,15 +1,15 @@
 import React from 'react';
 import { ResultChart } from './Chart.jsx';
-import Sidebar from './Sidebar';
+import Navbar from './Navbar.jsx';
 import { CountryResults } from './CountryResults.jsx';
 import '../../styling/EBandDelegateResults.css';
 
 function App() {
-  const getSidebar = () => {
+  const getNavbar = () => {
     // if (user.type !== 'EB') {
     //    return <Sidebar />
     //  }
-    return <Sidebar />;
+    return <Navbar />;
   };
 
   /*
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="Main">
-      {getSidebar()}
+      {getNavbar()}
       <p id="heading">RESULTS</p>
       <div className="parts">
         <div className="part1">

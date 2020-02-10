@@ -56,6 +56,11 @@ li a:hover{
 #secondLink {
 	margin-right: 10px;
 }
+.welcome{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 @media only screen and (max-width: 1030px) {
 	.logo {
@@ -71,6 +76,9 @@ li a:hover{
 	.username{
 		display: none;
 	}
+	.welcome{
+		display: none;
+	}
 }
 .small{
 	width:70px;
@@ -79,9 +87,4 @@ li a:hover{
 .username{
 	color: #F6DBA6;
 	margin-right: 30px;
-}
-.welcome{
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
