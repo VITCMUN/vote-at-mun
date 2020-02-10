@@ -9,6 +9,7 @@ import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import { typeDefs, IS_LOGGED_IN } from './typedefs';
 import { resolvers } from './resolvers';
 import App from './App';
+import ErrorBoundary from './components/Common/ErrorBoundary';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -38,8 +39,10 @@ function IsLoggedIn() {
 }
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <IsLoggedIn />
-  </ApolloProvider>,
+  <ErrorBoundary>
+    <ApolloProvider client={client}>
+      <IsLoggedIn />
+    </ApolloProvider>
+  </ErrorBoundary>,
   document.getElementById('root')
 );
