@@ -9,6 +9,7 @@ import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import { typeDefs, IS_LOGGED_IN } from './typedefs';
 import { resolvers } from './resolvers';
 import App from './App';
+import Login from './components/Common/login';
 import ErrorBoundary from './components/Common/ErrorBoundary';
 
 const cache = new InMemoryCache();
@@ -29,13 +30,12 @@ const client = new ApolloClient({
 cache.writeData({
   data: {
     isLoggedIn: !!localStorage.getItem('token'),
-    userType: localStorage.getItem('userType'),
   },
 });
 
 function IsLoggedIn() {
   const { data } = useQuery(IS_LOGGED_IN);
-  return data.isLoggedIn ? <App /> : <App />;
+  return data.isLoggedIn ? <App /> : <Login />;
 }
 
 ReactDOM.render(
