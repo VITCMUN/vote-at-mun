@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../../styling/login.css';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor() {
     super();
     this.state = { username: '', password: '' };
@@ -19,29 +20,32 @@ export default class LoginForm extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.login({
+    const { login } = this.props;
+    const { username, password } = this.state;
+    login({
       variables: {
-        username: this.state.username,
-        password: this.state.password,
+        username,
+        password,
       },
     });
   };
 
   render() {
+    const { username, password } = this.state;
     return (
       <div className="login-page">
         <div className="form">
           <form className="login-form" onSubmit={this.onSubmit}>
             <input
               type="text"
-              value={this.state.username}
+              value={username}
               placeholder="username"
               required
               onChange={this.onChangeUsername}
             />
             <input
               type="password"
-              value={this.state.password}
+              value={password}
               placeholder="password"
               required
               onChange={this.onChangePassword}
@@ -53,3 +57,9 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+export default LoginForm;
