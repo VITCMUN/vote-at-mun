@@ -17,10 +17,10 @@ const Navbar = () => {
     event.preventDefault();
     client.writeData({
       data: {
-        isLoggedIn: null,
-        userType: null,
+        isLoggedIn: false,
       },
     });
+    localStorage.clear();
   };
 
   return (

@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
+import { Mutation } from '@apollo/react-components';
+import { ADD_USER } from '../../typedefs';
 import '../../styling/admindashboard.css';
 
 function AdminDashboard() {
   const [renderView, setRenderView] = useState(0);
   const [addUserState, setaddUserState] = useState({
-    username: '',
-    password: '',
-    user_type: '',
-    profile_pic_url: '',
-    stance: '',
-    observer: '',
+    username: null,
+    password: null,
+    userType: null,
+    profilePicUrl: null,
+    stance: null,
+    observer: null,
   });
   const [deleteUserState, setdeleteUserState] = useState({ name: '', uid: '' });
   const [, setchooseBannerState] = useState({ banner: '1' });
-
-  function addUserFormHandler(event) {
-    event.preventDefault();
-    setRenderView(0);
-  }
 
   function deleteUserFormHandler(event) {
     event.preventDefault();
@@ -68,143 +65,159 @@ function AdminDashboard() {
   );
 
   const addUser = (
-    <>
-      <form className="adduserform">
-        <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          required
-          // value={addUserState.username}
-          onChange={event =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                username: event.target.value,
-              })
-            )
-          }
-        />
-        <br />
-        <label htmlFor="password">Password: </label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          required
-          // value={addUserState.password}
-          onChange={event =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                password: event.target.value,
-              })
-            )
-          }
-        />
-        <br />
-        <label htmlFor="user_type">User Type: </label>
-        <input
-          type="text"
-          name="user_type"
-          id="user_type"
-          required
-          // value={addUserState.user_type}
-          onChange={event =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                user_type: event.target.value,
-              })
-            )
-          }
-        />
-        <br />
-        <label htmlFor="profile_pic_url">Profile Pic URL: </label>
-        <input
-          type="text"
-          name="profile_pic_url"
-          id="profile_pic_url"
-          required
-          // value={addUserState.profile_pic_url}
-          onChange={event =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                profile_pic_url: event.target.value,
-              })
-            )
-          }
-        />
-        <br />
-        <label htmlFor="stance">Stance: </label>
-        <input
-          type="text"
-          name="stance"
-          id="stance"
-          required
-          // value={addUserState.stance}
-          onChange={event =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                stance: event.target.value,
-              })
-            )
-          }
-        />
-        <br />
-        <label htmlFor="observer">Not Observer: </label>
-        <input
-          type="radio"
-          name="observer"
-          id="observer"
-          required
-          // value={addUserState.stance}
-          onChange={() =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                observer: false,
-              })
-            )
-          }
-        />
-        <span />
-        <label htmlFor="observer">Observer: </label>
-        <input
-          type="radio"
-          name="observer"
-          id="observertwo"
-          required
-          // value={addUserState.stance}
-          onChange={() =>
-            setaddUserState(
-              Object.assign(addUserState, {
-                observer: true,
-              })
-            )
-          }
-        />
-        <div
-          className="submit"
-          onClick={event => addUserFormHandler(event)}
-          onKeyDown={event => {
-            if (event.keycode === 13) addUserFormHandler(event);
-          }}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="submittext">Submit</p>
-        </div>
-        <div
-          className="goback"
-          onClick={() => setRenderView(0)}
-          onKeyDown={event => {
-            if (event.keycode === 13) setRenderView(0);
-          }}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="submittext">Go Back</p>
-        </div>
-      </form>
-    </>
+    <Mutation mutation={ADD_USER}>
+      {addUserM => (
+        <>
+          <form
+            className="adduserform"
+            onSubmit={e => {
+              e.preventDefault();
+              const {
+                username,
+                password,
+                userType,
+                profilePicUrl,
+                stance,
+                observer,
+              } = addUserState;
+              addUserM({
+                variables: {
+                  username,
+                  password,
+                  userType,
+                  profilePicUrl,
+                  stance,
+                  observer,
+                },
+              });
+              setRenderView(0);
+            }}
+          >
+            <label htmlFor="username">Username: </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              required
+              onChange={event =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    username: event.target.value,
+                  })
+                )
+              }
+            />
+            <br />
+            <label htmlFor="password">Password: </label>
+            <input
+              type="text"
+              name="password"
+              id="password"
+              required
+              onChange={event =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    password: event.target.value,
+                  })
+                )
+              }
+            />
+            <br />
+            <label htmlFor="userType">User Type: </label>
+            <select
+              name="userType"
+              id="userType"
+              value={addUserState.userType}
+              required
+              onChange={event =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    userType: parseInt(event.target.value, 10),
+                  })
+                )
+              }
+            >
+              <option value="0">Delegate</option>
+              <option value="1">EB</option>
+              <option value="2">Admin</option>
+            </select>
+            <br />
+            <label htmlFor="profilePicUrl">Profile Pic URL: </label>
+            <input
+              type="text"
+              name="profilePicUrl"
+              id="profilePicUrl"
+              onChange={event =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    profilePicUrl: parseInt(event.target.value, 10),
+                  })
+                )
+              }
+            />
+            <br />
+            <label htmlFor="stance">Stance: </label>
+            <select
+              name="stance"
+              id="stance"
+              required
+              onChange={event =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    stance: event.target.value,
+                  })
+                )
+              }
+            >
+              <option value="0">Present</option>
+              <option value="1">Present and Voting</option>
+            </select>
+            <br />
+            <label htmlFor="observer">Not Observer: </label>
+            <input
+              type="radio"
+              name="observer"
+              id="observer"
+              onChange={() =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    observer: false,
+                  })
+                )
+              }
+            />
+            <span />
+            <label htmlFor="observer">Observer: </label>
+            <input
+              type="radio"
+              name="observer"
+              id="observertwo"
+              onChange={() =>
+                setaddUserState(
+                  Object.assign(addUserState, {
+                    observer: true,
+                  })
+                )
+              }
+            />
+            <button className="submit" type="submit">
+              Submit
+            </button>
+            <div
+              className="goback"
+              onClick={() => setRenderView(0)}
+              onKeyDown={event => {
+                if (event.keycode === 13) setRenderView(0);
+              }}
+              role="button"
+              tabIndex="0"
+            >
+              <p className="submittext">Go Back</p>
+            </div>
+          </form>
+        </>
+      )}
+    </Mutation>
   );
 
   const deleteUser = (
