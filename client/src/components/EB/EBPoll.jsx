@@ -37,10 +37,10 @@ const EBPoll = () => {
     //   'error':response.errors[0],
     // };
     //  } else {
-    // return {
-    //   'status':true,
-    //   'error':null,
-    // }
+    return {
+      status: true,
+      error: null,
+    };
     //  }
   };
 
@@ -51,7 +51,6 @@ const EBPoll = () => {
       return;
     }
     const response = sendPoll();
-    console.log(pollForm);
     if (response.status) {
       Swal.fire({
         icon: 'success',
