@@ -36,7 +36,8 @@ const App = () => {
     loading: LoadingScreen,
   });
 
-  const userType = localStorage.getItem('userType');
+  // const userType = localStorage.getItem('userType');
+  const userType = '2';
   const getRoutes = () => {
     if (userType === '0') {
       return (
