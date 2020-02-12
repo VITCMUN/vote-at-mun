@@ -23,16 +23,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
+	margin-left: 2vw;
+	margin-top: 2vh;
 }
 .headtitle{
 	flex: 8;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 60px;
+	font-size: 120px;
 	font-family: Nunito;
 	color: #f6dba6;
+	margin-top: 2vh;
 }
 .pagecontent{
 	flex: 7;
@@ -108,7 +110,7 @@ label{
 	font-size: 1.5em;
 	color: #f6dba6;
 	margin: auto auto;
-	margin-top: 10vh;
+	margin-top: 6vh;
 }
 
 select{
@@ -125,4 +127,9 @@ select{
 span{
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+input,select{
+	margin-top: 1vh;
+	margin-bottom: 1vh;
 }

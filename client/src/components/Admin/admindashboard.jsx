@@ -12,7 +12,7 @@ function AdminDashboard() {
     observer: '',
   });
   const [deleteUserState, setdeleteUserState] = useState({ name: '', uid: '' });
-  const [, setchooseBannerState] = useState({ banner: '1' });
+  const [councilState, setCouncilState] = useState({ cname: '', banner_url: '' });
 
   function addUserFormHandler(event) {
     event.preventDefault();
@@ -24,7 +24,7 @@ function AdminDashboard() {
     setRenderView(0);
   }
 
-  function chooseBannerFormHandler(event) {
+  function setCouncilFormHandler(event) {
     event.preventDefault();
     setRenderView(0);
   }
@@ -62,7 +62,7 @@ function AdminDashboard() {
         role="button"
         tabIndex="0"
       >
-        <p className="optiontext">Choose Banner</p>
+        <p className="optiontext">Set Council</p>
       </div>
     </>
   );
@@ -103,12 +103,9 @@ function AdminDashboard() {
         />
         <br />
         <label htmlFor="user_type">User Type: </label>
-        <input
-          type="text"
-          name="user_type"
+        <select
           id="user_type"
-          required
-          // value={addUserState.user_type}
+          className="select"
           onChange={event =>
             setaddUserState(
               Object.assign(addUserState, {
@@ -116,7 +113,17 @@ function AdminDashboard() {
               })
             )
           }
-        />
+        >
+          <option className="option" value="0">
+            Delegate
+          </option>
+          <option className="option" value="1">
+            EB
+          </option>
+          <option className="option" value="2">
+            Admin
+          </option>
+        </select>
         <br />
         <label htmlFor="profile_pic_url">Profile Pic URL: </label>
         <input
@@ -135,12 +142,9 @@ function AdminDashboard() {
         />
         <br />
         <label htmlFor="stance">Stance: </label>
-        <input
-          type="text"
-          name="stance"
+        <select
           id="stance"
-          required
-          // value={addUserState.stance}
+          className="select"
           onChange={event =>
             setaddUserState(
               Object.assign(addUserState, {
@@ -148,7 +152,14 @@ function AdminDashboard() {
               })
             )
           }
-        />
+        >
+          <option className="option" value="0">
+            Present
+          </option>
+          <option className="option" value="1">
+            Present And Voting
+          </option>
+        </select>
         <br />
         <label htmlFor="observer">Not Observer: </label>
         <input
@@ -224,6 +235,7 @@ function AdminDashboard() {
             })
           }
         />
+        <br />
         <label htmlFor="uid">Id: </label>
         <input
           type="text"
@@ -264,35 +276,43 @@ function AdminDashboard() {
     </>
   );
 
-  const chooseBanner = (
+  const setCouncil = (
     <>
-      <form className="choosebannerform">
-        <label htmlFor="countryselect">Country: </label>
-        <select
-          id="countryselect"
-          className="select"
+      <form className="setCouncilform">
+        <label htmlFor="cname">Council Name: </label>
+        <input
+          type="text"
+          name="cname"
+          id="cname"
+          required
           onChange={event =>
-            setchooseBannerState({ banner: event.target.value })
+            setCouncilState(
+              Object.assign(councilState, {
+                cname: event.target.value,
+              })
+            )
           }
-        >
-          <option className="option" value="1">
-            Option1
-          </option>
-          <option className="option" value="2">
-            Option2
-          </option>
-          <option className="option" value="3">
-            Option3
-          </option>
-          <option className="option" value="4">
-            Option4
-          </option>
-        </select>
+        />
+        <br />
+        <label htmlFor="banner_url">Council Banner URL: </label>
+        <input
+          type="text"
+          name="banner_url"
+          id="banner_url"
+          required
+          onChange={event =>
+            setCouncilState(
+              Object.assign(councilState, {
+                banner_url: event.target.value,
+              })
+            )
+          }
+        />
         <div
           className="submit"
-          onClick={event => chooseBannerFormHandler(event)}
+          onClick={event => setCouncilFormHandler(event)}
           onKeyDown={event => {
-            if (event.keycode === 13) chooseBannerFormHandler(event);
+            if (event.keycode === 13) setCouncilFormHandler(event);
           }}
           role="button"
           tabIndex="0"
@@ -318,14 +338,14 @@ function AdminDashboard() {
   if (renderView === 0) viewToRender = chooseRender;
   else if (renderView === 1) viewToRender = addUser;
   else if (renderView === 2) viewToRender = deleteUser;
-  else if (renderView === 3) viewToRender = chooseBanner;
+  else if (renderView === 3) viewToRender = setCouncil;
 
   // headlogo needs an image
   return (
     <div className="admincontainer">
       <div className="pageheader">
         <div className="headlogo">
-          <img alt="logo" src="" height="200" width="200" />
+          <img alt="logo" src="img/mun.png" height="150" width="200" />
         </div>
         <div className="headtitle">
           <p>Admin Dashboard</p>
