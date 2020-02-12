@@ -1,7 +1,7 @@
-// import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
+import Navbar from '../Common/Navbar';
 
 const Voting = () => {
   const initial = {
@@ -112,8 +112,8 @@ const Voting = () => {
 
   return (
     <div className="container">
+      <Navbar />
       <div className="heading">
-        <img className="headingLogo" src="vitcmun.png" alt="VITC MUN" />
         <h1 className="headingText">Delegate Voting</h1>
       </div>
       <div className="pollInfo">
@@ -134,8 +134,8 @@ const Voting = () => {
           <h1 className="pollDetail">{vote.individual_speaker_time} minutes</h1>
         </div>
       </div>
-      {renderButton && getButtons()}
       <div className="proceed">{proceed()}</div>
+      {renderButton && getButtons()}
     </div>
   );
 };

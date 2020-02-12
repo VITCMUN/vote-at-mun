@@ -37,7 +37,7 @@ const App = () => {
   });
 
   const getRoutes = () => {
-    const userType = 1;
+    const userType = 0;
     if (userType === 0) {
       return (
         <Router>
