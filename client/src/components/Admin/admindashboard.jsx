@@ -11,7 +11,7 @@ function AdminDashboard() {
     stance: '',
     observer: '',
   });
-  const [deleteUserState, setdeleteUserState] = useState({ name: '', uid: '' });
+  const [deleteUserState, setdeleteUserState] = useState({ name: ''});
   const [councilState, setCouncilState] = useState({ cname: '', banner_url: '' });
 
   function addUserFormHandler(event) {
@@ -221,7 +221,7 @@ function AdminDashboard() {
   const deleteUser = (
     <>
       <form className="deleteuserform">
-        <label htmlFor="name">Name: </label>
+        <label htmlFor="name">Userame: </label>
         <input
           type="text"
           name="name"
@@ -230,23 +230,7 @@ function AdminDashboard() {
           value={deleteUserState.name}
           onChange={event =>
             setdeleteUserState({
-              name: event.target.value,
-              uid: deleteUserState.uid,
-            })
-          }
-        />
-        <br />
-        <label htmlFor="uid">Id: </label>
-        <input
-          type="text"
-          name="uid"
-          id="uid"
-          required
-          value={deleteUserState.uid}
-          onChange={event =>
-            setdeleteUserState({
-              name: deleteUserState.name,
-              uid: event.target.value,
+              name: event.target.value
             })
           }
         />
