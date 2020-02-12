@@ -14,25 +14,17 @@ html,body{
     display: flex;
     position: relative;
     justify-content: center;
-}
-.headingLogo{
-    width:150px;
-    height: auto;
-    position: absolute;
-    left:130px;
-    top : 0px;
+    margin-top: 5%;
 }
 .headingText{
     color:#F6DBA6;
     font-size: 500%;
     font-weight: 100;
-    margin-top: 30px;
 }
 .pollInfo{
     border : 2px solid #F6DBA6;
     width:80%;
     border-radius: 50px 15px;
-    margin-top:60px;
 }
 .pollBox{
     display: flex;
@@ -50,7 +42,6 @@ html,body{
     font-weight: 100;
 }
 .votingButtons{
-    margin-top: 30px;
     display: flex;
     width: 100%;
     justify-content: space-evenly;
@@ -63,7 +54,7 @@ html,body{
     font-weight: 300;
     background: #F6DBA6;
     border: 2px solid #000000;
-    margin-top: 50px;
+    margin-top: 30px;
     opacity: 0.4;
     transition: all 0.75s;
 }
