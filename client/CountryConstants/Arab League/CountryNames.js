@@ -19,7 +19,7 @@ const CountryNames = [
   { name: 'Sudan', source: 'square/sudan.png' },
   { name: 'Syria', source: 'square/syria.png' },
   { name: 'Tunisia', source: 'square/tunisia.png' },
-  { name: 'Uae', source: 'square/uae.png' },
+  { name: 'Use', source: 'square/usa.png' },
   { name: 'Yemen', source: 'square/yemen.png' },
   { name: 'Iran', source: 'square/iran.png' },
   { name: 'Turkey', source: 'square/turkey.png' },
