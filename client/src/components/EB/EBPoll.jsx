@@ -17,18 +17,42 @@ const EBPoll = () => {
     countries: '',
   });
 
+  const [requiredError, updateError] = useState('');
+
   const [selected, setSelected] = useState([]);
 
   // The below functions are used to manage the state of the form
   const handleInputChange = event => {
     event.preventDefault();
+    updateError('');
     const { name, value } = event.target;
     updatePollForm({ ...pollForm, [name]: value });
   };
 
+  const sendPoll = () => {
+    //  const response = graphQLMutationCall()
+    //  if(!response.errors){
+    //    return {
+    //   'status':false,
+    //   'error':response.errors[0],
+    // };
+    //  } else {
+    // return {
+    //   'status':true,
+    //   'error':null,
+    // }
+    //  }
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    try {
+    if (!(pollForm.agenda.length > 0 && pollForm.description.length > 0)) {
+      updateError('Please fill out all the fields');
+      return;
+    }
+    const response = sendPoll();
+    console.log(pollForm);
+    if (response.status) {
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -37,11 +61,11 @@ const EBPoll = () => {
         confirmButtonColor: 'green',
       });
       navigate('/result');
-    } catch (err) {
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: err,
+        text: response.error,
         confirmButtonText: 'Try Again',
         confirmButtonColor: 'red',
       });
@@ -66,6 +90,7 @@ const EBPoll = () => {
               <h1 className="heading">Create a new Poll</h1>
               <div className="form-fields">
                 <div className="field">
+                  <p className="error">{requiredError}</p>
                   <label htmlFor="textinp">Agenda</label>
                   <input
                     type="text"
@@ -98,7 +123,7 @@ const EBPoll = () => {
                     value={pollForm.totalSpeakerTime}
                     min="0"
                     id="totalSpeakerTimeInp"
-                    onInput={handleInputChange}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="field">
@@ -133,6 +158,10 @@ const EBPoll = () => {
             </form>
           </div>
           <div className="form-flags">
+            <h1 className="warning">
+              Select the countries <span className="warn">NOT</span> to send the
+              poll to
+            </h1>
             <CountryFlags selected={selected} setSelected={setSelected} />
           </div>
         </div>

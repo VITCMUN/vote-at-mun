@@ -36,7 +36,6 @@ const Navbar = () => {
         <ul>
           <li>
             <div className="welcome">
-              <p className="username">Welcome</p>
               <img src="img/mun.png" className="small" alt="Username" />
             </div>
           </li>
