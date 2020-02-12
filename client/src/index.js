@@ -36,7 +36,7 @@ cache.writeData({
 
 function IsLoggedIn() {
   const { data } = useQuery(IS_LOGGED_IN);
-  return data.isLoggedIn ? <App /> : <Login />;
+  return data.isLoggedIn ? <App /> : <App />;
 }
 
 ReactDOM.render(

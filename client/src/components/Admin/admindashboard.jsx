@@ -12,7 +12,10 @@ function AdminDashboard() {
     observer: '',
   });
   const [deleteUserState, setdeleteUserState] = useState({ name: '', uid: '' });
-  const [councilState, setCouncilState] = useState({ cname: '', banner_url: '' });
+  const [councilState, setCouncilState] = useState({
+    cname: '',
+    banner_url: '',
+  });
 
   function addUserFormHandler(event) {
     event.preventDefault();
