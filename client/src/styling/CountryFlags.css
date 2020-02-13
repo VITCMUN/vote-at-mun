@@ -27,12 +27,13 @@
     margin-top: 27px;
     text-align: center;
     display: none;
+    color:rgb(184, 165, 58);
 }
 .CountriesMenu {
     height: 100%;
     width:100%;
     border-radius: 52px;
-    border: solid 3px #f6dba6;
+    border: dotted 3px #f6dba6;
 }
 .CountriesMenuText{
     position: relative;
@@ -83,4 +84,7 @@
   }
 .Selected{
     opacity: 0.3;
+}
+.heading{
+    color:#ffffd8;
 }

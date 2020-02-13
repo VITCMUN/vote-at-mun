@@ -1,84 +1,31 @@
 const CountryNames = [
-  {
-    source: 'india.png',
-    name: 'India',
-  },
-  {
-    source: 'india.png',
-    name: 'Australia',
-  },
-  {
-    source: 'india.png',
-    name: 'Germany',
-  },
-  {
-    source: 'india.png',
-    name: 'France',
-  },
-  {
-    source: 'india.png',
-    name: 'dIndia',
-  },
-  {
-    source: 'india.png',
-    name: 'Adustralia',
-  },
-  {
-    source: 'india.png',
-    name: 'Gefrmany',
-  },
-  {
-    source: 'india.png',
-    name: 'Frgance',
-  },
-  {
-    source: 'india.png',
-    name: 'Inhdia',
-  },
-  {
-    source: 'india.png',
-    name: 'Austraqlia',
-  },
-  {
-    source: 'india.png',
-    name: 'Germaqqny',
-  },
-  {
-    source: 'india.png',
-    name: 'Framnce',
-  },
-  {
-    source: 'india.png',
-    name: 'Indnfnia',
-  },
-  {
-    source: 'india.png',
-    name: 'Ausfnfdtralia',
-  },
-  {
-    source: 'india.png',
-    name: 'Germvvnany',
-  },
-  {
-    source: 'india.png',
-    name: 'Frandfnvnce',
-  },
-  {
-    source: 'india.png',
-    name: 'audbu',
-  },
-  {
-    source: 'india.png',
-    name: 'Austrffalia',
-  },
-  {
-    source: 'india.png',
-    name: 'Germeeeeany',
-  },
-  {
-    source: 'india.png',
-    name: 'Frqqnjance',
-  },
+  { name: 'Algeria', source: 'square/algeria.webp' },
+  { name: 'Bahrain', source: 'square/bahrain.webp' },
+  { name: 'Comoros', source: 'square/comoros.webp' },
+  { name: 'Djibouti', source: 'square/djibouti.webp' },
+  { name: 'Egypt', source: 'square/egypt.webp' },
+  { name: 'Iraq', source: 'square/iraq.webp' },
+  { name: 'Jordan', source: 'square/jordan.webp' },
+  { name: 'Kuwait', source: 'square/kuwait.webp' },
+  { name: 'Lebanon', source: 'square/lebanon.webp' },
+  { name: 'Libya', source: 'square/libya.webp' },
+  { name: 'Mauritania', source: 'square/mauritania.webp' },
+  { name: 'Morocco', source: 'square/morocco.webp' },
+  { name: 'Oman', source: 'square/oman.webp' },
+  { name: 'Palestine', source: 'square/palestine.webp' },
+  { name: 'Qatar', source: 'square/qatar.webp' },
+  { name: 'Saudi Arabia', source: 'square/saudiarabia.webp' },
+  { name: 'Somalia', source: 'square/somalia.webp' },
+  { name: 'Sudan', source: 'square/sudan.webp' },
+  { name: 'Syria', source: 'square/syria.webp' },
+  { name: 'Tunisia', source: 'square/tunisia.webp' },
+  { name: 'Uae', source: 'square/uae.webp' },
+  { name: 'Yemen', source: 'square/yemen.webp' },
+  { name: 'Iran', source: 'square/iran.webp' },
+  { name: 'Turkey', source: 'square/turkey.webp' },
+  { name: 'USA', source: 'square/usa.webp' },
+  { name: 'Russia', source: 'square/russia.webp' },
+  { name: 'China', source: 'square/china.webp' },
 ];
 
 export { CountryNames };

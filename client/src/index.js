@@ -14,6 +14,7 @@ import { resolvers } from './resolvers';
 import App from './App';
 import Login from './components/Common/login';
 import ErrorBoundary from './components/Common/ErrorBoundary';
+import './styling/index.css';
 
 const cache = new InMemoryCache();
 

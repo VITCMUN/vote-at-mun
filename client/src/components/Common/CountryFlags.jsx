@@ -87,9 +87,9 @@ const CountryFlags = props => {
   return (
     <div className="CountriesMenu">
       <div className="CountriesMenuText">
-        <b>UNHRC</b>
+        <b className="heading">UNHRC</b>
         <div className="CountriesHeading">
-          <b>Countries</b>
+          <b className="heading">Countries</b>
         </div>
         <div className="search">
           <input

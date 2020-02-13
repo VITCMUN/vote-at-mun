@@ -43,7 +43,7 @@ li {
 
 li a {
 	display: block;
-	color: #F6DBA6;
+	color: #ffffd8;
 	text-align: center;
 	text-decoration: none;
 	padding: 5vh;
@@ -60,6 +60,7 @@ li a:hover{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-right:90%;
 }
 
 @media only screen and (max-width: 1030px) {

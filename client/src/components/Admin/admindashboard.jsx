@@ -52,7 +52,7 @@ function AdminDashboard() {
         role="button"
         tabIndex="0"
       >
-        <p className="optiontext">Choose Banner</p>
+        <p className="optiontext">Set Council</p>
       </div>
     </>
   );
@@ -226,7 +226,7 @@ function AdminDashboard() {
               setRenderView(0);
             }}
           >
-            <label htmlFor="name">Name: </label>
+            <label htmlFor="name">Username: </label>
             <input
               type="text"
               name="username"
@@ -335,7 +335,7 @@ function AdminDashboard() {
     <div className="admincontainer">
       <div className="pageheader">
         <div className="headlogo">
-          <img alt="logo" src="" height="200" width="200" />
+          <img alt="logo" src="black1.png" height="150" width="200" />
         </div>
         <div className="headtitle">
           <p>Admin Dashboard</p>
