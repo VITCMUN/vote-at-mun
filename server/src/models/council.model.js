@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const { sequelize } = require('../common/postgres');
 
-exports.Council = sequelize.define('Council', {
+const Council = sequelize.define('Council', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -12,3 +12,5 @@ exports.Council = sequelize.define('Council', {
     allowNull: false,
   },
 });
+
+module.exports = Council;
