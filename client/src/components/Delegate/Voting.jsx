@@ -1,58 +1,63 @@
 import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
+import { useMutation } from '@apollo/react-hooks';
+import PropTypes from 'prop-types';
 import Navbar from '../Common/Navbar';
+import LoadingScreen from '../Common/LoadingScreen';
+import { VOTE } from '../../typedefs';
 
-const Voting = () => {
+const Voting = props => {
+  const { location } = props;
+  const { data } = location.state;
   const initial = {
-    type: '',
-    title: '',
-    total_speaker_time: 0,
-    individual_speaker_time: 0,
+    pollId: data.pollId,
+    type: data.votingType,
+    title: data.title,
+    description: data.description,
+    total_speaker_time: data.totalSpeakerTime,
   };
-  // const [vote, setVote] = useState(initial);
-  // This will ensure delegate does not cast a vote before vote details
-  // are displayed
-  // const [renderButton, setRenderButton] = useState(false);
   const [vote] = useState(initial);
   const [renderButton] = useState(true);
-  // 0 none selected
-  // 1 yes selected
-  // 2 no selected
-  const [selected, setSelected] = useState(0);
-  // useEffect(() => fetchVoteDetails(query));
+  const [selected, setSelected] = useState(null);
 
-  // Get the vote details from the graphql endpoint
-  // const fetchVoteDetails = async payload => {
-  //   const response = await graphQLCall(payload);
-  //   setVote(response.data)
-  //   setRenderButton(true);
-  // }
+  const [voteMutation, { loading, error }] = useMutation(VOTE, {
+    onCompleted() {
+      navigate('/result', { state: { pollId: vote.pollId } });
+    },
+  });
+
+  if (loading) return <LoadingScreen />;
+  if (error) return <p>An error occurred</p>;
 
   const handleVote = () => {
-    // voteResult = selected;
-    // const submitVote = async payload => {
-    // const response = await graphQLCall(payload);
-    // redirect to vote complete page
-    navigate('/result');
+    voteMutation({ variables: { pollId: vote.pollId, vote: selected } });
   };
 
   const getButtons = () => {
     let buttonYes = (
-      <button onClick={() => setSelected(1)} className="pollBtn" type="button">
+      <button
+        onClick={() => setSelected(true)}
+        className="pollBtn"
+        type="button"
+      >
         YES
       </button>
     );
     let buttonNo = (
-      <button onClick={() => setSelected(2)} className="pollBtn" type="button">
+      <button
+        onClick={() => setSelected(false)}
+        className="pollBtn"
+        type="button"
+      >
         NO
       </button>
     );
 
-    if (selected === 1) {
+    if (selected) {
       buttonYes = (
         <button
-          onClick={() => setSelected(1)}
+          onClick={() => setSelected(true)}
           className="pollBtn selected"
           type="button"
         >
@@ -61,7 +66,7 @@ const Voting = () => {
       );
       buttonNo = (
         <button
-          onClick={() => setSelected(2)}
+          onClick={() => setSelected(false)}
           className="pollBtn notSelected"
           type="button"
         >
@@ -70,10 +75,10 @@ const Voting = () => {
       );
     }
 
-    if (selected === 2) {
+    if (selected === false) {
       buttonYes = (
         <button
-          onClick={() => setSelected(1)}
+          onClick={() => setSelected(true)}
           className="pollBtn notSelected"
           type="button"
         >
@@ -82,7 +87,7 @@ const Voting = () => {
       );
       buttonNo = (
         <button
-          onClick={() => setSelected(2)}
+          onClick={() => setSelected(false)}
           className="pollBtn selected"
           type="button"
         >
@@ -100,7 +105,7 @@ const Voting = () => {
   };
 
   const proceed = () => {
-    if (selected) {
+    if (selected != null) {
       return (
         <button onClick={handleVote} className="proceedBtn" type="button">
           Vote
@@ -117,27 +122,27 @@ const Voting = () => {
         <h1 className="headingText">Delegate Voting</h1>
       </div>
       <div className="pollInfo">
-        <div className="pollBox pollType">
-          <h1 className="labelHeading">TYPE:</h1>
-          <h1 className="pollDetail">{vote.type}</h1>
-        </div>
         <div className="pollBox pollTitle">
           <h1 className="labelHeading">TITLE:</h1>
           <h1 className="pollDetail">{vote.title}</h1>
         </div>
+        <div className="pollBox pollTitle">
+          <h1 className="labelHeading">Description:</h1>
+          <h1 className="pollDetail">{vote.description}</h1>
+        </div>
         <div className="pollBox pollSpeakerTime">
           <h1 className="labelHeading">TOTAL SPEAKER TIME:</h1>
           <h1 className="pollDetail">{vote.total_speaker_time} minutes</h1>
-        </div>
-        <div className="pollBox pollIndividualTime">
-          <h1 className="labelHeading">INDIVIDUAL SPEAKER TIME:</h1>
-          <h1 className="pollDetail">{vote.individual_speaker_time} minutes</h1>
         </div>
       </div>
       <div className="proceed">{proceed()}</div>
       {renderButton && getButtons()}
     </div>
   );
+};
+
+Voting.propTypes = {
+  location: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Voting;
