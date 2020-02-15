@@ -31,5 +31,5 @@ exports.addPoll = async (
     logger.error(`Error in creating poll::${err}`);
     return new Error('Something went wrong');
   });
-  return pollDetails.title;
+  return 'Success';
 };

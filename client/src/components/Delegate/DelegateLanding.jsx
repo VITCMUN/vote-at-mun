@@ -1,18 +1,20 @@
 import React from 'react';
 import '../../styling/DelegateLanding.css';
-// import { navigate } from '@reach/router';
-import { useApolloClient } from '@apollo/react-hooks';
+import { navigate } from '@reach/router';
+import { useApolloClient, useSubscription } from '@apollo/react-hooks';
+import { POLL_DETAILS } from '../../subscriptions';
 
 function DelegateLanding() {
-  // insert : councilLogo, countyFlag, vitcmun logo images from /Public/
-  /*
-  Since for the delegate we do not have any in app sidebar we need to have a
-  subscription which will trigger the navigation
-  */
-
-  // navigate('/vote');
-
   const client = useApolloClient();
+
+  useSubscription(POLL_DETAILS, {
+    shouldResubscribe: true,
+    onSubscriptionData: options => {
+      navigate('vote', {
+        state: { data: options.subscriptionData.data.pollDetails },
+      });
+    },
+  });
 
   const logout = event => {
     event.preventDefault();

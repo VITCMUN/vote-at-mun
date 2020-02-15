@@ -83,3 +83,9 @@ export const ADD_POLL = gql`
     )
   }
 `;
+
+export const VOTE = gql`
+  mutation vote($pollId: Int!, $vote: Boolean!) {
+    vote(voteDetails: { vote: $vote, pollId: $pollId })
+  }
+`;
