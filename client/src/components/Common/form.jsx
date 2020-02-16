@@ -1,37 +1,65 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../../styling/login.css';
 
-const LoginForm = () => {
-  const [title, setTitle] = useState('');
-  const [password, setPassword] = useState('');
-  const handleSubmit = e => {
-    e.preventDefault();
-    setTitle('');
-    setPassword('');
+class LoginForm extends Component {
+  constructor() {
+    super();
+    this.state = { username: '', password: '' };
+  }
+
+  onChangeUsername = event => {
+    const username = event.target.value;
+    this.setState({ username });
   };
-  return (
-    <div className="login-page">
-      <div className="form">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={title}
-            placeholder="username"
-            required
-            onChange={e => setTitle(e.target.value)}
-          />
-          <input
-            type="password"
-            value={password}
-            placeholder="password"
-            required
-            onChange={e => setPassword(e.target.value)}
-          />
-          <button type="submit">login</button>
-        </form>
+
+  onChangePassword = event => {
+    const password = event.target.value;
+    this.setState({ password });
+  };
+
+  onSubmit = event => {
+    event.preventDefault();
+    const { login } = this.props;
+    const { username, password } = this.state;
+    login({
+      variables: {
+        username,
+        password,
+      },
+    });
+  };
+
+  render() {
+    const { username, password } = this.state;
+    return (
+      <div className="login-page">
+        <div className="form">
+          <form className="login-form" onSubmit={this.onSubmit}>
+            <input
+              type="text"
+              value={username}
+              placeholder="username"
+              required
+              onChange={this.onChangeUsername}
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="password"
+              required
+              onChange={this.onChangePassword}
+            />
+            <button type="submit">login</button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

@@ -3,20 +3,6 @@ import gql from 'graphql-tag';
 export const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
-    userType: Int
-    userName: String
-  }
-`;
-
-export const GET_USER_TYPE = gql`
-  query GetUserType {
-    userType @client
-  }
-`;
-
-export const GET_USER_NAME = gql`
-  query GetUserType {
-    username @client
   }
 `;
 
@@ -95,5 +81,11 @@ export const ADD_POLL = gql`
         raisedBy: $raisedBy
       }
     )
+  }
+`;
+
+export const VOTE = gql`
+  mutation vote($pollId: Int!, $vote: Boolean!) {
+    vote(voteDetails: { vote: $vote, pollId: $pollId })
   }
 `;

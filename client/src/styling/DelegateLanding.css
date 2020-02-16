@@ -5,7 +5,7 @@
 
 body {
 	height: 100%;
-	background-color: #511926;
+	background-color: #310B14;
 }
 
 .title {
@@ -102,3 +102,14 @@ body {
 	}
 
 }
+.logout{
+	width:140px;
+	padding:10px 30px;
+	border-radius: 40px;
+	margin:15px;
+	font-size: 20px;
+	background-color: #834b56;
+	color: #ffffd8;
+	border: none;
+	font-weight: 100;
+  }
