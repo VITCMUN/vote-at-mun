@@ -1,32 +1,46 @@
 import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
-import { useMutation } from '@apollo/react-hooks';
+import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 import Navbar from '../Common/Navbar';
 import LoadingScreen from '../Common/LoadingScreen';
-import { VOTE } from '../../typedefs';
+import { VOTE, CURRENT_ROUTE, GET_POLL_DETAILS } from '../../typedefs';
 
-const Voting = props => {
-  const { location } = props;
-  const { data } = location.state;
+const Voting = () => {
+  const client = useApolloClient();
+  const { data: d1 } = useQuery(CURRENT_ROUTE);
+  const { data: d2 } = useQuery(GET_POLL_DETAILS);
+  if (d1 && d1.protectRoute === 0) {
+    navigate('/');
+  } else if (d1 && d1.protectRoute === 2) {
+    navigate('/result', { state: { pollId: d2.pollId } });
+  }
+  console.log(d2);
   const initial = {
-    pollId: data.pollId,
-    type: data.votingType,
-    title: data.title,
-    description: data.description,
-    total_speaker_time: data.totalSpeakerTime,
+    pollId: d2.pollId,
+    type: d2.votingType,
+    title: d2.title,
+    description: d2.description,
+    total_speaker_time: d2.total_speaker_time,
   };
+  localStorage.setItem(
+    'authtoken',
+    '1dbsf34567854exdcfvgbvgcdfxe4567bifbdufvdbfudbfudsfouseoufauoefwr'
+  );
   const [vote] = useState(initial);
   const [renderButton] = useState(true);
   const [selected, setSelected] = useState(null);
-
   const [voteMutation, { loading, error }] = useMutation(VOTE, {
     onCompleted() {
+      client.writeData({
+        data: {
+          protectRoute: 2,
+        },
+      });
       navigate('/result', { state: { pollId: vote.pollId } });
     },
   });
-
   if (loading) return <LoadingScreen />;
   if (error) return <p>An error occurred</p>;
 
@@ -139,10 +153,6 @@ const Voting = props => {
       {renderButton && getButtons()}
     </div>
   );
-};
-
-Voting.propTypes = {
-  location: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Voting;

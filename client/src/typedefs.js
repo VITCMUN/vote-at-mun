@@ -3,12 +3,34 @@ import gql from 'graphql-tag';
 export const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
+    protectRoute: Int!
+    pollId: Int!
+    type: Int!
+    title: String
+    description: String
+    total_speaker_time: Int!
   }
 `;
 
 export const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
     isLoggedIn @client
+  }
+`;
+
+export const CURRENT_ROUTE = gql`
+  query isRouteProtected {
+    protectRoute @client
+  }
+`;
+
+export const GET_POLL_DETAILS = gql`
+  query getPollDetails {
+    pollId @client
+    type @client
+    title @client
+    description @client
+    total_speaker_time @client
   }
 `;
 

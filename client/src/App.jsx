@@ -1,9 +1,19 @@
 import React from 'react';
-import { Router } from '@reach/router';
+import { Router, navigate } from '@reach/router';
 import Loadable from 'react-loadable';
 import LoadingScreen from './components/Common/LoadingScreen';
 
 const App = () => {
+  const auth = localStorage.getItem('authtoken');
+  if (auth) {
+    if (auth[0] === '0') {
+      navigate('/');
+    } else if (auth[0] === '1') {
+      navigate('/vote');
+    } else if (auth[0] === '2') {
+      navigate('/result');
+    }
+  }
   // Loadable is used so that when an user accesses the voting app
   // the entire app isn't sent. Only the required portion is sent
   const DelegateDashboard = Loadable({

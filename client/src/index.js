@@ -53,7 +53,33 @@ const client = new ApolloClient({
   typeDefs,
   resolvers,
 });
-
+// If protectRoute is 0 stay in dashboard page
+// 1 then stay on voting
+// 2 then stay on result
+const authtoken = localStorage.getItem('authtoken');
+let route = 0;
+if (authtoken) {
+  [route] = authtoken;
+  route = parseInt(route, 10);
+}
+if (!authtoken) {
+  cache.writeData({
+    data: {
+      protectRoute: route,
+      pollId: 0,
+      type: 0,
+      title: '',
+      description: '',
+      total_speaker_time: 0,
+    },
+  });
+} else {
+  cache.writeData({
+    data: {
+      protectRoute: route,
+    },
+  });
+}
 cache.writeData({
   data: {
     isLoggedIn: !!localStorage.getItem('token'),

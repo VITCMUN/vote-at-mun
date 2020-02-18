@@ -1,18 +1,43 @@
 import React from 'react';
 import '../../styling/DelegateLanding.css';
 import { navigate } from '@reach/router';
-import { useApolloClient, useSubscription } from '@apollo/react-hooks';
+import {
+  useApolloClient,
+  useSubscription,
+  useQuery,
+} from '@apollo/react-hooks';
 import { POLL_DETAILS } from '../../subscriptions';
+import { CURRENT_ROUTE, GET_POLL_DETAILS } from '../../typedefs';
 
 function DelegateLanding() {
+  const { data: d1 } = useQuery(CURRENT_ROUTE);
+  const { data: d2 } = useQuery(GET_POLL_DETAILS);
+  if (d1.protectRoute === 1) {
+    navigate('/vote');
+  } else if (d1.protectRoute === 2) {
+    navigate('/result', {
+      state: { data: d2.pollId },
+    });
+  }
   const client = useApolloClient();
-
   useSubscription(POLL_DETAILS, {
     shouldResubscribe: true,
     onSubscriptionData: options => {
-      navigate('vote', {
-        state: { data: options.subscriptionData.data.pollDetails },
-      });
+      const route = localStorage.getItem('authtoken');
+      if (route[0] !== '1') {
+        client.writeData({
+          data: {
+            protectRoute: 1,
+            pollId: options.subscriptionData.data.pollDetails.pollId,
+            type: options.subscriptionData.data.pollDetails.votingType,
+            title: options.subscriptionData.data.pollDetails.title,
+            description: options.subscriptionData.data.pollDetails.description,
+            total_speaker_time:
+              options.subscriptionData.data.pollDetails.totalSpeakerTime,
+          },
+        });
+      }
+      navigate('/vote');
     },
   });
 
@@ -25,6 +50,8 @@ function DelegateLanding() {
       },
     });
   };
+
+  localStorage.setItem('authtoken', '0dbsfbifbdufvdbfudbfudsfouseoufauoefwr');
 
   return (
     <>
