@@ -10,8 +10,9 @@ function Login() {
   const [loginUser, { loading, error }] = useMutation(LOGIN, {
     onCompleted({ login }) {
       localStorage.setItem('token', login.token);
-      localStorage.setItem('userType', login.user.userType);
-      client.writeData({ data: { isLoggedIn: true } });
+      client.writeData({
+        data: { isLoggedIn: true, user_type: login.user.userType },
+      });
     },
   });
 

@@ -81,6 +81,7 @@ if (!authtoken) {
       title: '',
       description: '',
       total_speaker_time: 0,
+      user_type: null,
     },
   });
 } else {

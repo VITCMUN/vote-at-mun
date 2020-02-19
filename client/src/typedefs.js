@@ -9,12 +9,19 @@ export const typeDefs = gql`
     title: String
     description: String
     total_speaker_time: Int!
+    user_type: Int
   }
 `;
 
 export const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
     isLoggedIn @client
+  }
+`;
+
+export const USER_TYPE = gql`
+  query getUserType {
+    user_type @client
   }
 `;
 

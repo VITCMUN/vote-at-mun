@@ -1,7 +1,9 @@
 import React from 'react';
 import { Router, navigate } from '@reach/router';
 import Loadable from 'react-loadable';
+import { useQuery } from '@apollo/react-hooks';
 import LoadingScreen from './components/Common/LoadingScreen';
+import { USER_TYPE } from './typedefs';
 
 const App = () => {
   let auth = localStorage.getItem('token');
@@ -47,9 +49,10 @@ const App = () => {
     loading: LoadingScreen,
   });
 
-  const userType = localStorage.getItem('userType');
+  const { data } = useQuery(USER_TYPE);
+  const userType = data.user_type;
   const getRoutes = () => {
-    if (userType === '0') {
+    if (userType === 0) {
       return (
         <Router>
           <Voting path="vote" />
@@ -58,7 +61,7 @@ const App = () => {
         </Router>
       );
     }
-    if (userType === '1') {
+    if (userType === 1) {
       return (
         <Router>
           <EBPoll path="ebPoll" />
@@ -67,7 +70,7 @@ const App = () => {
         </Router>
       );
     }
-    if (userType === '2') {
+    if (userType === 2) {
       return (
         <Router>
           <AdminDashboard path="/*" />
