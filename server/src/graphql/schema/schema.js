@@ -44,7 +44,7 @@ exports.typeDefs = gql`
     title: String
     description: String
     totalSpeakerTime: Int
-    votingType: Int!
+
     raisedBy: String
     username: [String]
   }

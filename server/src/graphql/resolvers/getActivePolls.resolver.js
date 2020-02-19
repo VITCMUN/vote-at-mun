@@ -10,7 +10,7 @@ exports.getActivePolls = async (_, __, { Poll }) => {
 
   const polls = [];
 
-  for (let i = 0; i < users.length; i += 1) {
+  for (let i = 0; i < poll.length; i += 1) {
     polls.push(poll[i].id);
   }
 
