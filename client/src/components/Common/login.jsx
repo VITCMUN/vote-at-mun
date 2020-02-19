@@ -11,6 +11,7 @@ function Login() {
     onCompleted({ login }) {
       localStorage.setItem('token', login.token);
       localStorage.setItem('userType', login.user.userType);
+      localStorage.setItem('userName', login.user.username);
       client.writeData({ data: { isLoggedIn: true } });
     },
   });

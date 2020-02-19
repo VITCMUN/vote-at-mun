@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import '../../styling/EBPoll.css';
 import { navigate } from '@reach/router';
 import Swal from 'sweetalert2';
+import { useMutation } from 'react-apollo';
 import { CountryFlags } from '../Common/CountryFlags';
 import Navbar from '../Common/Navbar';
 import { CountryNames } from '../../constants/CountryNames';
+import { ADD_POLL } from '../../typedefs';
 
 const EBPoll = () => {
   // Initial State of the poll form
   const [pollForm, updatePollForm] = useState({
     agenda: '',
-    type: '0',
+
     totalSpeakerTime: '0',
     description: '',
     raisedBy: '',
@@ -28,30 +30,27 @@ const EBPoll = () => {
     const { name, value } = event.target;
     updatePollForm({ ...pollForm, [name]: value });
   };
-
-  const sendPoll = () => {
-    //  const response = graphQLMutationCall()
-    //  if(!response.errors){
-    //    return {
-    //   'status':false,
-    //   'error':response.errors[0],
-    // };
-    //  } else {
-    return {
-      status: true,
-      error: null,
-    };
-    //  }
-  };
-
+  const [addpoll] = useMutation(ADD_POLL);
   const handleSubmit = event => {
     event.preventDefault();
     if (!(pollForm.agenda.length > 0 && pollForm.description.length > 0)) {
       updateError('Please fill out all the fields');
       return;
     }
-    const response = sendPoll();
-    if (response.status) {
+
+    try {
+      event.preventDefault();
+      addpoll({
+        variables: {
+          title: pollForm.agenda,
+          description: pollForm.description,
+
+          totalSpeakerTime: Number(pollForm.totalSpeakerTime),
+          raisedBy: pollForm.raisedBy,
+          username: selected,
+        },
+      });
+
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -60,11 +59,11 @@ const EBPoll = () => {
         confirmButtonColor: 'green',
       });
       navigate('/result');
-    } else {
+    } catch (err) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: response.error,
+        text: err,
         confirmButtonText: 'Try Again',
         confirmButtonColor: 'red',
       });
