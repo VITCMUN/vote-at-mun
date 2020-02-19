@@ -66,19 +66,19 @@ export const SET_COUNCIL = gql`
 
 export const ADD_POLL = gql`
   mutation addPoll(
-    $title: String
-    $description: String
-    $totalSpeakerTime: Int
-    $votingType: Int!
+    $title: String!
+    $description: String!
+    $totalSpeakerTime: Int!
     $raisedBy: String
+    $username: [String]
   ) {
     addPoll(
       pollDetails: {
         title: $title
         description: $description
         totalSpeakerTime: $totalSpeakerTime
-        votingType: $votingType
         raisedBy: $raisedBy
+        username: $username
       }
     )
   }
