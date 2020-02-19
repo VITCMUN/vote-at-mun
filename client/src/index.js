@@ -21,7 +21,11 @@ const cache = new InMemoryCache();
 const httpLink = new HttpLink({
   uri: 'http://localhost:4000/',
   headers: {
-    authorization: localStorage.getItem('token'),
+    authorization: localStorage.getItem('token')
+      ? localStorage
+          .getItem('token')
+          .slice(0, localStorage.getItem('token').length - 4)
+      : null,
   },
 });
 
@@ -30,7 +34,11 @@ const wsLink = new WebSocketLink({
   options: {
     reconnect: true,
     connectionParams: {
-      authorization: localStorage.getItem('token'),
+      authorization: localStorage.getItem('token')
+        ? localStorage
+            .getItem('token')
+            .slice(0, localStorage.getItem('token').length - 4)
+        : null,
     },
   },
 });
@@ -56,10 +64,12 @@ const client = new ApolloClient({
 // If protectRoute is 0 stay in dashboard page
 // 1 then stay on voting
 // 2 then stay on result
-const authtoken = localStorage.getItem('authtoken');
+// const authtoken = localStorage.getItem('authtoken');
+let authtoken = localStorage.getItem('token');
+authtoken = authtoken ? authtoken.slice(authtoken.length - 4) : null;
 let route = 0;
 if (authtoken) {
-  [route] = authtoken;
+  route = atob(authtoken);
   route = parseInt(route, 10);
 }
 if (!authtoken) {
@@ -82,7 +92,11 @@ if (!authtoken) {
 }
 cache.writeData({
   data: {
-    isLoggedIn: !!localStorage.getItem('token'),
+    isLoggedIn: localStorage.getItem('token')
+      ? !!localStorage
+          .getItem('token')
+          .slice(0, localStorage.getItem('token').length - 4)
+      : null,
   },
 });
 

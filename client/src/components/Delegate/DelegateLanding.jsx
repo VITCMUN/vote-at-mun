@@ -23,8 +23,9 @@ function DelegateLanding() {
   useSubscription(POLL_DETAILS, {
     shouldResubscribe: true,
     onSubscriptionData: options => {
-      const route = localStorage.getItem('authtoken');
-      if (route[0] !== '1') {
+      let route = localStorage.getItem('token');
+      route = atob(route.slice(route.length - 4));
+      if (route !== '1') {
         client.writeData({
           data: {
             protectRoute: 1,
@@ -51,7 +52,12 @@ function DelegateLanding() {
     });
   };
 
-  localStorage.setItem('authtoken', '0dbsfbifbdufvdbfudbfudsfouseoufauoefwr');
+  let currToken = localStorage.getItem('token');
+  const currView = atob(currToken.slice(currToken.length - 4));
+  if (currView === '0' || currView === '1' || currView === '2')
+    currToken = currToken.slice(0, currToken.length - 4).concat(btoa('0'));
+  else currToken = currToken.concat(btoa('0'));
+  localStorage.setItem('token', currToken);
 
   return (
     <>

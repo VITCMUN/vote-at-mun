@@ -4,13 +4,14 @@ import Loadable from 'react-loadable';
 import LoadingScreen from './components/Common/LoadingScreen';
 
 const App = () => {
-  const auth = localStorage.getItem('authtoken');
+  let auth = localStorage.getItem('token');
+  auth = auth ? atob(auth.slice(auth.length - 4)) : null;
   if (auth) {
-    if (auth[0] === '0') {
+    if (auth === '0') {
       navigate('/');
-    } else if (auth[0] === '1') {
+    } else if (auth === '1') {
       navigate('/vote');
-    } else if (auth[0] === '2') {
+    } else if (auth === '2') {
       navigate('/result');
     }
   }

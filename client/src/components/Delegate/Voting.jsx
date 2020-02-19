@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
-import PropTypes from 'prop-types';
 import Navbar from '../Common/Navbar';
 import LoadingScreen from '../Common/LoadingScreen';
 import { VOTE, CURRENT_ROUTE, GET_POLL_DETAILS } from '../../typedefs';
@@ -16,7 +15,6 @@ const Voting = () => {
   } else if (d1 && d1.protectRoute === 2) {
     navigate('/result', { state: { pollId: d2.pollId } });
   }
-  console.log(d2);
   const initial = {
     pollId: d2.pollId,
     type: d2.votingType,
@@ -24,10 +22,14 @@ const Voting = () => {
     description: d2.description,
     total_speaker_time: d2.total_speaker_time,
   };
-  localStorage.setItem(
-    'authtoken',
-    '1dbsf34567854exdcfvgbvgcdfxe4567bifbdufvdbfudbfudsfouseoufauoefwr'
-  );
+
+  let currToken = localStorage.getItem('token');
+  const currView = atob(currToken.slice(currToken.length - 4));
+  if (currView === '0' || currView === '1' || currView === '2')
+    currToken = currToken.slice(0, currToken.length - 4).concat(btoa('1'));
+  else currToken = currToken.concat(btoa('1'));
+  localStorage.setItem('token', currToken);
+
   const [vote] = useState(initial);
   const [renderButton] = useState(true);
   const [selected, setSelected] = useState(null);
