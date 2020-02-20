@@ -89,3 +89,12 @@ export const VOTE = gql`
     vote(voteDetails: { vote: $vote, pollId: $pollId })
   }
 `;
+
+export const GET_RESULT = gql`
+  query GetResult($id: Int!) {
+    getResult(id: $id) {
+      countYes
+      countNo
+    }
+  }
+`;

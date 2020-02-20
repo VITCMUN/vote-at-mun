@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
-import { useMutation, useSubscription } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 import Navbar from '../Common/Navbar';
 import LoadingScreen from '../Common/LoadingScreen';
 import { VOTE } from '../../typedefs';
-import { UPDATE_VOTE } from '../../subscriptions';
 
 const Voting = props => {
   const { location } = props;
@@ -22,12 +21,10 @@ const Voting = props => {
   const [renderButton] = useState(true);
   const [selected, setSelected] = useState(null);
 
-  const { results } = useSubscription(UPDATE_VOTE);
-
   const [voteMutation, { loading, error }] = useMutation(VOTE, {
     onCompleted() {
       navigate('/result', {
-        state: { data: results || (vote ? 1 : 0) },
+        state: { data: { vote: vote ? 1 : 0, pollId: vote.pollId } },
       });
     },
   });

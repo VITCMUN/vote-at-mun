@@ -12,7 +12,6 @@ const EBPoll = () => {
   // Initial State of the poll form
   const [pollForm, updatePollForm] = useState({
     agenda: '',
-
     totalSpeakerTime: '0',
     description: '',
     raisedBy: '',
@@ -30,7 +29,20 @@ const EBPoll = () => {
     const { name, value } = event.target;
     updatePollForm({ ...pollForm, [name]: value });
   };
-  const [addpoll] = useMutation(ADD_POLL);
+  const [addpoll] = useMutation(ADD_POLL, {
+    onCompleted: data => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Poll Created',
+        confirmButtonText: 'Poll Created',
+        confirmButtonColor: 'green',
+      });
+      navigate('/result', {
+        state: { data: { pollId: data.addPoll } },
+      });
+    },
+  });
   const handleSubmit = event => {
     event.preventDefault();
     if (!(pollForm.agenda.length > 0 && pollForm.description.length > 0)) {
@@ -44,21 +56,11 @@ const EBPoll = () => {
         variables: {
           title: pollForm.agenda,
           description: pollForm.description,
-
           totalSpeakerTime: Number(pollForm.totalSpeakerTime),
           raisedBy: pollForm.raisedBy,
           username: selected,
         },
       });
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: 'Poll Created',
-        confirmButtonText: 'Poll Created',
-        confirmButtonColor: 'green',
-      });
-      navigate('/result');
     } catch (err) {
       Swal.fire({
         icon: 'error',
@@ -70,7 +72,7 @@ const EBPoll = () => {
     }
   };
 
-  const getCountrties = () => {
+  const getCountries = () => {
     return CountryNames.map(obj => (
       <option key={obj.name} value={obj.name}>
         {obj.name}
@@ -143,7 +145,7 @@ const EBPoll = () => {
                     id="raisedType"
                     className="selectField"
                   >
-                    {getCountrties()}
+                    {getCountries()}
                   </select>
                 </div>
                 <input
