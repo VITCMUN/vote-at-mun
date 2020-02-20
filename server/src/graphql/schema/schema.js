@@ -4,6 +4,8 @@ exports.typeDefs = gql`
   type Query {
     getDelegates: [String!]
     getActivePolls: [Int!]
+    getPollDetails(id: Int!): pollDet!
+    getResult(id: Int!): vote!
   }
   type Mutation {
     addUser(userDetails: userDetails!): String!
@@ -44,9 +46,15 @@ exports.typeDefs = gql`
     title: String
     description: String
     totalSpeakerTime: Int
-
     raisedBy: String
     username: [String]
+  }
+  type pollDet{
+    pollId: Int!
+    title: String!
+    description: String!
+    totalSpeakerTime: Int!
+    raisedBy: String
   }
   type vote {
     countYes: Int!
