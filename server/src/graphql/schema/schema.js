@@ -11,7 +11,7 @@ exports.typeDefs = gql`
     addUser(userDetails: userDetails!): String!
     removeUser(username: String!): Int!
     login(username: String!, password: String!): loginResponse!
-    addPoll(pollDetails: pollDetails!): String!
+    addPoll(pollDetails: pollDetails!): Int!
     setCouncil(name: String!, bannerUrl: String): String!
     vote(voteDetails: voteDetails): Boolean!
     endPoll(id: Int!): String!
