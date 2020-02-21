@@ -13,6 +13,7 @@ function Login() {
       localStorage.setItem('userType', login.user.userType);
       localStorage.setItem('userName', login.user.username);
       client.writeData({ data: { isLoggedIn: true } });
+      window.location.reload();
     },
   });
 

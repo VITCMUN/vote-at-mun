@@ -4,7 +4,6 @@ export const POLL_DETAILS = gql`
   subscription onPollAdded {
     pollDetails {
       pollId
-
       description
       totalSpeakerTime
       raisedBy
