@@ -11,14 +11,15 @@ function DelegateLanding() {
     shouldResubscribe: true,
     fetchPolicy: 'network-only',
     onSubscriptionData: options => {
-      // if (
-      //   options.subscriptionData.data.pollDetails.username.indexOf(
-      //     localStorage.getItem('userName')
-      //   ) > -1
-      // )
-      navigate('vote', {
-        state: { data: options.subscriptionData.data.pollDetails },
-      });
+      if (
+        options.subscriptionData.data.pollDetails.username.indexOf(
+          localStorage.getItem('userName')
+        ) > -1
+      ) {
+        navigate('vote', {
+          state: { data: options.subscriptionData.data.pollDetails },
+        });
+      }
     },
   });
 
@@ -30,6 +31,7 @@ function DelegateLanding() {
         userType: null,
       },
     });
+    localStorage.clear();
   };
 
   return (

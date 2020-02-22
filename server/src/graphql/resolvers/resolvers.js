@@ -7,12 +7,16 @@ const { removeUser } = require("./removeUser.resolver");
 const { getDelegates } = require("./getDelegates.resolver");
 const { getActivePolls } = require("./getActivePolls.resolver");
 const { endPoll } = require("./endPoll.resolver");
+const { getPollDetails } = require('./getPollDetails.resolver');
+const { getResult } = require('./getResult.resolver');
 const logger = require("../../winston");
 
 module.exports = {
   Query: {
     getDelegates,
-    getActivePolls
+    getActivePolls,
+    getPollDetails,
+    getResult,
   },
   Mutation: {
     vote, // delegate

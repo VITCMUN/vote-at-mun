@@ -4,12 +4,14 @@ exports.typeDefs = gql`
   type Query {
     getDelegates: [String!]
     getActivePolls: [Int!]
+    getPollDetails(id: Int!): pollDet!
+    getResult(id: Int!): vote!
   }
   type Mutation {
     addUser(userDetails: userDetails!): String!
     removeUser(username: String!): Int!
     login(username: String!, password: String!): loginResponse!
-    addPoll(pollDetails: pollDetails!): String!
+    addPoll(pollDetails: pollDetails!): Int!
     setCouncil(name: String!, bannerUrl: String): String!
     vote(voteDetails: voteDetails): Boolean!
     endPoll(id: Int!): String!
@@ -44,9 +46,15 @@ exports.typeDefs = gql`
     title: String
     description: String
     totalSpeakerTime: Int
-
     raisedBy: String
     username: [String]
+  }
+  type pollDet{
+    pollId: Int!
+    title: String!
+    description: String!
+    totalSpeakerTime: Int!
+    raisedBy: String
   }
   type vote {
     countYes: Int!

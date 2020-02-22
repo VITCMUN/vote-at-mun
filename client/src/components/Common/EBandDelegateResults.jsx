@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSubscription } from 'react-apollo';
+import { useQuery, useSubscription } from 'react-apollo';
 import { Pie } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar.jsx';
@@ -7,28 +7,28 @@ import { CountryResults } from './CountryResults.jsx';
 import '../../styling/EBandDelegateResults.css';
 import { UPDATE_VOTE } from '../../subscriptions';
 import '../../styling/Chart.css';
+import { GET_RESULT } from '../../typedefs';
+import LoadingScreen from './LoadingScreen';
 
 const ResultPage = props => {
   const getNavbar = () => {
     return <Navbar />;
   };
   const { location } = props;
-  const countYesInit = location.state.data;
-  const [countYes, setCountYes] = useState(countYesInit || 0);
-  const [chartData, setChartData] = useState({
-    labels: ['Yes', 'No'],
-    datasets: [
-      {
-        label: 'Votes',
-        data: [countYes, 0],
-        backgroundColor: ['rgba(246,219,166,0.8)', 'rgba(246,219,166,0.7)'],
-      },
-    ],
+  const { vote, pollId } = location.state.data;
+  let countNo = 0;
+  if (vote) {
+    countNo = vote ? 0 : 1;
+  }
+
+  const [votes, setVotes] = useState({
+    yes: vote || 0,
+    no: countNo,
   });
   const dataResult = {
     datasets: [
       {
-        data: [countYes, 0],
+        data: [votes.yes, votes.no],
         backgroundColor: ['#ED8C2B', '#88A825'],
         hoverBackgroundColor: ['#ED8C2B', '#88A825'],
       },
@@ -37,25 +37,28 @@ const ResultPage = props => {
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: ['Yes', 'No'],
   };
-  const { data } = useSubscription(UPDATE_VOTE, {
-    onSubscriptionData: options => {
-      setCountYes(options.subscriptionData.data.voteUpdate.countYes);
-      setChartData(
-        Object.assign(chartData, {
-          datasets: [
-            {
-              label: 'Votes',
-              data: [options.subscriptionData.data.voteUpdate.countYes, 0],
-              backgroundColor: [
-                'rgba(246,219,166,0.8)',
-                'rgba(246,219,166,0.7)',
-              ],
-            },
-          ],
-        })
-      );
+
+  useSubscription(UPDATE_VOTE, {
+    onSubscriptionData: data => {
+      setVotes({
+        yes: data.subscriptionData.data.voteUpdate.countYes,
+        no: data.subscriptionData.data.voteUpdate.countNo,
+      });
     },
   });
+
+  const { loading, error } = useQuery(GET_RESULT, {
+    variables: { id: pollId },
+    onCompleted: voteVal => {
+      setVotes({
+        yes: voteVal.getResult.countYes,
+        no: voteVal.getResult.countNo,
+      });
+    },
+  });
+
+  if (loading) return <LoadingScreen />;
+  if (error) return 'Contact Tech Support';
 
   return (
     <div className="Main">
@@ -65,24 +68,8 @@ const ResultPage = props => {
         <div className="part1">
           <div className="result">
             <div className="chart box">
-              {/* <Doughnut
-                data={chartData}
-                options={{
-                  maintainAspectRatio: false,
-                  legend: {
-                    display: true,
-                    labels: { fontColor: '#ffffff', fontSize: 20 },
-                  },
-                  layout: {
-                    padding: {
-                      bottom: 50,
-                    },
-                  },
-                }}
-              /> */}
               <Pie data={dataResult} />
             </div>
-            {data ? data.voteUpdate.countYes : 1}
           </div>
         </div>
         <div className="part2">
