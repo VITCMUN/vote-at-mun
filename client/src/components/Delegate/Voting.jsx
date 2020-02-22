@@ -32,12 +32,9 @@ const Voting = () => {
   const [selected, setSelected] = useState(null);
   const [voteMutation, { loading, error }] = useMutation(VOTE, {
     onCompleted() {
-      client.writeData({
-        data: {
-          protectRoute: 2,
-        },
+      navigate('/result', {
+        state: { data: { vote: vote ? 1 : 0, pollId: vote.pollId } },
       });
-      navigate('/result', { state: { pollId: vote.pollId } });
     },
   });
   if (loading) return <LoadingScreen />;

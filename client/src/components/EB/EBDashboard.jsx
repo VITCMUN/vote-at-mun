@@ -18,6 +18,7 @@ const EBDashboard = () => {
         userType: null,
       },
     });
+    localStorage.clear();
   };
 
   return (

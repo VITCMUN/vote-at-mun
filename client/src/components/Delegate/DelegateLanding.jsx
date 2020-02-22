@@ -22,22 +22,17 @@ function DelegateLanding() {
   const client = useApolloClient();
   useSubscription(POLL_DETAILS, {
     shouldResubscribe: true,
+    fetchPolicy: 'network-only',
     onSubscriptionData: options => {
-      const route = localStorage.getItem('authtoken');
-      if (route[0] !== '1') {
-        client.writeData({
-          data: {
-            protectRoute: 1,
-            pollId: options.subscriptionData.data.pollDetails.pollId,
-            type: options.subscriptionData.data.pollDetails.votingType,
-            title: options.subscriptionData.data.pollDetails.title,
-            description: options.subscriptionData.data.pollDetails.description,
-            total_speaker_time:
-              options.subscriptionData.data.pollDetails.totalSpeakerTime,
-          },
+      if (
+        options.subscriptionData.data.pollDetails.username.indexOf(
+          localStorage.getItem('userName')
+        ) > -1
+      ) {
+        navigate('vote', {
+          state: { data: options.subscriptionData.data.pollDetails },
         });
       }
-      navigate('/vote');
     },
   });
 
@@ -49,6 +44,7 @@ function DelegateLanding() {
         userType: null,
       },
     });
+    localStorage.clear();
   };
 
   localStorage.setItem('authtoken', '0dbsfbifbdufvdbfudbfudsfouseoufauoefwr');

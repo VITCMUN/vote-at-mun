@@ -1,20 +1,25 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server");
 
 exports.typeDefs = gql`
-  type Query{
+  type Query {
     getDelegates: [String!]
+    getActivePolls: [Int!]
+    getPollDetails(id: Int!): pollDet!
+    getResult(id: Int!): vote!
   }
   type Mutation {
     addUser(userDetails: userDetails!): String!
     removeUser(username: String!): Int!
     login(username: String!, password: String!): loginResponse!
-    addPoll(pollDetails: pollDetails!): String!
-    setCouncil(name: String!,bannerUrl: String): String!
+    addPoll(pollDetails: pollDetails!): Int!
+    setCouncil(name: String!, bannerUrl: String): String!
     vote(voteDetails: voteDetails): Boolean!
+    endPoll(id: Int!): String!
   }
   type Subscription {
-    voteUpdate: Int!
+    voteUpdate: vote
     pollDetails: pollUpdate!
+    pollEnd: Int!
   }
   type User {
     username: String!
@@ -28,22 +33,34 @@ exports.typeDefs = gql`
     pollId: Int!
     vote: Boolean!
   }
+
   input pollDetails {
-    title: String
-    description: String
-    totalSpeakerTime: Int
-    votingType: Int!
+    title: String!
+    description: String!
+    totalSpeakerTime: Int!
     raisedBy: String
+    username: [String]
   }
   type pollUpdate {
     pollId: Int!
     title: String
     description: String
     totalSpeakerTime: Int
-    votingType: Int!
+    raisedBy: String
+    username: [String]
+  }
+  type pollDet{
+    pollId: Int!
+    title: String!
+    description: String!
+    totalSpeakerTime: Int!
     raisedBy: String
   }
-  input userDetails{
+  type vote {
+    countYes: Int!
+    countNo: Int!
+  }
+  input userDetails {
     username: String!
     password: String!
     userType: Int!

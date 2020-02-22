@@ -88,19 +88,19 @@ export const SET_COUNCIL = gql`
 
 export const ADD_POLL = gql`
   mutation addPoll(
-    $title: String
-    $description: String
-    $totalSpeakerTime: Int
-    $votingType: Int!
+    $title: String!
+    $description: String!
+    $totalSpeakerTime: Int!
     $raisedBy: String
+    $username: [String]
   ) {
     addPoll(
       pollDetails: {
         title: $title
         description: $description
         totalSpeakerTime: $totalSpeakerTime
-        votingType: $votingType
         raisedBy: $raisedBy
+        username: $username
       }
     )
   }
@@ -109,5 +109,14 @@ export const ADD_POLL = gql`
 export const VOTE = gql`
   mutation vote($pollId: Int!, $vote: Boolean!) {
     vote(voteDetails: { vote: $vote, pollId: $pollId })
+  }
+`;
+
+export const GET_RESULT = gql`
+  query GetResult($id: Int!) {
+    getResult(id: $id) {
+      countYes
+      countNo
+    }
   }
 `;
