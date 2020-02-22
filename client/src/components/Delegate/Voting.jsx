@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
-import PropTypes from 'prop-types';
 import Navbar from '../Common/Navbar';
 import LoadingScreen from '../Common/LoadingScreen';
 import { VOTE, CURRENT_ROUTE, GET_POLL_DETAILS } from '../../typedefs';

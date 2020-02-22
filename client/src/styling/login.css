@@ -39,14 +39,14 @@ html,body {
 }
 .MunImage1{
   flex: 1;
-  width: 30vw;
+  width: 35vw;
 }
 .MunImage2{
   width: 150px;
 }
 .CouncilImage{
   flex: 1;
-  width:30vw;
+  width:40vw;
 }
 
 .DashboardHeading{

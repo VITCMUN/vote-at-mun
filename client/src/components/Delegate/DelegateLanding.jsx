@@ -61,14 +61,14 @@ function DelegateLanding() {
       <p className="title">WELCOME DELEGATE !</p>
       <div className="councilContainer">
         <div className="councilLogo">
-          <img src="" alt="councilLogo" height="300" width="300" />
+          <img src="Logos/Square/Arab-01.png" alt="councilLogo" height="300" width="300" />
         </div>
         <div className="countryFlag">
-          <img src="" alt="countryFlag" height="250" width="450" />
+          <img src="square/iran.webp" alt="countryFlag" height="250" width="450" />
         </div>
       </div>
       <div className="logo">
-        <img src="" alt="logo" height="330" width="330" />
+        <img src="Logos/mun.png" alt="logo" height="200" width="auto" />
       </div>
     </>
   );

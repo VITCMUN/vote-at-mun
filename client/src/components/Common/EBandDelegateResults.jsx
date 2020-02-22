@@ -6,6 +6,7 @@ import '../../styling/EBandDelegateResults.css';
 import { CURRENT_ROUTE, GET_POLL_DETAILS } from "../../typedefs";
 import { useQuery } from '@apollo/react-hooks';
 import { navigate } from '@reach/router';
+import EndPoll from '../EB/EndPoll';
 
 function Result() {
   const getNavbar = () => {
@@ -22,7 +23,8 @@ function Result() {
 
   const {data:d1} = useQuery(CURRENT_ROUTE);
   const {data:d2} = useQuery(GET_POLL_DETAILS);
-  if(d1.protectRoute === 1) {
+  const usertype = localStorage.getItem("userType");
+  if(usertype ==='0' && d1.protectRoute === 1) {
     const reqdObj = {
       pollId: d2.pollId,
       type: d2.type,
@@ -33,14 +35,24 @@ function Result() {
     navigate('/vote', {
       state: { data:  reqdObj},
     });
-  } else if (d1.protectRoute === 0) {
+  } else if (usertype ==='0' && d1.protectRoute === 0) {
     navigate('/');
+  }
+
+  const getEndPoll = () => {
+    if(usertype === '1') {
+      return <EndPoll />
+    }
+    return null;
   }
 
   return (
     <div className="Main">
       {getNavbar()}
       <p id="heading">RESULTS</p>
+      <div className="endVote">
+        {getEndPoll()}
+      </div>
       <div className="parts">
         <div className="part1">
           <div className="result">
