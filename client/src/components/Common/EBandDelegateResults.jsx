@@ -9,6 +9,7 @@ import { UPDATE_VOTE } from '../../subscriptions';
 import '../../styling/Chart.css';
 import { GET_RESULT } from '../../typedefs';
 import LoadingScreen from './LoadingScreen';
+import EndPoll from '../EB/EndPoll';
 
 const ResultPage = props => {
   const getNavbar = () => {
@@ -59,11 +60,21 @@ const ResultPage = props => {
 
   if (loading) return <LoadingScreen />;
   if (error) return 'Contact Tech Support';
+  const usertype = localStorage.getItem("userType");
+  const getEndPoll = () => {
+    if(usertype === '1') {
+      return <EndPoll />
+    }
+    return null;
+  }
 
   return (
     <div className="Main">
       {getNavbar()}
       <p id="heading">RESULTS </p>
+      <div className="endVote">
+        {getEndPoll()}
+      </div>
       <div className="parts">
         <div className="part1">
           <div className="result">

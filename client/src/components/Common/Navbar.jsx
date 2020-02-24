@@ -23,12 +23,26 @@ const Navbar = () => {
     localStorage.clear();
   };
 
+  const usertype = localStorage.getItem("userType");
+
+  const getImage = () => {
+    if(usertype === '0') {
+      return(
+        <img src="square/iran.webp" className="small" alt="Username" />
+      )
+    } else {
+      return(
+        <img src="Logos/Square/Arab-01.png" className="small" alt="Username" />
+      )
+    }
+  }
+
   return (
     <div className="nav-container">
       <img
         onClick={gotoDashboard}
         className="logo"
-        src="img/mun.png"
+        src="Logos/mun.png"
         onKeyPress={gotoDashboard}
         alt="MUN Logo"
       />
@@ -36,7 +50,7 @@ const Navbar = () => {
         <ul>
           <li>
             <div className="welcome">
-              <img src="img/mun.png" className="small" alt="Username" />
+              {getImage()}
             </div>
           </li>
           <li>

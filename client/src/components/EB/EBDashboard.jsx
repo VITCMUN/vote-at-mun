@@ -27,7 +27,7 @@ const EBDashboard = () => {
         <button type="button" className="logout" onClick={logout}>
           Logout
         </button>
-        <img className="logo-big" src="img/mun.png" alt="VITCMUN" />
+        <img className="logo-big" src="Logos/mun.png" alt="VITCMUN" />
         <div className="welcome-text">
           Welcomes the Members of the Executive Board
         </div>
@@ -35,7 +35,7 @@ const EBDashboard = () => {
       <div className="right-container">
         <div className="card">
           <div className="card-header">
-            <img className="card-img" src="img/disec.png" alt="Council" />
+            <img className="card-img" src="Logos/Square/Arab-01.png" alt="Council" />
             <div className="card-text">DISEC</div>
           </div>
           <div className="card-body">

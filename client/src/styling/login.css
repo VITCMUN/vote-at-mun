@@ -39,14 +39,14 @@ html,body {
 }
 .MunImage1{
   flex: 1;
-  width: 30vw;
+  width: 35vw;
 }
 .MunImage2{
   width: 150px;
 }
 .CouncilImage{
   flex: 1;
-  width:30vw;
+  width:40vw;
 }
 
 .DashboardHeading{
@@ -105,7 +105,8 @@ html,body {
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 20px 0 #f6dba6;
+    border-radius: 10px;
   }
   .form input {
     font-family: "Roboto", sans-serif;
@@ -134,19 +135,3 @@ html,body {
   .form button:hover,.form button:active,.form button:focus {
     background: #000;
   }
-
-/* @media(max-width:1440px) and (min-width:320px)
-{
-  .App{
-    margin:0 auto;
-    height: 100vh;
-    width: 100vw;
-  }
-  .VotingButton{
-    display: table;
-    margin: auto;
-    margin-top: 130px;
-  }
-  
-} */
-
