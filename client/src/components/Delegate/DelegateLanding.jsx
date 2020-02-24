@@ -42,10 +42,20 @@ function DelegateLanding() {
       <p className="title">WELCOME DELEGATE !</p>
       <div className="councilContainer">
         <div className="councilLogo">
-          <img src="Logos/Square/Arab-01.png" alt="councilLogo" height="300" width="300" />
+          <img
+            src="Logos/Square/Arab-01.png"
+            alt="councilLogo"
+            height="300"
+            width="300"
+          />
         </div>
         <div className="countryFlag">
-          <img src="square/iran.webp" alt="countryFlag" height="250" width="450" />
+          <img
+            src="square/iran.webp"
+            alt="countryFlag"
+            height="250"
+            width="450"
+          />
         </div>
       </div>
       <div className="logo">

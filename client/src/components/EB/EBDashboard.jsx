@@ -35,7 +35,11 @@ const EBDashboard = () => {
       <div className="right-container">
         <div className="card">
           <div className="card-header">
-            <img className="card-img" src="Logos/Square/Arab-01.png" alt="Council" />
+            <img
+              className="card-img"
+              src="Logos/Square/Arab-01.png"
+              alt="Council"
+            />
             <div className="card-text">DISEC</div>
           </div>
           <div className="card-body">

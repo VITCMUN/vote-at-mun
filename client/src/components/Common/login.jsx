@@ -12,30 +12,41 @@ function Login() {
       localStorage.setItem('token', login.token);
       localStorage.setItem('userType', login.user.userType);
       localStorage.setItem('userName', login.user.username);
-      client.writeData({ data: { isLoggedIn: true } });
+      client.writeData({
+        data: {
+          isLoggedIn: true,
+        },
+      });
       window.location.reload();
     },
   });
 
   if (loading) return <LoadingScreen />;
-  if (error) return <p>An error occurred</p>;
+  if (error) return <p> An error occurred </p>;
 
   return (
     <div className="FlexContainer">
       <div className="LeftContainer">
         <img className="MunImage1" src="Logos/mun.png" alt="VITCMUN" />
-        <img className="CouncilImage" src="Logos/dateswhite.png" alt="VITCMUN" />
+        <img
+          className="CouncilImage"
+          src="Logos/dateswhite.png"
+          alt="VITCMUN"
+        />
       </div>
-
       <div className="RightContainer">
         <br />
-        <img className="MunImage2" src="Logos/Square/ARAB-01.png" alt="VITCMUN" />
+        <img
+          className="MunImage2"
+          src="Logos/Square/ARAB-01.png"
+          alt="VITCMUN"
+        />
         <h4 className="DashboardHeading">
-          <b>WELCOME</b>
-        </h4>
+          <b> WELCOME </b>{' '}
+        </h4>{' '}
         <br />
-        <LoginForm login={loginUser} />
-      </div>
+        <LoginForm login={loginUser} />{' '}
+      </div>{' '}
     </div>
   );
 }

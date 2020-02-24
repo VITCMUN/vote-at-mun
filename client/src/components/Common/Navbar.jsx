@@ -23,19 +23,16 @@ const Navbar = () => {
     localStorage.clear();
   };
 
-  const usertype = localStorage.getItem("userType");
+  const usertype = localStorage.getItem('userType');
 
   const getImage = () => {
-    if(usertype === '0') {
-      return(
-        <img src="square/iran.webp" className="small" alt="Username" />
-      )
-    } else {
-      return(
-        <img src="Logos/Square/Arab-01.png" className="small" alt="Username" />
-      )
+    if (usertype === '0') {
+      return <img src="square/iran.webp" className="small" alt="Username" />;
     }
-  }
+    return (
+      <img src="Logos/Square/Arab-01.png" className="small" alt="Username" />
+    );
+  };
 
   return (
     <div className="nav-container">
@@ -49,22 +46,20 @@ const Navbar = () => {
       <div className="navigation">
         <ul>
           <li>
-            <div className="welcome">
-              {getImage()}
-            </div>
-          </li>
+            <div className="welcome"> {getImage()} </div>{' '}
+          </li>{' '}
           <li>
             <a onClick={gotoDashboard} href="#">
-              Dashboard
-            </a>
-          </li>
+              Dashboard{' '}
+            </a>{' '}
+          </li>{' '}
           <li>
             <a onClick={logout} id="secondLink" href="#">
-              Logout
-            </a>
-          </li>
-        </ul>
-      </div>
+              Logout{' '}
+            </a>{' '}
+          </li>{' '}
+        </ul>{' '}
+      </div>{' '}
     </div>
   );
 };

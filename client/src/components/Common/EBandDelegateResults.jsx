@@ -49,7 +49,9 @@ const ResultPage = props => {
   });
 
   const { loading, error } = useQuery(GET_RESULT, {
-    variables: { id: pollId },
+    variables: {
+      id: pollId,
+    },
     onCompleted: voteVal => {
       setVotes({
         yes: voteVal.getResult.countYes,
@@ -60,35 +62,33 @@ const ResultPage = props => {
 
   if (loading) return <LoadingScreen />;
   if (error) return 'Contact Tech Support';
-  const usertype = localStorage.getItem("userType");
+  const usertype = localStorage.getItem('userType');
   const getEndPoll = () => {
-    if(usertype === '1') {
-      return <EndPoll />
+    if (usertype === '1') {
+      return <EndPoll />;
     }
     return null;
-  }
+  };
 
   return (
     <div className="Main">
-      {getNavbar()}
-      <p id="heading">RESULTS </p>
-      <div className="endVote">
-        {getEndPoll()}
-      </div>
+      {' '}
+      {getNavbar()} <p id="heading"> RESULTS </p>{' '}
+      <div className="endVote"> {getEndPoll()} </div>{' '}
       <div className="parts">
         <div className="part1">
           <div className="result">
             <div className="chart box">
-              <Pie data={dataResult} />
-            </div>
-          </div>
-        </div>
+              <Pie data={dataResult} />{' '}
+            </div>{' '}
+          </div>{' '}
+        </div>{' '}
         <div className="part2">
           <div className="country">
             <CountryResults />
-          </div>
-        </div>
-      </div>
+          </div>{' '}
+        </div>{' '}
+      </div>{' '}
     </div>
   );
 };

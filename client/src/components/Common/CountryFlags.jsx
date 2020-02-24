@@ -66,7 +66,7 @@ const CountryFlags = props => {
   let countryImages;
   // If no matching result display some information
   if (result.length === 0) {
-    countryImages = <b>No Such Country Exists</b>;
+    countryImages = <b> No Such Country Exists </b>;
   } else {
     countryImages = result.map(country => (
       <div className="countryContainer" key={country.name}>
@@ -77,9 +77,8 @@ const CountryFlags = props => {
           tabIndex={0}
           onKeyPress={event => handleKeyPress(event, country)}
         >
-          {getImage(country)}
-          <b className="countryName">{country.name}</b>
-        </div>
+          {getImage(country)} <b className="countryName"> {country.name} </b>{' '}
+        </div>{' '}
       </div>
     ));
   }
@@ -87,26 +86,26 @@ const CountryFlags = props => {
   return (
     <div className="CountriesMenu">
       <div className="CountriesMenuText">
-        <b className="heading">UNHRC</b>
+        <b className="heading"> UNHRC </b>{' '}
         <div className="CountriesHeading">
-          <b className="heading">Countries</b>
-        </div>
+          <b className="heading"> Countries </b>{' '}
+        </div>{' '}
         <div className="search">
           <input
             onSubmit={event => event.preventDefault()}
             placeholder="Enter the country"
             type="text"
             onChange={event => setKeyword(event.target.value)}
-          />
-        </div>
-      </div>
-      <div className="CountryProfilesArea">{countryImages}</div>
+          />{' '}
+        </div>{' '}
+      </div>{' '}
+      <div className="CountryProfilesArea"> {countryImages} </div>{' '}
       <button className="selectorCountry" onClick={clearAll} type="button">
-        Clear All
-      </button>
+        Clear All{' '}
+      </button>{' '}
       <button className="selectorCountry" onClick={selectAll} type="button">
-        Select All
-      </button>
+        Select All{' '}
+      </button>{' '}
     </div>
   );
 };
