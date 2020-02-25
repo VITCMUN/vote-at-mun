@@ -19,14 +19,14 @@ import './styling/index.css';
 const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
-  uri: 'http://192.168.43.226:4000/',
+  uri: 'http://localhost:4000/',
   headers: {
     authorization: localStorage.getItem('token'),
   },
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://192.168.43.226:4000/graphql`,
+  uri: `ws://localhost:4000/graphql`,
   options: {
     reconnect: true,
     connectionParams: {

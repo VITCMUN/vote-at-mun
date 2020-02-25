@@ -15,22 +15,26 @@ const ResultPage = props => {
     return <Navbar />;
   };
   const { location } = props;
-  const { vote, pollId } = location.state.data;
+  console.log(props);
+  const { vote = 23, pollId } = location.state.data;
+
   let countNo = 0;
-  if (vote) {
+  if (vote !== 23) {
     countNo = vote ? 0 : 1;
+  } else {
+    countNo = 0;
   }
 
   const [votes, setVotes] = useState({
-    yes: vote || 0,
+    yes: vote === 23 ? 0 : vote || 0,
     no: countNo,
   });
   const dataResult = {
     datasets: [
       {
         data: [votes.yes, votes.no],
-        backgroundColor: ['#ED8C2B', '#88A825'],
-        hoverBackgroundColor: ['#ED8C2B', '#88A825'],
+        backgroundColor: ['green', 'red'],
+        hoverBackgroundColor: ['green', 'red'],
       },
     ],
 
