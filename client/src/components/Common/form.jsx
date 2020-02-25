@@ -39,14 +39,14 @@ class LoginForm extends Component {
             <input
               type="text"
               value={username}
-              placeholder="username"
+              placeholder="Enter your Username"
               required
               onChange={this.onChangeUsername}
             />
             <input
               type="password"
               value={password}
-              placeholder="password"
+              placeholder="Enter your Password"
               required
               onChange={this.onChangePassword}
             />
