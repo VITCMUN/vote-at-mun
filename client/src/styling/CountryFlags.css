@@ -5,10 +5,10 @@
     margin-bottom: 15px;
     justify-content: center;
 }
-.Flag:hover{
+.CountryProfile:hover .Flag{
     display: none;
 }
-.Flag:hover + .countryName{
+.CountryProfile:hover .countryName{
     display: inherit;
 }
 .Flag{
