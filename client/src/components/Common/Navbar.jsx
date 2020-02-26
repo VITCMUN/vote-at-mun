@@ -27,8 +27,8 @@ const Navbar = () => {
 
   const getImage = () => {
     if (usertype === '0') {
-      const username = localStorage.getItem("userName").toLowerCase();
-      const imageSource = "square/" + username + ".webp";
+      const username = localStorage.getItem('userName').toLowerCase();
+      const imageSource = `square/${username}.webp`;
       return <img src={imageSource} className="small" alt="Username" />;
     }
     return (
