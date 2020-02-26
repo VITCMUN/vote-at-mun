@@ -158,10 +158,6 @@ const EBPoll = () => {
             </form>
           </div>
           <div className="form-flags">
-            <h1 className="warning">
-              Select the countries <span className="warn">NOT</span> to send the
-              poll to
-            </h1>
             <CountryFlags selected={selected} setSelected={setSelected} />
           </div>
         </div>

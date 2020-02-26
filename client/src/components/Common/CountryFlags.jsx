@@ -86,10 +86,7 @@ const CountryFlags = props => {
   return (
     <div className="CountriesMenu">
       <div className="CountriesMenuText">
-        <b className="heading"> UNHRC </b>{' '}
-        <div className="CountriesHeading">
-          <b className="heading"> Countries </b>{' '}
-        </div>{' '}
+        <b className="heading">Exclude countires from poll</b>{' '}
         <div className="search">
           <input
             onSubmit={event => event.preventDefault()}

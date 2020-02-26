@@ -85,6 +85,8 @@
 .Selected{
     opacity: 0.3;
 }
-.heading{
-    color:#ffffd8;
+.CountriesMenuText .heading{
+    color:rgb(236, 194, 109);
+    font-size: 1.3rem;
+    text-align: justify;
 }
