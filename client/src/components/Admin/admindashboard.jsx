@@ -138,11 +138,11 @@ function AdminDashboard() {
             <input
               type="text"
               name="profilePicUrl"
-              id="profilePicUrl"
-              onChange={event =>
+              id="profilePicUrl" 
+              onChange={event => 
                 setaddUserState(
                   Object.assign(addUserState, {
-                    profilePicUrl: parseInt(event.target.value, 10),
+                    profilePicUrl: event.target.value,
                   })
                 )
               }
