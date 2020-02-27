@@ -17,7 +17,7 @@ exports.typeDefs = gql`
     endPoll(id: Int!): String!
   }
   type Subscription {
-    voteUpdate: vote
+    voteUpdate(id: Int!): vote
     pollDetails: pollUpdate!
     pollEnd: Int!
   }
@@ -59,6 +59,7 @@ exports.typeDefs = gql`
   type vote {
     countYes: Int!
     countNo: Int!
+    usernames: [String!]
   }
   input userDetails {
     username: String!
