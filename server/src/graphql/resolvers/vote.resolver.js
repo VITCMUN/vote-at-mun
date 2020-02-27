@@ -1,9 +1,9 @@
 const logger = require("../../winston");
 
 exports.vote = async (_, { voteDetails }, { currentUser, Vote, pubsub }) => {
-   if (!currentUser || currentUser.userType !== 0) {
-     throw new Error("Not Allowed");
-   }
+  if (!currentUser || currentUser.userType !== 0) {
+    throw new Error("Not Allowed");
+  }
 
   await Vote.create({
     vote_val: voteDetails.vote,
@@ -20,14 +20,19 @@ exports.vote = async (_, { voteDetails }, { currentUser, Vote, pubsub }) => {
         no = 0;
       var country = [];
       for (let i = 0; i < vote.length; i += 1) {
-        //  country.push(vote[i].voterId);
+        var temp = { country: vote[i].voterId, value: vote[i].vote_val };
+        //  temp.push(vote[i].voterId);
+        //temp.push(vote[i].vote_val);
+        country.push(temp);
         vote[i].vote_val ? (yes += 1) : (no += 1);
       }
-
+      // console.log(country);
+      logger.error(`Error storing vote::${country}`);
       pubsub.publish("voteUpdate", {
         voteUpdate: {
           countYes: yes,
-          countNo: no
+          countNo: no,
+          username: country
         }
       });
     })

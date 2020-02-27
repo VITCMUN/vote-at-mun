@@ -1,12 +1,23 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import '../../styling/endButton.css';
+import { navigate } from '@reach/router';
+import PropTypes from 'prop-types';
+import { useMutation } from '@apollo/react-hooks';
+import { END_POLL } from '../../typedefs';
 
-const EndPoll = () => {
+const EndPoll = props => {
+  const [pollend] = useMutation(END_POLL, {
+    onCompleted: () => {
+      navigate('/dashboard');
+    },
+  });
+
+  // const { yes, no } = props;
   const endVote = () => {
     // Add end vote logic here
-    const forTheMotion = 20;
-    const againstTheMotion = 20;
+    const forTheMotion = props.yes;
+    const againstTheMotion = props.no;
     const difference = forTheMotion - againstTheMotion;
     if (difference > 0) {
       Swal.fire({
@@ -39,6 +50,8 @@ const EndPoll = () => {
         footer: '<a href="/">Go to Dashboard</Link>',
       });
     }
+
+    pollend({ variables: { pollId: props.id } });
   };
 
   return (
@@ -47,5 +60,14 @@ const EndPoll = () => {
     </button>
   );
 };
-
+EndPoll.propTypes = {
+  yes: PropTypes.number,
+  no: PropTypes.number,
+  id: PropTypes.number,
+};
+EndPoll.defaultProps = {
+  yes: 0,
+  no: 0,
+  id: 0,
+};
 export default EndPoll;

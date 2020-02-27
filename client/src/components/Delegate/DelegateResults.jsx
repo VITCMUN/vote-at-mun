@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useQuery, useSubscription } from 'react-apollo';
 import { Pie } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
-import Navbar from './Navbar.jsx';
-import { CountryResults } from './CountryResults.jsx';
+import Swal from 'sweetalert2';
+import { navigate } from '@reach/router';
+import Navbar from '../Common/Navbar.jsx';
 import '../../styling/EBandDelegateResults.css';
-import { UPDATE_VOTE } from '../../subscriptions';
+import { UPDATE_VOTE, POLL_END } from '../../subscriptions';
 import '../../styling/Chart.css';
 import { GET_RESULT } from '../../typedefs';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../Common/LoadingScreen';
 import EndPoll from '../EB/EndPoll';
 
 const ResultPage = props => {
@@ -17,20 +18,20 @@ const ResultPage = props => {
   };
   const { location } = props;
 
-  const { pollId } = location.state.data;
+  const { vote = null, pollId } = location.state.data;
 
-  const countNo = 0;
-  // if (vote !== 23) {
-  //   countNo = vote ? 0 : 1;
-  // } else {
-  //   countNo = 0;
-  // }
+  let countNo = 0;
+  if (vote !== null) {
+    countNo = vote ? 0 : 1;
+  } else {
+    countNo = 0;
+  }
 
   const [votes, setVotes] = useState({
-    yes: 0,
+    yes: vote === null ? 0 : vote || 0,
     no: countNo,
   });
-  const [votedCountry, setVotedCountry] = useState([]);
+
   const dataResult = {
     datasets: [
       {
@@ -50,7 +51,45 @@ const ResultPage = props => {
         yes: data.subscriptionData.data.voteUpdate.countYes,
         no: data.subscriptionData.data.voteUpdate.countNo,
       });
-      setVotedCountry(data.subscriptionData.data.voteUpdate.username);
+    },
+  });
+  useSubscription(POLL_END, {
+    onSubscriptionData: () => {
+      const forTheMotion = votes.yes;
+      const againstTheMotion = votes.no;
+      const difference = forTheMotion - againstTheMotion;
+      if (difference > 0) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Motion Passed',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'green',
+          backdrop: 'rgba(188, 245, 188, 0.336)',
+          footer: '<a href="/">Go to Dashboard</Link>',
+        });
+      } else if (difference < 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Motion Failed',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'red',
+          backdrop: 'rgba(253, 176, 176, 0.553)',
+          footer: '<a href="/">Go to Dashboard</Link>',
+        });
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tie',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'gray',
+          backdrop: 'rgba(253, 253, 185, 0.637)',
+          footer: '<a href="/">Go to Dashboard</Link>',
+        });
+      }
+      navigate('/dashboard');
     },
   });
 
@@ -71,7 +110,7 @@ const ResultPage = props => {
   const usertype = localStorage.getItem('userType');
   const getEndPoll = () => {
     if (usertype === '1') {
-      return <EndPoll yes={votes.yes} no={votes.no} id={pollId} />;
+      return <EndPoll yes={votes.yes} no={votes.no} />;
     }
     return null;
   };
@@ -87,11 +126,6 @@ const ResultPage = props => {
             <div className="chart box">
               <Pie data={dataResult} />{' '}
             </div>{' '}
-          </div>{' '}
-        </div>{' '}
-        <div className="part2">
-          <div className="country">
-            <CountryResults country={votedCountry} />
           </div>{' '}
         </div>{' '}
       </div>{' '}
