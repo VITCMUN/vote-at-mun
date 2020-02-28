@@ -2,7 +2,7 @@ const logger = require('../../winston');
 
 exports.vote = async (_, { voteDetails }, { currentUser, Vote, pubsub }) => {
   if (!currentUser || currentUser.userType !== 0) {
-    throw new Error('Not Allowed');
+    throw new Error("Not Allowed");
   }
 
   await Vote.create({
@@ -20,7 +20,8 @@ exports.vote = async (_, { voteDetails }, { currentUser, Vote, pubsub }) => {
       let no = 0;
       const country = [];
       for (let i = 0; i < vote.length; i += 1) {
-        country.push(vote[i].voterId);
+        var temp = { country: vote[i].voterId, value: vote[i].vote_val };
+        country.push(temp);
         vote[i].vote_val ? (yes += 1) : (no += 1);
       }
 

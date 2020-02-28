@@ -98,3 +98,9 @@ export const GET_RESULT = gql`
     }
   }
 `;
+
+export const END_POLL = gql`
+  mutation endpoll($pollId: Int!) {
+    endPoll(id: $pollId)
+  }
+`;

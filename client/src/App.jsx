@@ -36,13 +36,18 @@ const App = () => {
     loading: LoadingScreen,
   });
 
+  const ResultDel = Loadable({
+    loader: () => import('./components/Delegate/DelegateResults'),
+    loading: LoadingScreen,
+  });
+
   const userType = localStorage.getItem('userType');
   const getRoutes = () => {
     if (userType === '0') {
       return (
         <Router>
           <Voting path="vote" />
-          <Result path="result" />
+          <ResultDel path="result" />
           <DelegateDashboard path="/*" />
         </Router>
       );

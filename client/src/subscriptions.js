@@ -17,6 +17,15 @@ export const UPDATE_VOTE = gql`
     voteUpdate(id: $id) {
       countYes
       countNo
+      username {
+        country
+        value
+      }
     }
+  }
+`;
+export const POLL_END = gql`
+  subscription pollend {
+    pollEnd
   }
 `;
