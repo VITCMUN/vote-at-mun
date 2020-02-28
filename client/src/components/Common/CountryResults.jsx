@@ -37,7 +37,7 @@ const CountryResults = props => {
   });
 
   const { country: votedCountries } = props;
-  if (votedCountries.length > 0) {
+  if (votedCountries && votedCountries.length > 0) {
     votedCountries.map(cont => {
       countries = countries.map(val => {
         if (val.name === cont.country) {

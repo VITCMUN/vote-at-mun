@@ -46,6 +46,7 @@ const ResultPage = props => {
   };
 
   useSubscription(UPDATE_VOTE, {
+    variables: { id: pollId },
     onSubscriptionData: data => {
       setVotes({
         yes: data.subscriptionData.data.voteUpdate.countYes,

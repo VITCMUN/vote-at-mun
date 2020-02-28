@@ -13,8 +13,8 @@ export const POLL_DETAILS = gql`
   }
 `;
 export const UPDATE_VOTE = gql`
-  subscription voteadd {
-    voteUpdate {
+  subscription voteadd($id: Int!) {
+    voteUpdate(id: $id) {
       countYes
       countNo
       username {
