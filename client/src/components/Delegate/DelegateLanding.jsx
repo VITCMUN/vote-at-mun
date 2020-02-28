@@ -11,11 +11,18 @@ function DelegateLanding() {
     shouldResubscribe: true,
     fetchPolicy: 'network-only',
     onSubscriptionData: options => {
+      console.log(options.subscriptionData.data);
       if (
         options.subscriptionData.data.pollDetails.username.indexOf(
           localStorage.getItem('userName')
         ) > -1
       ) {
+        navigate('result', {
+          state: {
+            data: { pollId: options.subscriptionData.data.pollDetails.pollId },
+          },
+        });
+      } else {
         navigate('vote', {
           state: { data: options.subscriptionData.data.pollDetails },
         });
