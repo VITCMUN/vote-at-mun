@@ -29,7 +29,7 @@ exports.vote = async (_, { voteDetails }, { currentUser, Vote, pubsub }) => {
         voteUpdate: {
           countYes: yes,
           countNo: no,
-          usernames: country,
+          username: country,
         }
       });
     })

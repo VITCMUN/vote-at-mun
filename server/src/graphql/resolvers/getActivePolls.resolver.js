@@ -30,7 +30,7 @@ exports.getActivePolls = async (_, __, { currentUser ,Poll, Vote }) => {
         polls.push(pollInfo);
     }
     else
-      poll.push(pollInfo)
+      polls.push(pollInfo)
   }
 
   return polls;
