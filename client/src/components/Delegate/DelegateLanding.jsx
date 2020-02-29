@@ -57,6 +57,9 @@ function DelegateLanding() {
     },
   });
 
+  const username = localStorage.getItem('userName').toLowerCase();
+  const imageSource = `square/${username}.webp`;
+
   const logout = event => {
     event.preventDefault();
     client.writeData({
@@ -84,12 +87,7 @@ function DelegateLanding() {
           />
         </div>
         <div className="countryFlag">
-          <img
-            src="square/iran.webp"
-            alt="countryFlag"
-            height="250"
-            width="450"
-          />
+          <img src={imageSource} alt="countryFlag" height="250" width="450" />
         </div>
       </div>
       <div className="logo">

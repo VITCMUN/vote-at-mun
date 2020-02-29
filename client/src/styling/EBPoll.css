@@ -24,6 +24,7 @@ body{
   border-radius: 55px;
   background: rgb(224, 194, 132);
   margin-bottom: 40px;
+  max-height: 95%;
 }
 .form-flags{
   width:355px;
@@ -51,7 +52,7 @@ body{
 }
 .field input{
   width:100%;
-  height:40px;
+  height:20px;
   background: rgb(224, 194, 132);
   border:none;
   border-bottom: 1px dotted black;
