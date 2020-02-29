@@ -12,6 +12,7 @@ const Vote = sequelize.define('Vote', {
   },
   voterId: {
     type: Sequelize.STRING,
+    primaryKey: true,
     references: {
       model: 'Users',
       key: 'username'
@@ -19,6 +20,7 @@ const Vote = sequelize.define('Vote', {
   },
   pollId: {
     type: Sequelize.INTEGER,
+    primaryKey: true,
     references: {
       model: 'Polls',
       key: 'id'

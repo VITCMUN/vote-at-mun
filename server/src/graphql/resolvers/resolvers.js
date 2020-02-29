@@ -29,7 +29,7 @@ module.exports = {
   },
   Subscription: {
     voteUpdate: {
-      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("voteUpdate")
+      subscribe: (_, {id}, { pubsub }) => pubsub.asyncIterator(`voteUpdate${id}`),
     },
     pollDetails: {
       // delegate
