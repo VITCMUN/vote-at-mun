@@ -3,7 +3,7 @@ const { gql } = require("apollo-server");
 exports.typeDefs = gql`
   type Query {
     getDelegates: [String!]
-    getActivePolls: [Int!]
+    getActivePolls: [pollUpdate!]
     getPollDetails(id: Int!): pollDet!
     getResult(id: Int!): vote!
   }

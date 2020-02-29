@@ -99,6 +99,19 @@ export const GET_RESULT = gql`
   }
 `;
 
+export const GET_ACTIVE_POLLS = gql`
+  query GetActivePolls {
+    getActivePolls {
+      pollId
+      description
+      totalSpeakerTime
+      raisedBy
+      title
+      username
+    }
+  }
+`;
+
 export const END_POLL = gql`
   mutation endpoll($pollId: Int!) {
     endPoll(id: $pollId)
