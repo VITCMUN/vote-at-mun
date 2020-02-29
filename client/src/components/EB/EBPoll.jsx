@@ -49,9 +49,14 @@ const EBPoll = () => {
       updateError('Please fill out all the fields');
       return;
     }
-
+    if (pollForm.raisedBy !== '') {
+      const copyArr = selected;
+      copyArr.push(pollForm.raisedBy);
+      setSelected(copyArr);
+    }
     try {
       event.preventDefault();
+
       addpoll({
         variables: {
           title: pollForm.agenda,
@@ -73,11 +78,12 @@ const EBPoll = () => {
   };
 
   const getCountries = () => {
-    return CountryNames.map(obj => (
+    const arr = CountryNames.map(obj => (
       <option key={obj.name} value={obj.name}>
         {obj.name}
       </option>
     ));
+    return arr;
   };
 
   return (
@@ -142,9 +148,10 @@ const EBPoll = () => {
                     name="raisedBy"
                     value={pollForm.raisedBy}
                     onChange={handleInputChange}
-                    id="raisedType"
+                    id="raisedBy"
                     className="selectField"
                   >
+                    <option value="">------------</option>
                     {getCountries()}
                   </select>
                 </div>

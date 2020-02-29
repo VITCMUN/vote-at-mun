@@ -39,6 +39,7 @@ function DelegateLanding() {
     shouldResubscribe: true,
     fetchPolicy: 'network-only',
     onSubscriptionData: options => {
+      console.log(options);
       if (
         options.subscriptionData.data.pollDetails.username.indexOf(
           localStorage.getItem('userName')
