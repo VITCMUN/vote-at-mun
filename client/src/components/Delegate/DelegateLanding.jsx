@@ -13,6 +13,7 @@ function DelegateLanding() {
   const client = useApolloClient();
 
   useQuery(GET_ACTIVE_POLLS, {
+    fetchPolicy: 'network-only',
     onCompleted: data => {
       const activePolls = data.getActivePolls;
       if (activePolls.length > 0) {

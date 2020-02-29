@@ -1,6 +1,6 @@
 const logger = require('../../winston');
 
-exports.getActivePolls = async (_, __, { Poll }) => {
+exports.getActivePolls = async (_, __, { currentUser ,Poll, Vote }) => {
   const poll = await Poll.findAll({
     where: {
       active: true
@@ -19,7 +19,18 @@ exports.getActivePolls = async (_, __, { Poll }) => {
     pollInfo['totalSpeakerTime'] = poll[i]['total_speaker_time'];
     pollInfo['raisedBy'] = poll[i]['raised_by'];
     pollInfo['username'] = [];
-    polls.push(pollInfo);
+    if(currentUser){
+      const vote = await Vote.findAll({
+        where:{
+          pollId: pollInfo.pollId,
+          voterId: currentUser.username
+        }
+      })
+      if(vote.length==0)
+        polls.push(pollInfo);
+    }
+    else
+      poll.push(pollInfo)
   }
 
   return polls;
