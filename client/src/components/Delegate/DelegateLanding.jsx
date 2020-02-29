@@ -1,17 +1,44 @@
 import React from 'react';
 import '../../styling/DelegateLanding.css';
 import { navigate } from '@reach/router';
-import { useApolloClient, useSubscription } from '@apollo/react-hooks';
+import {
+  useApolloClient,
+  useSubscription,
+  useQuery,
+} from '@apollo/react-hooks';
+import { GET_ACTIVE_POLLS } from '../../typedefs';
 import { POLL_DETAILS } from '../../subscriptions';
 
 function DelegateLanding() {
   const client = useApolloClient();
 
+  useQuery(GET_ACTIVE_POLLS, {
+    fetchPolicy: 'network-only',
+    onCompleted: data => {
+      const activePolls = data.getActivePolls;
+      if (activePolls.length > 0) {
+        const activePoll = activePolls[activePolls.length - 1];
+        if (
+          activePoll.username.indexOf(localStorage.getItem('userName')) > -1
+        ) {
+          navigate('result', {
+            state: {
+              data: { pollId: activePoll.pollId },
+            },
+          });
+        } else {
+          navigate('vote', {
+            state: { data: activePoll },
+          });
+        }
+      }
+    },
+  });
+
   useSubscription(POLL_DETAILS, {
     shouldResubscribe: true,
     fetchPolicy: 'network-only',
     onSubscriptionData: options => {
-      console.log(options.subscriptionData.data);
       if (
         options.subscriptionData.data.pollDetails.username.indexOf(
           localStorage.getItem('userName')
