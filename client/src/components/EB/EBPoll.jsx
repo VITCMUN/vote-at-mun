@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import '../../styling/EBPoll.css';
 import { navigate } from '@reach/router';
 import Swal from 'sweetalert2';
-import { useMutation } from 'react-apollo';
+import { useMutation, useQuery } from 'react-apollo';
 import { CountryFlags } from '../Common/CountryFlags';
 import Navbar from '../Common/Navbar';
-import { CountryNames } from '../../constants/CountryNames';
-import { ADD_POLL } from '../../typedefs';
+import { CountryNames as CN } from '../../constants/CountryNames';
+import { ADD_POLL, GET_DELEGATES } from '../../typedefs';
+import LoadingScreen from '../Common/LoadingScreen.jsx';
 
 const EBPoll = () => {
   // Initial State of the poll form
   const [pollForm, updatePollForm] = useState({
     agenda: '',
-    totalSpeakerTime: '0',
-    description: '',
+    totalSpeakerTime: '',
+    description: 'Moderated Caucus',
     raisedBy: '',
     countries: '',
   });
@@ -21,6 +22,15 @@ const EBPoll = () => {
   const [requiredError, updateError] = useState('');
 
   const [selected, setSelected] = useState([]);
+
+  const { loading, error, data } = useQuery(GET_DELEGATES);
+  const CountryPresent = [];
+  CN.forEach(country => {
+    if (!loading && data.getDelegates.includes(country.name)) {
+      CountryPresent.push(country);
+    }
+  });
+  const CountryNames = CountryPresent;
 
   // The below functions are used to manage the state of the form
   const handleInputChange = event => {
@@ -30,7 +40,7 @@ const EBPoll = () => {
     updatePollForm({ ...pollForm, [name]: value });
   };
   const [addpoll] = useMutation(ADD_POLL, {
-    onCompleted: data => {
+    onCompleted: data1 => {
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -39,7 +49,7 @@ const EBPoll = () => {
         confirmButtonColor: 'green',
       });
       navigate('/result', {
-        state: { data: { pollId: data.addPoll } },
+        state: { data: { pollId: data1.addPoll } },
       });
     },
   });
@@ -86,6 +96,9 @@ const EBPoll = () => {
     return arr;
   };
 
+  if (loading) return <LoadingScreen />;
+  if (error) return <p> An error occurred </p>;
+
   return (
     <div className="container">
       <Navbar />
@@ -97,7 +110,7 @@ const EBPoll = () => {
               <div className="form-fields">
                 <div className="field">
                   <p className="error">{requiredError}</p>
-                  <label htmlFor="textinp">Agenda</label>
+                  <label htmlFor="textinp">Motion Raised</label>
                   <input
                     type="text"
                     name="agenda"
@@ -105,19 +118,6 @@ const EBPoll = () => {
                     id="textinp"
                     onChange={handleInputChange}
                   />
-                </div>
-                <div className="field">
-                  <label htmlFor="voteType">Voting Type</label>
-                  <select
-                    name="type"
-                    value={pollForm.type}
-                    onChange={handleInputChange}
-                    id="voteType"
-                    className="selectField"
-                  >
-                    <option value="0">All not voting</option>
-                    <option value="1">All voting</option>
-                  </select>
                 </div>
                 <div className="field">
                   <label htmlFor="totalSpeakerTimeInp">
@@ -133,14 +133,19 @@ const EBPoll = () => {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="description">Description</label>
-                  <input
-                    type="text"
+                  <label htmlFor="description">Type of Motion Raised</label>
+                  <select
                     name="description"
                     value={pollForm.description}
-                    id="description"
                     onChange={handleInputChange}
-                  />
+                    id="description"
+                    className="selectField"
+                  >
+                    <option value="Moderated Caucus">Moderated Caucus</option>
+                    <option value="Unmoderated Caucus">
+                      Unmoderated Caucus
+                    </option>
+                  </select>
                 </div>
                 <div className="field">
                   <label htmlFor="raisedBy">Raised By</label>
@@ -151,8 +156,21 @@ const EBPoll = () => {
                     id="raisedBy"
                     className="selectField"
                   >
-                    <option value="">------------</option>
+                    <option value="">------------------</option>
                     {getCountries()}
+                  </select>
+                </div>
+                <div className="field">
+                  <label htmlFor="description">Type of Voting</label>
+                  <select
+                    name="description"
+                    // value={pollForm.description}
+                    // onChange={handleInputChange}
+                    id="description"
+                    className="selectField"
+                  >
+                    <option value="0">Simple Majority</option>
+                    <option value="1">Two-Third Majority</option>
                   </select>
                 </div>
                 <input

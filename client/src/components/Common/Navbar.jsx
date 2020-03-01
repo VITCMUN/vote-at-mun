@@ -25,45 +25,69 @@ const Navbar = () => {
 
   const usertype = localStorage.getItem('userType');
 
-  const getImage = () => {
+  const getGreeting = () => {
     if (usertype === '0') {
-      const username = localStorage.getItem('userName').toLowerCase();
-      const imageSource = `square/${username}.webp`;
-      return <img src={imageSource} className="small" alt="Username" />;
+      const username = localStorage.getItem('userName');
+      return (
+        <div className="welcome">
+          <p className="welcome welcometext">{`Welcome ${username}`}</p>
+        </div>
+      );
     }
     return (
-      <img src="Logos/Square/Arab-01.png" className="small" alt="Username" />
+      <div className="welcome">
+        <img src="Logos/Square/Arab-01.png" className="small" alt="Username" />
+      </div>
     );
   };
 
-  return (
-    <div className="nav-container">
-      <img
-        onClick={gotoDashboard}
-        className="logo"
-        src="Logos/mun.png"
-        onKeyPress={gotoDashboard}
-        alt="MUN Logo"
-      />
-      <div className="navigation">
-        <ul>
-          <li>
-            <div className="welcome"> {getImage()} </div>{' '}
-          </li>{' '}
-          <li>
-            <a onClick={gotoDashboard} href="#">
-              Dashboard{' '}
-            </a>{' '}
-          </li>{' '}
-          <li>
-            <a onClick={logout} id="secondLink" href="#">
-              Logout{' '}
-            </a>{' '}
-          </li>{' '}
-        </ul>{' '}
-      </div>{' '}
-    </div>
-  );
+  const getRender = () => {
+    if (usertype === '0') {
+      return (
+        <div className="nav-container">
+          <img className="logo" src="Logos/mun.png" alt="MUN Logo" />
+          <div className="navigation">
+            <ul>
+              <li>{getGreeting()}</li>{' '}
+              <li>
+                <a onClick={logout} id="secondLink" href="#">
+                  Logout{' '}
+                </a>{' '}
+              </li>{' '}
+            </ul>{' '}
+          </div>{' '}
+        </div>
+      );
+    }
+    return (
+      <div className="nav-container">
+        <img
+          onClick={gotoDashboard}
+          className="logo"
+          src="Logos/mun.png"
+          onKeyPress={gotoDashboard}
+          alt="MUN Logo"
+        />
+        <div className="navigation">
+          <ul>
+            <li>{getGreeting()}</li>{' '}
+            <li>
+              <a onClick={gotoDashboard} href="#">
+                Dashboard{' '}
+              </a>{' '}
+            </li>{' '}
+            <li>
+              <a onClick={logout} id="secondLink" href="#">
+                Logout{' '}
+              </a>{' '}
+            </li>{' '}
+          </ul>{' '}
+        </div>{' '}
+      </div>
+    );
+  };
+
+  return getRender();
 };
 
 export default Navbar;

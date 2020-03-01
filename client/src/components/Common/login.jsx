@@ -27,12 +27,7 @@ function Login() {
   return (
     <div className="FlexContainer">
       <div className="LeftContainer">
-        <img className="MunImage1" src="Logos/mun.png" alt="VITCMUN" />
-        <img
-          className="CouncilImage"
-          src="Logos/dateswhite.png"
-          alt="VITCMUN"
-        />
+        <img className="MunImage1" src="dateLogo.png" alt="VITCMUN" />
       </div>
       <div className="RightContainer">
         <br />

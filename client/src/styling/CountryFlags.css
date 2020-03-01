@@ -4,6 +4,7 @@
     width:100%;
     margin-bottom: 15px;
     justify-content: center;
+    cursor: pointer;
 }
 .CountryProfile:hover .Flag{
     display: none;

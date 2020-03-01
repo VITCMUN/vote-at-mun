@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import '../../styling/CountryFlags.css';
 import FuzzySearch from 'fuzzy-search';
 import PropTypes from 'prop-types';
-import { CountryNames } from '../../constants/CountryNames';
+import { useQuery } from '@apollo/react-hooks';
+import { CountryNames as CN } from '../../constants/CountryNames';
+import { GET_DELEGATES } from '../../typedefs';
+import LoadingScreen from './LoadingScreen';
 
 // Recommended Width and Height
 // width: 355px;
@@ -13,6 +16,14 @@ import { CountryNames } from '../../constants/CountryNames';
 // Country Names are used to filter countries and will be passed as selected from this component
 
 const CountryFlags = props => {
+  const { loading, error, data } = useQuery(GET_DELEGATES);
+  const CountryPresent = [];
+  CN.forEach(country => {
+    if (!loading && data.getDelegates.includes(country.name)) {
+      CountryPresent.push(country);
+    }
+  });
+  const CountryNames = CountryPresent;
   const { selected, setSelected } = props;
   const [keyword, setKeyword] = useState('');
   const searcher = new FuzzySearch(CountryNames, ['name'], {
@@ -82,7 +93,8 @@ const CountryFlags = props => {
       </div>
     ));
   }
-
+  if (loading) return <LoadingScreen />;
+  if (error) return <p> An error occurred </p>;
   return (
     <div className="CountriesMenu">
       <div className="CountriesMenuText">

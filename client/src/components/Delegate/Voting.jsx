@@ -128,7 +128,7 @@ const Voting = props => {
           <h1 className="pollDetail">{vote.title}</h1>
         </div>
         <div className="pollBox pollTitle">
-          <h1 className="labelHeading">Description:</h1>
+          <h1 className="labelHeading">TYPE OF MOTION RAISED:</h1>
           <h1 className="pollDetail">{vote.description}</h1>
         </div>
         <div className="pollBox pollSpeakerTime">

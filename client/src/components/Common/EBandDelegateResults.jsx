@@ -47,13 +47,11 @@ const ResultPage = props => {
   useSubscription(UPDATE_VOTE, {
     variables: { id: pollId },
     onSubscriptionData: data => {
-      console.log(data);
       setVotes({
         yes: data.subscriptionData.data.voteUpdate.countYes,
         no: data.subscriptionData.data.voteUpdate.countNo,
       });
       setVotedCountry(data.subscriptionData.data.voteUpdate.username);
-      console.log(votedCountry);
     },
   });
 
