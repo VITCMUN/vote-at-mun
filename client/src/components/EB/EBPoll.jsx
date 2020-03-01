@@ -60,11 +60,6 @@ const EBPoll = () => {
       updateError('Please fill out all the fields');
       return;
     }
-    if (pollForm.raisedBy !== '') {
-      const copyArr = selected;
-      copyArr.push(pollForm.raisedBy);
-      setSelected(copyArr);
-    }
     try {
       event.preventDefault();
 

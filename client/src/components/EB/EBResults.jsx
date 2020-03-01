@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useQuery, useSubscription } from 'react-apollo';
 import { Pie } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
-import Navbar from './Navbar.jsx';
-import { CountryResults } from './CountryResults.jsx';
+import Navbar from '../Common/Navbar.jsx';
+import { CountryResults } from '../Common/CountryResults.jsx';
 import '../../styling/EBandDelegateResults.css';
 import { UPDATE_VOTE } from '../../subscriptions';
 import '../../styling/Chart.css';
 import { GET_RESULT } from '../../typedefs';
-import LoadingScreen from './LoadingScreen';
-import EndPoll from '../EB/EndPoll';
+import LoadingScreen from '../Common/LoadingScreen';
+import EndPoll from './EndPoll';
 
 const ResultPage = props => {
   const getNavbar = () => {

@@ -32,7 +32,7 @@ const App = () => {
   });
 
   const Result = Loadable({
-    loader: () => import('./components/Common/EBandDelegateResults'),
+    loader: () => import('./components/EB/EBResults'),
     loading: LoadingScreen,
   });
 

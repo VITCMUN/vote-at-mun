@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require('apollo-server');
 
 exports.typeDefs = gql`
   type Query {
@@ -20,7 +20,11 @@ exports.typeDefs = gql`
   type Subscription {
     voteUpdate(id: Int!): vote
     pollDetails: pollUpdate!
-    pollEnd: Int!
+    pollEnd: EndPoll!
+  }
+  type EndPoll{
+    voteYes: Int!
+    voteNo: Int!
   }
   type User {
     username: String!
