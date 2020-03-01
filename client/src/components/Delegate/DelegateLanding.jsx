@@ -42,7 +42,7 @@ function DelegateLanding() {
       if (
         options.subscriptionData.data.pollDetails.username.indexOf(
           localStorage.getItem('userName')
-        ) === -1
+        ) > -1
       ) {
         navigate('result', {
           state: {
