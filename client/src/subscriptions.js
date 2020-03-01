@@ -26,6 +26,9 @@ export const UPDATE_VOTE = gql`
 `;
 export const POLL_END = gql`
   subscription pollend {
-    pollEnd
+    pollEnd {
+      voteYes
+      voteNo
+    }
   }
 `;

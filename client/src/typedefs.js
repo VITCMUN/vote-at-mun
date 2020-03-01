@@ -71,6 +71,7 @@ export const ADD_POLL = gql`
     $totalSpeakerTime: Int!
     $raisedBy: String
     $username: [String]
+    $twoThirdsMajority: Boolean!
   ) {
     addPoll(
       pollDetails: {
@@ -79,6 +80,7 @@ export const ADD_POLL = gql`
         totalSpeakerTime: $totalSpeakerTime
         raisedBy: $raisedBy
         username: $username
+        twoThirdsMajority: $twoThirdsMajority
       }
     )
   }

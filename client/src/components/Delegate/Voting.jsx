@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import '../../styling/Voting.css';
 import { navigate } from '@reach/router';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useSubscription } from '@apollo/react-hooks';
+import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
 import Navbar from '../Common/Navbar';
 import LoadingScreen from '../Common/LoadingScreen';
 import { VOTE } from '../../typedefs';
+import { POLL_END } from '../../subscriptions';
 
 const Voting = props => {
   const { location } = props;
@@ -20,6 +22,43 @@ const Voting = props => {
   const [vote] = useState(initial);
   const [renderButton] = useState(true);
   const [selected, setSelected] = useState(null);
+
+  useSubscription(POLL_END, {
+    onSubscriptionData: options => {
+      const forTheMotion = options.subscriptionData.data.pollEnd.voteYes;
+      const againstTheMotion = options.subscriptionData.data.pollEnd.voteNo;
+      const difference = forTheMotion - againstTheMotion;
+      if (difference > 0) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Motion Passed',
+          html: `Poll has Ended.<br>For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'green',
+          backdrop: 'rgba(188, 245, 188, 0.336)',
+        });
+      } else if (difference < 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Motion Failed',
+          html: `Poll has Ended.<br>For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'red',
+          backdrop: 'rgba(253, 176, 176, 0.553)',
+        });
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tie',
+          html: `Poll has Ended.<br>For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'gray',
+          backdrop: 'rgba(253, 253, 185, 0.637)',
+        });
+      }
+      navigate('/dashboard');
+    },
+  });
 
   const [voteMutation, { loading, error }] = useMutation(VOTE, {
     onCompleted() {

@@ -55,9 +55,9 @@ const ResultPage = props => {
     },
   });
   useSubscription(POLL_END, {
-    onSubscriptionData: () => {
-      const forTheMotion = votes.yes;
-      const againstTheMotion = votes.no;
+    onSubscriptionData: options => {
+      const forTheMotion = options.subscriptionData.data.pollEnd.voteYes;
+      const againstTheMotion = options.subscriptionData.data.pollEnd.voteNo;
       const difference = forTheMotion - againstTheMotion;
       if (difference > 0) {
         Swal.fire({
