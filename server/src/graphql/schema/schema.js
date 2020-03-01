@@ -6,6 +6,7 @@ exports.typeDefs = gql`
     getActivePolls: [pollUpdate!]
     getPollDetails(id: Int!): pollDet!
     getResult(id: Int!): vote!
+    getCouncil: Council!
   }
   type Mutation {
     addUser(userDetails: userDetails!): String!
@@ -64,6 +65,10 @@ exports.typeDefs = gql`
   type votevalue {
     country: String
     value: Boolean
+  }
+  type Council{
+    name: String!
+    url: String!
   }
   input userDetails {
     username: String!
