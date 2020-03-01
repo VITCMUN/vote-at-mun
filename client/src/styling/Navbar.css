@@ -13,8 +13,9 @@
 	width: auto;
 	height: 11%;
 	position: fixed;
-	left: 10px;
+	/* left: 10px; */
 	top: 4px;
+	padding:0.5%;
 	cursor: pointer;
 }
 
@@ -23,6 +24,9 @@
 	position: fixed;
 	right: 0px;
 	height: 13%;
+}
+.welcometext{
+	margin-right: 50px;
 }
 
 .navigation ul {
@@ -60,8 +64,9 @@ li a:hover{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right:90%;
 	height: 11%;
+	color:#ffff7a;
+	max-width: 100%;	
 }
 
 @media only screen and (max-width: 1030px) {

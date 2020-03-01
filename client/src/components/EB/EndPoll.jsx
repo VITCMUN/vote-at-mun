@@ -27,7 +27,6 @@ const EndPoll = props => {
         confirmButtonText: 'OK',
         confirmButtonColor: 'green',
         backdrop: 'rgba(188, 245, 188, 0.336)',
-        footer: '<a href="/">Go to Dashboard</Link>',
       });
     } else if (difference < 0) {
       Swal.fire({
@@ -37,7 +36,6 @@ const EndPoll = props => {
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',
         backdrop: 'rgba(253, 176, 176, 0.553)',
-        footer: '<a href="/">Go to Dashboard</Link>',
       });
     } else {
       Swal.fire({
@@ -47,7 +45,6 @@ const EndPoll = props => {
         confirmButtonText: 'OK',
         confirmButtonColor: 'gray',
         backdrop: 'rgba(253, 253, 185, 0.637)',
-        footer: '<a href="/">Go to Dashboard</Link>',
       });
     }
 

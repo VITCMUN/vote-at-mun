@@ -40,7 +40,7 @@ const EBDashboard = () => {
               src="Logos/Square/Arab-01.png"
               alt="Council"
             />
-            <div className="card-text">DISEC</div>
+            <div className="card-text">Arab League</div>
           </div>
           <div className="card-body">
             <button type="button" className="button" onClick={goToPollForm}>

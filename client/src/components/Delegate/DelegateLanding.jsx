@@ -39,11 +39,10 @@ function DelegateLanding() {
     shouldResubscribe: true,
     fetchPolicy: 'network-only',
     onSubscriptionData: options => {
-      console.log(options);
       if (
         options.subscriptionData.data.pollDetails.username.indexOf(
           localStorage.getItem('userName')
-        ) > -1
+        ) === -1
       ) {
         navigate('result', {
           state: {
@@ -91,7 +90,7 @@ function DelegateLanding() {
           <img src={imageSource} alt="countryFlag" height="250" width="450" />
         </div>
       </div>
-      <div className="logo">
+      <div className="dlogo">
         <img src="Logos/mun.png" alt="logo" height="200" width="auto" />
       </div>
     </>

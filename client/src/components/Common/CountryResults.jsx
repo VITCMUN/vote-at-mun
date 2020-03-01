@@ -2,32 +2,24 @@ import React, { useState } from 'react';
 import '../../styling/CountryResults.css';
 import FuzzySearch from 'fuzzy-search';
 import PropTypes from 'prop-types';
-import { CountryNames } from '../../constants/CountryNames';
+import { useQuery } from '@apollo/react-hooks';
+import { CountryNames as CN } from '../../constants/CountryNames';
+import LoadingScreen from './LoadingScreen';
+import { GET_DELEGATES } from '../../typedefs';
 
 // Recommended Width and Height
 // width: 355px;
 // height: 583px;
 
-// Pass a function as props to get the selected items
-
-// Country Names are used to filter countries and will be passed as selected from this component
-
-// function setNewCountries(countries, votedCountries) {
-//   if (votedCountries.length > 0) {
-//     let votedIndex = 0;
-//     return countries.map(val => {
-//       if (val.name === votedCountries[votedIndex].country) {
-//         val.voteStatus = votedCountries[votedIndex].value;
-//         val.voted = true;
-//         votedIndex += votedIndex;
-//       }
-//       return val;
-//     });
-//   }
-//   return countries;
-// }
-
 const CountryResults = props => {
+  const { loading, error, data } = useQuery(GET_DELEGATES);
+  const CountryPresent = [];
+  CN.forEach(country => {
+    if (!loading && data.getDelegates.includes(country.name)) {
+      CountryPresent.push(country);
+    }
+  });
+  const CountryNames = CountryPresent;
   let countries = CountryNames.map(val => {
     // eslint-disable-next-line no-param-reassign
     val.voted = false;
@@ -37,7 +29,6 @@ const CountryResults = props => {
   });
 
   const { country: votedCountries } = props;
-  console.log(props);
   if (votedCountries && votedCountries.length > 0) {
     votedCountries.map(cont => {
       countries = countries.map(val => {
@@ -112,7 +103,8 @@ const CountryResults = props => {
       })
     );
   }
-
+  if (loading) return <LoadingScreen />;
+  if (error) return <p> An error occurred </p>;
   return (
     <div className="CountriesMenu">
       <div className="CountriesMenuText">
