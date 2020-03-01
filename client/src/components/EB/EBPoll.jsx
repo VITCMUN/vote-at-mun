@@ -17,6 +17,7 @@ const EBPoll = () => {
     description: 'Moderated Caucus',
     raisedBy: '',
     countries: '',
+    twoThirdsMajority: false,
   });
 
   const [requiredError, updateError] = useState('');
@@ -74,6 +75,7 @@ const EBPoll = () => {
           totalSpeakerTime: Number(pollForm.totalSpeakerTime),
           raisedBy: pollForm.raisedBy,
           username: selected,
+          twoThirdsMajority: pollForm.twoThirdsMajority,
         },
       });
     } catch (err) {
@@ -163,14 +165,14 @@ const EBPoll = () => {
                 <div className="field">
                   <label htmlFor="description">Type of Voting</label>
                   <select
-                    name="description"
-                    // value={pollForm.description}
-                    // onChange={handleInputChange}
-                    id="description"
+                    name="majority"
+                    value={pollForm.twoThirdsMajority}
+                    onChange={handleInputChange}
+                    id="twoThirdsMajority"
                     className="selectField"
                   >
-                    <option value="0">Simple Majority</option>
-                    <option value="1">Two-Third Majority</option>
+                    <option value="false">Simple Majority</option>
+                    <option value="true">Two-Third Majority</option>
                   </select>
                 </div>
                 <input

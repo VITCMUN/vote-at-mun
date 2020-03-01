@@ -29,6 +29,7 @@ exports.getActivePolls = async (_, __, { currentUser, Poll, Vote }) => {
     pollInfo.totalSpeakerTime = poll[i].total_speaker_time;
     pollInfo.raisedBy = poll[i].raised_by;
     pollInfo.username = poll[i].username_filter;
+    pollInfo.twoThirdsMajority = poll[i].two_thirds_majority;
     if (currentUser) {
       if (canVote(pollInfo.pollId)) {
         polls.push(pollInfo);

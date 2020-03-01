@@ -41,6 +41,7 @@ exports.typeDefs = gql`
     totalSpeakerTime: Int!
     raisedBy: String
     username: [String]
+    twoThirdsMajority: Boolean!
   }
   type pollUpdate {
     pollId: Int!
@@ -49,6 +50,7 @@ exports.typeDefs = gql`
     totalSpeakerTime: Int
     raisedBy: String
     username: [String]
+    twoThirdsMajority: Boolean!
   }
   type pollDet {
     pollId: Int!

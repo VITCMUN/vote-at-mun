@@ -11,7 +11,8 @@ exports.addPoll = async (_, { pollDetails }, { currentUser, Poll, pubsub }) => {
       total_speaker_time: pollDetails.totalSpeakerTime,
       description: pollDetails.description,
       raised_by: pollDetails.raisedBy,
-      username_filter: pollDetails.username
+      username_filter: pollDetails.username,
+      two_thirds_majority: pollDetails.twoThirdsMajority
     });
     pubsub.publish('pollDetails', {
       pollDetails: {
@@ -20,7 +21,8 @@ exports.addPoll = async (_, { pollDetails }, { currentUser, Poll, pubsub }) => {
         description: poll.description,
         totalSpeakerTime: poll.total_speaker_time,
         raisedBy: poll.raised_by,
-        username: poll.username_filter
+        username: poll.username_filter,
+        twoThirdsMajority: poll.two_thirds_majority
       }
     });
     logger.info(`New Poll created::${pollDetails.title}`);

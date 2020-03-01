@@ -28,6 +28,10 @@ const Poll = sequelize.define('Poll', {
     defaultValue: true
   },
 
+  two_thirds_majority: {
+    type: Sequelize.BOOLEAN,
+  },
+
   username_filter: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   }
