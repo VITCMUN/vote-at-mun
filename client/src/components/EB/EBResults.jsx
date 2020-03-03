@@ -17,7 +17,7 @@ const ResultPage = props => {
   };
   const { location } = props;
 
-  const { pollId } = location.state.data;
+  const { pollId, pollType } = location.state.data;
 
   const countNo = 0;
 
@@ -67,7 +67,14 @@ const ResultPage = props => {
   const usertype = localStorage.getItem('userType');
   const getEndPoll = () => {
     if (usertype === '1') {
-      return <EndPoll yes={votes.yes} no={votes.no} id={pollId} />;
+      return (
+        <EndPoll
+          yes={votes.yes}
+          no={votes.no}
+          id={pollId}
+          pollType={pollType}
+        />
+      );
     }
     return null;
   };

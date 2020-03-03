@@ -46,6 +46,9 @@
     align-items: center;
     justify-content: center;
   }
+  #heading{
+    margin-top: 25%;
+  }
   
   .part1{
     margin-bottom: 20px;

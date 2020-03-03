@@ -119,3 +119,12 @@ export const END_POLL = gql`
     endPoll(id: $pollId)
   }
 `;
+
+export const GET_COUNCIL = gql`
+  query getCouncil {
+    getCouncil {
+      name
+      url
+    }
+  }
+`;

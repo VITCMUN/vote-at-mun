@@ -17,7 +17,7 @@ const EBPoll = () => {
     description: 'Moderated Caucus',
     raisedBy: '',
     countries: '',
-    twoThirdsMajority: false,
+    twoThirdsMajority: 'false',
   });
 
   const [requiredError, updateError] = useState('');
@@ -50,7 +50,9 @@ const EBPoll = () => {
         confirmButtonColor: 'green',
       });
       navigate('/result', {
-        state: { data: { pollId: data1.addPoll } },
+        state: {
+          data: { pollId: data1.addPoll, pollType: pollForm.twoThirdsMajority },
+        },
       });
     },
   });
@@ -62,7 +64,7 @@ const EBPoll = () => {
     }
     try {
       event.preventDefault();
-
+      const majority = pollForm.twoThirdsMajority === 'true';
       addpoll({
         variables: {
           title: pollForm.agenda,
@@ -70,7 +72,7 @@ const EBPoll = () => {
           totalSpeakerTime: Number(pollForm.totalSpeakerTime),
           raisedBy: pollForm.raisedBy,
           username: selected,
-          twoThirdsMajority: pollForm.twoThirdsMajority,
+          twoThirdsMajority: majority,
         },
       });
     } catch (err) {
@@ -160,7 +162,7 @@ const EBPoll = () => {
                 <div className="field">
                   <label htmlFor="description">Type of Voting</label>
                   <select
-                    name="majority"
+                    name="twoThirdsMajority"
                     value={pollForm.twoThirdsMajority}
                     onChange={handleInputChange}
                     id="twoThirdsMajority"

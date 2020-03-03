@@ -7,12 +7,13 @@ import {
   useQuery,
 } from '@apollo/react-hooks';
 import Swal from 'sweetalert2';
-import { GET_ACTIVE_POLLS } from '../../typedefs';
+import { GET_ACTIVE_POLLS, GET_COUNCIL } from '../../typedefs';
 import { POLL_DETAILS } from '../../subscriptions';
+import LoadingScreen from '../Common/LoadingScreen';
 
 function DelegateLanding() {
   const client = useApolloClient();
-
+  const { loading: ld, data: d } = useQuery(GET_COUNCIL);
   useQuery(GET_ACTIVE_POLLS, {
     fetchPolicy: 'network-only',
     onCompleted: data => {
@@ -79,6 +80,11 @@ function DelegateLanding() {
     localStorage.clear();
   };
 
+  if (ld) return <LoadingScreen />;
+  const councilURL = d.getCouncil.url;
+  const councilName = d.getCouncil.name;
+  const image = `Logos/Square/${councilURL}.png`;
+
   return (
     <>
       <button type="button" onClick={logout} className="logout">
@@ -87,15 +93,14 @@ function DelegateLanding() {
       <p className="title">WELCOME DELEGATE !</p>
       <div className="councilContainer">
         <div className="councilLogo">
-          <img
-            src="Logos/Square/Arab-01.png"
-            alt="councilLogo"
-            height="300"
-            width="300"
-          />
+          <img src={image} alt={councilName} height="300" width="300" />
         </div>
         <div className="countryFlag">
-          <img src={imageSource} alt="countryFlag" height="250" width="450" />
+          <img
+            className="countryFlagImage"
+            src={imageSource}
+            alt="countryFlag"
+          />
         </div>
       </div>
       <div className="dlogo">

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Mutation } from '@apollo/react-components';
+import { useApolloClient } from '@apollo/react-hooks';
 import { ADD_USER, REMOVE_USER, SET_COUNCIL } from '../../typedefs';
 import '../../styling/admindashboard.css';
 
 function AdminDashboard() {
+  const client = useApolloClient();
+
   const [renderView, setRenderView] = useState(0);
   const [addUserState, setaddUserState] = useState({
     username: null,
@@ -330,6 +333,17 @@ function AdminDashboard() {
   else if (renderView === 2) viewToRender = deleteUser;
   else if (renderView === 3) viewToRender = setCouncil;
 
+  const logout = event => {
+    event.preventDefault();
+    client.writeData({
+      data: {
+        isLoggedIn: null,
+        userType: null,
+      },
+    });
+    localStorage.clear();
+  };
+
   // headlogo needs an image
   return (
     <div className="admincontainer">
@@ -341,6 +355,9 @@ function AdminDashboard() {
           <p>Admin Dashboard</p>
         </div>
       </div>
+      <button className="submit" type="button" onClick={logout} tabIndex="0">
+        <p className="submittext">Logout</p>
+      </button>
       <div className="pagecontent">{viewToRender}</div>
     </div>
   );

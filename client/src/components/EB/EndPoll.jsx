@@ -19,33 +19,66 @@ const EndPoll = props => {
     const forTheMotion = props.yes;
     const againstTheMotion = props.no;
     const difference = forTheMotion - againstTheMotion;
-    if (difference > 0) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Motion Passed',
-        html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
-        confirmButtonText: 'OK',
-        confirmButtonColor: 'green',
-        backdrop: 'rgba(188, 245, 188, 0.336)',
-      });
-    } else if (difference < 0) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Motion Failed',
-        html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
-        confirmButtonText: 'OK',
-        confirmButtonColor: 'red',
-        backdrop: 'rgba(253, 176, 176, 0.553)',
-      });
+    const type = props.pollType;
+    if (!type) {
+      if (difference > 0) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Motion Passed',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'green',
+          backdrop: 'rgba(188, 245, 188, 0.336)',
+        });
+      } else if (difference < 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Motion Failed',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'red',
+          backdrop: 'rgba(253, 176, 176, 0.553)',
+        });
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tie',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'gray',
+          backdrop: 'rgba(253, 253, 185, 0.637)',
+        });
+      }
     } else {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Tie',
-        html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
-        confirmButtonText: 'OK',
-        confirmButtonColor: 'gray',
-        backdrop: 'rgba(253, 253, 185, 0.637)',
-      });
+      const reqd = Math.floor((2 * (forTheMotion + againstTheMotion)) / 3);
+      if (reqd < forTheMotion) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Motion Passed',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'green',
+          backdrop: 'rgba(188, 245, 188, 0.336)',
+        });
+      } else if (reqd > forTheMotion) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Motion Failed',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'red',
+          backdrop: 'rgba(253, 176, 176, 0.553)',
+        });
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tie',
+          html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
+          confirmButtonText: 'OK',
+          confirmButtonColor: 'gray',
+          backdrop: 'rgba(253, 253, 185, 0.637)',
+        });
+      }
     }
 
     pollend({ variables: { pollId: props.id } });
@@ -61,10 +94,12 @@ EndPoll.propTypes = {
   yes: PropTypes.number,
   no: PropTypes.number,
   id: PropTypes.number,
+  pollType: PropTypes.bool,
 };
 EndPoll.defaultProps = {
   yes: 0,
   no: 0,
   id: 0,
+  pollType: false,
 };
 export default EndPoll;

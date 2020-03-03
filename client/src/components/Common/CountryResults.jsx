@@ -126,7 +126,7 @@ const CountryResults = props => {
   );
 };
 CountryResults.propTypes = {
-  country: PropTypes.objectOf,
+  country: PropTypes.instanceOf(Array),
 };
 CountryResults.defaultProps = {
   country: {
