@@ -20,11 +20,6 @@ const ResultPage = props => {
   const { pollId } = location.state.data;
 
   const countNo = 0;
-  // if (vote !== 23) {
-  //   countNo = vote ? 0 : 1;
-  // } else {
-  //   countNo = 0;
-  // }
 
   const [votes, setVotes] = useState({
     yes: 0,

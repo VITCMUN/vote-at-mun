@@ -12,7 +12,8 @@ exports.endPoll = async (_, { id }, { currentUser, Poll, Vote, pubsub }) => {
     const vote = await Vote.findAll({
       where: {
         pollId: id
-      }
+      },
+      attributes: ['vote_val']
     });
 
     let yes = 0;
@@ -27,6 +28,7 @@ exports.endPoll = async (_, { id }, { currentUser, Poll, Vote, pubsub }) => {
 
     pubsub.publish('pollEnd', {
       pollEnd: {
+        twoThirdsMajority: poll.two_thirds_majority,
         voteYes: yes,
         voteNo: no
       }
