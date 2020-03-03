@@ -6,6 +6,7 @@ import {
   useSubscription,
   useQuery,
 } from '@apollo/react-hooks';
+import Swal from 'sweetalert2';
 import { GET_ACTIVE_POLLS } from '../../typedefs';
 import { POLL_DETAILS } from '../../subscriptions';
 
@@ -32,6 +33,13 @@ function DelegateLanding() {
           });
         }
       }
+    },
+    onError: () => {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Something went wrong!',
+        html: 'Contact Tech Team',
+      });
     },
   });
 

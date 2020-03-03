@@ -5,9 +5,12 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
-import { split } from 'apollo-link';
+import { split, ApolloLink } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
+import { onError } from 'apollo-link-error';
+
+import Swal from 'sweetalert2';
 
 import { typeDefs, IS_LOGGED_IN } from './typedefs';
 import { resolvers } from './resolvers';
@@ -37,7 +40,25 @@ const wsLink = new WebSocketLink({
   },
 });
 
-const link = split(
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message }) =>
+      Swal.fire({
+        icon: 'error',
+        title: message,
+      })
+    );
+  if (networkError) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Aw! Snap',
+      html:
+        '<strong>Some Network Error Occured</strong><br>Please contact our Tech team.',
+    });
+  }
+});
+
+const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return (
@@ -48,6 +69,8 @@ const link = split(
   wsLink,
   httpLink
 );
+
+const link = ApolloLink.from([errorLink, splitLink]);
 
 const client = new ApolloClient({
   cache,
