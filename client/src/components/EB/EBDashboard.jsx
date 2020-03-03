@@ -1,7 +1,8 @@
 import React from 'react';
-import '../../styling/EBDashboard.css';
 import { navigate } from '@reach/router';
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { GET_ACTIVE_POLLS } from '../../typedefs';
+import '../../styling/EBDashboard.css';
 
 const EBDashboard = () => {
   const goToPollForm = () => {
@@ -9,6 +10,16 @@ const EBDashboard = () => {
   };
 
   const client = useApolloClient();
+
+  useQuery(GET_ACTIVE_POLLS, {
+    onCompleted: data => {
+      const polls = data.getActivePolls;
+      if (polls.length > 0) {
+        const poll = polls[polls.length - 1];
+        navigate('/result', { state: { data: { pollId: poll.pollId } } });
+      }
+    },
+  });
 
   const logout = event => {
     event.preventDefault();

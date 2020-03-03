@@ -23,6 +23,7 @@ exports.typeDefs = gql`
     pollEnd: EndPoll!
   }
   type EndPoll{
+    twoThirdsMajority: Boolean!
     voteYes: Int!
     voteNo: Int!
   }

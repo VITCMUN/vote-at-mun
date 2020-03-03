@@ -7,7 +7,7 @@ import LoadingScreen from './LoadingScreen';
 
 function Login() {
   const client = useApolloClient();
-  const [loginUser, { loading, error }] = useMutation(LOGIN, {
+  const [loginUser, { loading }] = useMutation(LOGIN, {
     onCompleted({ login }) {
       localStorage.setItem('token', login.token);
       localStorage.setItem('userType', login.user.userType);
@@ -22,7 +22,6 @@ function Login() {
   });
 
   if (loading) return <LoadingScreen />;
-  if (error) return <p> An error occurred </p>;
 
   return (
     <div className="FlexContainer">
