@@ -1,8 +1,9 @@
 import React from 'react';
 import { navigate } from '@reach/router';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
-import { GET_ACTIVE_POLLS } from '../../typedefs';
+import { GET_ACTIVE_POLLS, GET_COUNCIL } from '../../typedefs';
 import '../../styling/EBDashboard.css';
+import LoadingScreen from '../Common/LoadingScreen.jsx';
 
 const EBDashboard = () => {
   const goToPollForm = () => {
@@ -10,7 +11,7 @@ const EBDashboard = () => {
   };
 
   const client = useApolloClient();
-
+  const { loading: ld, data: d } = useQuery(GET_COUNCIL);
   useQuery(GET_ACTIVE_POLLS, {
     onCompleted: data => {
       const polls = data.getActivePolls;
@@ -31,6 +32,10 @@ const EBDashboard = () => {
     });
     localStorage.clear();
   };
+  if (ld) return <LoadingScreen />;
+  const councilURL = d.getCouncil.url;
+  const councilName = d.getCouncil.name;
+  const image = `Logos/Square/${councilURL}.png`;
 
   return (
     <>
@@ -46,12 +51,8 @@ const EBDashboard = () => {
       <div className="right-container">
         <div className="card">
           <div className="card-header">
-            <img
-              className="card-img"
-              src="Logos/Square/Arab-01.png"
-              alt="Council"
-            />
-            <div className="card-text">Arab League</div>
+            <img className="card-img" src={image} alt={councilName} />
+            <div className="card-text">{councilName}</div>
           </div>
           <div className="card-body">
             <button type="button" className="button" onClick={goToPollForm}>

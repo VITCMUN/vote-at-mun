@@ -3,11 +3,14 @@
 import React from 'react';
 import '../../styling/Navbar.css';
 import { navigate } from '@reach/router';
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { GET_COUNCIL } from '../../typedefs';
+import LoadingScreen from './LoadingScreen';
 
 // Navbar will contain the MUN Logo on the left and Dashboard, Logout buttons on right
 const Navbar = () => {
   const client = useApolloClient();
+  const { loading: ld, data: d } = useQuery(GET_COUNCIL);
   const gotoDashboard = event => {
     event.preventDefault();
     navigate('./dashboard');
@@ -25,6 +28,11 @@ const Navbar = () => {
 
   const usertype = localStorage.getItem('userType');
 
+  if (ld) return <LoadingScreen />;
+  const councilURL = d.getCouncil.url;
+  const councilName = d.getCouncil.name;
+  const image = `Logos/Square/${councilURL}.png`;
+
   const getGreeting = () => {
     if (usertype === '0') {
       const username = localStorage.getItem('userName');
@@ -36,7 +44,7 @@ const Navbar = () => {
     }
     return (
       <div className="welcome">
-        <img src="Logos/Square/Arab-01.png" className="small" alt="Username" />
+        <img src={image} className="small" alt={councilName} />
       </div>
     );
   };

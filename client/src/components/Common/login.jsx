@@ -1,8 +1,8 @@
 import React from 'react';
-import { useApolloClient, useMutation } from '@apollo/react-hooks';
+import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import '../../styling/login.css';
 import LoginForm from './form';
-import { LOGIN } from '../../typedefs';
+import { LOGIN, GET_COUNCIL } from '../../typedefs';
 import LoadingScreen from './LoadingScreen';
 
 function Login() {
@@ -20,9 +20,11 @@ function Login() {
       window.location.reload();
     },
   });
-
-  if (loading) return <LoadingScreen />;
-
+  const { loading: ld, data: d } = useQuery(GET_COUNCIL);
+  if (loading || ld) return <LoadingScreen />;
+  const councilURL = d.getCouncil.url;
+  const councilName = d.getCouncil.name;
+  const image = `Logos/Square/${councilURL}.png`;
   return (
     <div className="FlexContainer">
       <div className="LeftContainer">
@@ -30,11 +32,7 @@ function Login() {
       </div>
       <div className="RightContainer">
         <br />
-        <img
-          className="MunImage2"
-          src="Logos/Square/ARAB-01.png"
-          alt="VITCMUN"
-        />
+        <img className="MunImage2" src={image} alt={councilName} />
         <h4 className="DashboardHeading">
           <b> WELCOME </b>{' '}
         </h4>{' '}

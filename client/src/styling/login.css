@@ -63,6 +63,10 @@ html,body {
   /* margin-top:-98px; */
 }
 
+input{
+  color:black;
+}
+
 
 .Cardboard{
   background: #310B14;

@@ -148,7 +148,7 @@ const Voting = props => {
     if (selected != null) {
       return (
         <button onClick={handleVote} className="proceedBtn" type="button">
-          Vote
+          Confirm
         </button>
       );
     }
