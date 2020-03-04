@@ -46,6 +46,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       Swal.fire({
         icon: 'error',
         title: message,
+        html: '<p>Please contact our Tech team.</p>',
       })
     );
   if (networkError) {

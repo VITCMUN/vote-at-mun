@@ -1,5 +1,5 @@
-const { ApolloServer, PubSub } = require("apollo-server");
-const logger = require("winston");
+const { ApolloServer, PubSub } = require('apollo-server');
+const logger = require('./winston');
 const { sequelize } = require("./common/postgres");
 const { typeDefs } = require("./graphql/schema/schema");
 const resolvers = require("./graphql/resolvers/resolvers");
@@ -43,9 +43,11 @@ const server = new ApolloServer({
       pubsub
     };
   },
-  cors: true,
-  debug: true,
-  playground: true
+  cors: {
+    origin: 'http://localhost:3000'
+  },
+  debug: false,
+  playground: false
 });
 
 const PORT = process.env.WEBAPP_PORT || 4000;
