@@ -5,7 +5,7 @@ exports.typeDefs = gql`
     getDelegates: [String!]
     getActivePolls: [pollUpdate!]
     getPollDetails(id: Int!): pollDet!
-    getResult(id: Int!): vote!
+    getResult(id: Int!): EndPoll!
     getCouncil: Council!
   }
   type Mutation {
@@ -15,7 +15,7 @@ exports.typeDefs = gql`
     addPoll(pollDetails: pollDetails!): Int!
     setCouncil(name: String!, bannerUrl: String): String!
     vote(voteDetails: voteDetails): Boolean!
-    endPoll(id: Int!): String!
+    endPoll(id: Int!): EndPoll!
   }
   type Subscription {
     voteUpdate(id: Int!): vote

@@ -33,9 +33,13 @@ exports.endPoll = async (_, { id }, { currentUser, Poll, Vote, pubsub }) => {
         voteNo: no
       }
     });
+    return {
+      twoThirdsMajority: poll.two_thirds_majority,
+      voteYes: yes,
+      voteNo: no
+    };
   } catch (err) {
     logger.error(`Error ending Poll::${err}`);
     throw new Error('Error ending Poll');
   }
-  return 'Success';
 };
