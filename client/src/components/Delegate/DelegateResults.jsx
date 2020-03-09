@@ -59,8 +59,8 @@ const ResultPage = props => {
       const forTheMotion = options.subscriptionData.data.pollEnd.voteYes;
       const againstTheMotion = options.subscriptionData.data.pollEnd.voteNo;
       const type = options.subscriptionData.data.pollEnd.twoThirdsMajority;
-      const difference = forTheMotion - againstTheMotion;
       if (!type) {
+        const difference = forTheMotion - againstTheMotion;
         if (difference > 0) {
           Swal.fire({
             icon: 'success',
@@ -70,7 +70,7 @@ const ResultPage = props => {
             confirmButtonColor: 'green',
             backdrop: 'rgba(188, 245, 188, 0.336)',
           });
-        } else if (difference < 0) {
+        } else {
           Swal.fire({
             icon: 'error',
             title: 'Motion Failed',
@@ -79,18 +79,9 @@ const ResultPage = props => {
             confirmButtonColor: 'red',
             backdrop: 'rgba(253, 176, 176, 0.553)',
           });
-        } else {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Tie',
-            html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
-            confirmButtonText: 'OK',
-            confirmButtonColor: 'gray',
-            backdrop: 'rgba(253, 253, 185, 0.637)',
-          });
         }
       } else {
-        const reqd = Math.floor((2 * (forTheMotion + againstTheMotion)) / 3);
+        const reqd = Math.ceil((2 * (forTheMotion + againstTheMotion)) / 3);
         if (reqd < forTheMotion) {
           Swal.fire({
             icon: 'success',
@@ -100,7 +91,7 @@ const ResultPage = props => {
             confirmButtonColor: 'green',
             backdrop: 'rgba(188, 245, 188, 0.336)',
           });
-        } else if (reqd > forTheMotion) {
+        } else {
           Swal.fire({
             icon: 'error',
             title: 'Motion Failed',
@@ -108,15 +99,6 @@ const ResultPage = props => {
             confirmButtonText: 'OK',
             confirmButtonColor: 'red',
             backdrop: 'rgba(253, 176, 176, 0.553)',
-          });
-        } else {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Tie',
-            html: `For the motion : ${forTheMotion}<br>Against the motion : ${againstTheMotion}`,
-            confirmButtonText: 'OK',
-            confirmButtonColor: 'gray',
-            backdrop: 'rgba(253, 253, 185, 0.637)',
           });
         }
       }
@@ -130,8 +112,8 @@ const ResultPage = props => {
     },
     onCompleted: voteVal => {
       setVotes({
-        yes: voteVal.getResult.countYes,
-        no: voteVal.getResult.countNo,
+        yes: voteVal.getResult.voteYes,
+        no: voteVal.getResult.voteNo,
       });
     },
   });

@@ -78,6 +78,7 @@ function DelegateLanding() {
       },
     });
     localStorage.clear();
+    navigate('/');
   };
 
   if (ld) return <LoadingScreen />;

@@ -16,9 +16,7 @@ const ResultPage = props => {
     return <Navbar />;
   };
   const { location } = props;
-
-  const { pollId, pollType } = location.state.data;
-
+  const { pollId } = location.state.data;
   const countNo = 0;
 
   const [votes, setVotes] = useState({
@@ -50,31 +48,24 @@ const ResultPage = props => {
     },
   });
 
-  const { loading, error } = useQuery(GET_RESULT, {
+  const { loading } = useQuery(GET_RESULT, {
     variables: {
       id: pollId,
     },
     onCompleted: voteVal => {
       setVotes({
-        yes: voteVal.getResult.countYes,
-        no: voteVal.getResult.countNo,
+        yes: voteVal.getResult.voteYes,
+        no: voteVal.getResult.voteNo,
       });
     },
   });
 
   if (loading) return <LoadingScreen />;
-  if (error) return 'Contact Tech Support';
+
   const usertype = localStorage.getItem('userType');
   const getEndPoll = () => {
     if (usertype === '1') {
-      return (
-        <EndPoll
-          yes={votes.yes}
-          no={votes.no}
-          id={pollId}
-          pollType={pollType}
-        />
-      );
+      return <EndPoll id={pollId} />;
     }
     return null;
   };

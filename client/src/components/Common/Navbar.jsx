@@ -24,6 +24,7 @@ const Navbar = () => {
       },
     });
     localStorage.clear();
+    navigate('/');
   };
 
   const usertype = localStorage.getItem('userType');

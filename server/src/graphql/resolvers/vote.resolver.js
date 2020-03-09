@@ -15,12 +15,13 @@ exports.vote = async (_, { voteDetails }, { currentUser, Vote, Poll, pubsub }) =
   if (pollStatus.length === 0) {
     throw new Error('Trying to vote on an inactive poll.');
   }
-  await Vote.create({
-    vote_val: voteDetails.vote,
-    voterId: currentUser.username,
-    pollId: voteDetails.pollId
-  });
   try {
+    await Vote.create({
+      vote_val: voteDetails.vote,
+      voterId: currentUser.username,
+      pollId: voteDetails.pollId
+    });
+
     const vote = await Vote.findAll({
       where: {
         pollId: voteDetails.pollId

@@ -95,8 +95,9 @@ export const VOTE = gql`
 export const GET_RESULT = gql`
   query GetResult($id: Int!) {
     getResult(id: $id) {
-      countYes
-      countNo
+      voteYes
+      voteNo
+      twoThirdsMajority
     }
   }
 `;
@@ -116,7 +117,11 @@ export const GET_ACTIVE_POLLS = gql`
 
 export const END_POLL = gql`
   mutation endpoll($pollId: Int!) {
-    endPoll(id: $pollId)
+    endPoll(id: $pollId) {
+      voteYes
+      voteNo
+      twoThirdsMajority
+    }
   }
 `;
 
